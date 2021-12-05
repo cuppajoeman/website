@@ -1,0 +1,48 @@
+body {
+  background-color:black;
+  color:white;
+}
+img, video, source {
+  display:block;
+  margin-left: auto; 
+  margin-right: auto;
+}
+pre {
+  display:inline;
+}
+a {
+  color: #006400;
+}
+a:visited {
+  color: grey;
+}
+li {
+  margin: 10px 0;
+}
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hn_center {
+  text-align:center;  
+}
+
+/* Used to give a page some centering and not take up full screen */
+.wrapper {
+  width: 70%;     /* specify a width! */
+  margin: 0 auto; /* center */
+}
+
+
+.full_width {
+  width: 100%;
+}
+
+/*center align items in table cells */
+td {
+  text-align:center;
+  padding: 10px;
+}
+
+

@@ -1,0 +1,52 @@
+.relative_container {
+    position: relative;
+    /* border:3px solid white;*/
+    height: 800px;
+}
+
+.ascii_art {
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.circlegraph {
+
+  margin: auto;
+  position: absolute;
+  /* so that it works on any device */
+  top: 0; left: 570px; bottom: 40px; right: 0;
+  width: 500px;
+  height: 500px;
+}
+
+.circlegraph:before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  border: 2px solid white;
+  width: calc( 100% - 2px * 2);
+  height: calc( 100% - 2px * 2 );
+  border-radius: 50%;
+}
+
+.circlegraph .circle {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 110px;
+  height: 110px;
+  margin: calc( -100px / 2 );
+  background: white;
+  border-radius: 50%;
+}
+
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bird_center{
+  position: absolute;
+  top: 50%; left: 50%;
+}
