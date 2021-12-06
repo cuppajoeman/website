@@ -32,7 +32,7 @@ function tableCreate() {
                 td.appendChild(document.createTextNode("*"));
             }
             td.onclick = function () {
-                new Audio(`guitar_samples/${octave}_${note}.flac`).play();
+                new Audio(`../guitar_samples/${octave}_${note}.flac`).play();
                 this.style.transitionDuration = "0.001ms"
                 this.style.backgroundColor = 'green';
             }
