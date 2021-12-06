@@ -1,28 +1,47 @@
+const BASE_STRINGS = [4, 9, 14, 19, 23, 28]
+const MARKERS = [3, 5, 7, 9, 12, 15, 17, 19, 21]
+const NUM_STRINGS = 6;
+const NUM_FRETS = 21;
+
 function quotientRemainder(n, d) {
     var quotient = Math.floor(n/d);
     var remainder = n % d;
     return [quotient, remainder];
 }
 
+function constructPreloadedAudioArray() {
+    let audioArray = [];
+    for (let i = 0; i < NUM_STRINGS; i++) {
+        let string = [];
+        for (let j = 0; j < NUM_FRETS; j++) {
+            const [octave, note] = constructNoteAndOctaveFromFretboardPosition(i, j);
+            string.push(new Audio(`../guitar_samples/${octave}_${note}.flac`));
+        }
+        audioArray.push(string);
+    }
+    return audioArray;
+}
+
+const AUDIO_ARRAY = constructPreloadedAudioArray();
+
+function constructNoteAndOctaveFromFretboardPosition(string, fret) {
+    const inverted_y_index = (NUM_STRINGS - 1) - string;
+    let octave, note;
+    [octave, note] = quotientRemainder((BASE_STRINGS[inverted_y_index] + fret), 12)
+    octave += 3
+    return [octave, note]
+}
+
 function tableCreate() {
 
     const body = document.body,
-        tbl = document.createElement('table');
+    tbl = document.createElement('table');
     tbl.style.border = '1px solid black';
 
-    const BASE_STRINGS = [4, 9, 14, 19, 23, 28]
-    const MARKERS = [3, 5, 7, 9, 12, 15, 17, 19, 21]
-
-    let numStrings = 6;
-    let numFrets = 21;
-
-    for (let i = 0; i < numStrings; i++) {
+    for (let i = 0; i < NUM_STRINGS; i++) {
         const tr = tbl.insertRow();
-        for (let j = 0; j < numFrets; j++) {
-            const inverted_y_index = (numStrings - 1) - i;
-            let octave, note;
-            [octave, note] = quotientRemainder((BASE_STRINGS[inverted_y_index] + j), 12)
-            octave += 3
+        for (let j = 0; j < NUM_FRETS; j++) {
+            const [octave, note] = constructNoteAndOctaveFromFretboardPosition(i, j);
             const td = tr.insertCell();
             td.classList.add("fret")
             // td.appendChild(document.createTextNode(`${octave}_${note}`));
@@ -31,7 +50,7 @@ function tableCreate() {
             } else {
                 td.appendChild(document.createTextNode("*"));
             }
-            td.id = `guitar_samples/${octave}_${note}.flac`;
+            td.id = `${octave}_${note}`;
             td.onclick = function () {
                 this.classList.toggle("fretted")
                 this.style.transitionDuration = "0.001ms"
@@ -58,10 +77,11 @@ function tableCreate() {
 document.body.onkeyup = function(e){
     if(e.key === ' '){
         // Copy since we are modifying during iterations by using toggle
-        var frettedNotes = Array.from(document.getElementsByClassName("fretted"));
-        for (var i = 0; i < frettedNotes.length; i++) {
-            var frettedNote = frettedNotes[i];
-            new Audio(frettedNote.id).play();
+        let frettedNotes = Array.from(document.getElementsByClassName("fretted"));
+        for (let i = 0; i < frettedNotes.length; i++) {
+            let frettedNote = frettedNotes[i];
+            const [string, fret] = frettedNote.id.split("_").map(Number)
+            AUDIO_ARRAY[string][fret].play();
             frettedNote.style.transitionDuration = "0.001ms"
             frettedNote.style.backgroundColor = 'green';
             frettedNote.classList.toggle("fretted")
