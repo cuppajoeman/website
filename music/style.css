@@ -1,0 +1,26 @@
+table {
+    /* FULLSCREEN TABLE */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    text-align:center;
+    border-collapse: collapse;
+}
+
+.fretted {
+    background-color: blue !important;
+}
+
+.fret {
+    background-color: #451004;
+    transition: background-color 1000ms linear;
+    user-select: none;
+}
+
+.notransition {
+    transition: none !important;
+}

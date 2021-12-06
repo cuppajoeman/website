@@ -11,6 +11,7 @@ function tableCreate() {
     tbl.style.border = '1px solid black';
 
     const BASE_STRINGS = [4, 9, 14, 19, 23, 28]
+    const MARKERS = [3, 5, 7, 9, 12, 15, 17, 19, 21]
 
     let numStrings = 6;
     let numFrets = 21;
@@ -39,7 +40,14 @@ function tableCreate() {
                 this.style.transitionDuration = "2s"
                 this.style.backgroundColor = '#451004';
             })
-            td.style.border = '1px solid black';
+            if (MARKERS.includes(j)) {
+                td.style.borderRight = '3px solid black';
+                td.style.borderLeft = '1px solid black';
+                td.style.borderTop = '1px solid black';
+                td.style.borderBottom = '1px solid black';
+            } else {
+                td.style.border = '1px solid black';
+            }
         }
     }
     body.appendChild(tbl);
