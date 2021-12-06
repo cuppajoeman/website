@@ -2,6 +2,8 @@ const BASE_STRINGS = [4, 9, 14, 19, 23, 28]
 const MARKERS = [3, 5, 7, 9, 12, 15, 17, 19, 21]
 const NUM_STRINGS = 6;
 const NUM_FRETS = 21;
+let MODE = "HARMONY";
+let AUDIO_ARRAY;
 
 function quotientRemainder(n, d) {
     var quotient = Math.floor(n/d);
@@ -15,6 +17,7 @@ function constructPreloadedAudioArray() {
         let string = [];
         for (let j = 0; j < NUM_FRETS; j++) {
             const [octave, note] = constructNoteAndOctaveFromFretboardPosition(i, j);
+            // string.push(new Audio(`../guitar_samples_mp3/${octave}_${note}.mp3`));
             string.push(new Audio(`../guitar_samples/${octave}_${note}.flac`));
         }
         audioArray.push(string);
@@ -22,7 +25,7 @@ function constructPreloadedAudioArray() {
     return audioArray;
 }
 
-const AUDIO_ARRAY = constructPreloadedAudioArray();
+
 
 function constructNoteAndOctaveFromFretboardPosition(string, fret) {
     const inverted_y_index = (NUM_STRINGS - 1) - string;
@@ -50,10 +53,17 @@ function tableCreate() {
             } else {
                 td.appendChild(document.createTextNode("*"));
             }
-            td.id = `${octave}_${note}`;
+            td.id = `${i}_${j}`;
             td.onclick = function () {
-                this.classList.toggle("fretted")
-                this.style.transitionDuration = "0.001ms"
+                if (MODE === "HARMONY") {
+                    this.classList.toggle("fretted")
+                    this.style.transitionDuration = "0.001ms"
+                } else if (MODE === "MELODY") {
+                    console.log(i, j)
+                    AUDIO_ARRAY[i][j].play();
+                    this.style.transitionDuration = "0.001ms"
+                    this.style.backgroundColor = 'green';
+                }
             }
             td.addEventListener("transitionend", function() {
                 if (! this.classList.contains("fretted")) {
@@ -75,7 +85,18 @@ function tableCreate() {
 }
 
 document.body.onkeyup = function(e){
-    if(e.key === ' '){
+    if(e.key === 'H'){
+        MODE = "HARMONY"
+    }
+    if(e.key === 'M'){
+        MODE = "MELODY"
+        let frettedNotes = Array.from(document.getElementsByClassName("fretted"));
+        for (let i = 0; i < frettedNotes.length; i++) {
+            let frettedNote = frettedNotes[i];
+            frettedNote.classList.toggle("fretted")
+        }
+    }
+    if(MODE === "HARMONY" && e.key === ' '){
         // Copy since we are modifying during iterations by using toggle
         let frettedNotes = Array.from(document.getElementsByClassName("fretted"));
         for (let i = 0; i < frettedNotes.length; i++) {
@@ -87,6 +108,8 @@ document.body.onkeyup = function(e){
             frettedNote.classList.toggle("fretted")
         }
     }
+
 }
 
+AUDIO_ARRAY = constructPreloadedAudioArray();
 tableCreate();
