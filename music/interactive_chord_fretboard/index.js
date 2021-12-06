@@ -3,28 +3,12 @@ const MARKERS = [3, 5, 7, 9, 12, 15, 17, 19, 21]
 const NUM_STRINGS = 6;
 const NUM_FRETS = 21;
 let MODE = "HARMONY";
-let AUDIO_ARRAY;
 
 function quotientRemainder(n, d) {
-    var quotient = Math.floor(n/d);
-    var remainder = n % d;
+    let quotient = Math.floor(n/d);
+    let remainder = n % d;
     return [quotient, remainder];
 }
-
-function constructPreloadedAudioArray() {
-    let audioArray = [];
-    for (let i = 0; i < NUM_STRINGS; i++) {
-        let string = [];
-        for (let j = 0; j < NUM_FRETS; j++) {
-            const [octave, note] = constructNoteAndOctaveFromFretboardPosition(i, j);
-            // string.push(new Audio(`../guitar_samples_mp3/${octave}_${note}.mp3`));
-            string.push(new Audio(`../guitar_samples/${octave}_${note}.flac`));
-        }
-        audioArray.push(string);
-    }
-    return audioArray;
-}
-
 
 
 function constructNoteAndOctaveFromFretboardPosition(string, fret) {
@@ -33,6 +17,15 @@ function constructNoteAndOctaveFromFretboardPosition(string, fret) {
     [octave, note] = quotientRemainder((BASE_STRINGS[inverted_y_index] + fret), 12)
     octave += 3
     return [octave, note]
+}
+
+function preloadAudio() {
+    for (let i = 0; i < NUM_STRINGS; i++) {
+        for (let j = 0; j < NUM_FRETS; j++) {
+            const [octave, note] = constructNoteAndOctaveFromFretboardPosition(i, j);
+            new Audio(`../guitar_samples/${octave}_${note}.flac`);
+        }
+    }
 }
 
 function tableCreate() {
@@ -47,20 +40,18 @@ function tableCreate() {
             const [octave, note] = constructNoteAndOctaveFromFretboardPosition(i, j);
             const td = tr.insertCell();
             td.classList.add("fret")
-            // td.appendChild(document.createTextNode(`${octave}_${note}`));
             if (j === 0) {
                 td.appendChild(document.createTextNode("o"));
             } else {
                 td.appendChild(document.createTextNode("*"));
             }
-            td.id = `${i}_${j}`;
+            td.id = `${octave}_${note}`;
             td.onclick = function () {
                 if (MODE === "HARMONY") {
                     this.classList.toggle("fretted")
                     this.style.transitionDuration = "0.001ms"
                 } else if (MODE === "MELODY") {
-                    console.log(i, j)
-                    AUDIO_ARRAY[i][j].play();
+                    new Audio(`../guitar_samples/${octave}_${note}.flac`).play();
                     this.style.transitionDuration = "0.001ms"
                     this.style.backgroundColor = 'green';
                 }
@@ -101,8 +92,8 @@ document.body.onkeyup = function(e){
         let frettedNotes = Array.from(document.getElementsByClassName("fretted"));
         for (let i = 0; i < frettedNotes.length; i++) {
             let frettedNote = frettedNotes[i];
-            const [string, fret] = frettedNote.id.split("_").map(Number)
-            AUDIO_ARRAY[string][fret].play();
+            const [octave, note] = frettedNote.id.split("_").map(Number)
+            new Audio(`../guitar_samples/${octave}_${note}.flac`).play();
             frettedNote.style.transitionDuration = "0.001ms"
             frettedNote.style.backgroundColor = 'green';
             frettedNote.classList.toggle("fretted")
@@ -111,5 +102,5 @@ document.body.onkeyup = function(e){
 
 }
 
-AUDIO_ARRAY = constructPreloadedAudioArray();
+preloadAudio();
 tableCreate();
