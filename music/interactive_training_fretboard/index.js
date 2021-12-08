@@ -4,14 +4,28 @@ const NUM_STRINGS = 6;
 const NUM_FRETS = 21;
 let MODE = "HARMONY";
 
+var KEY = 2;
+
 let tonePosition = 0;
 var toneSequence = [ [0, 4, 7, 11], [2, 5, 9, 0], [4, 7, 11, 2], [5, 9, 0, 4], [7, 11, 2, 5], [9, 0, 4, 7], [11, 2, 5, 9]];
 
 function setToneSequence(newToneSequence) {
     toneSequence = newToneSequence;
-    console.log(toneSequence);
 }
 
+function getToneSequence() {
+    return toneSequence;
+}
+
+function setKey(newKey) {
+    KEY = newKey;
+    let keyElement = document.getElementById("key");
+    keyElement.innerHTML = newKey;
+}
+
+function getKey() {
+    return KEY;
+}
 
 function arraysEqual(a, b) {
     a = a.slice(0);
@@ -61,6 +75,10 @@ function tableCreate() {
 
     let chordWindow = document.getElementById("chord_window");
     chordWindow.innerHTML = toneSequence[tonePosition].toString().replace(/,/g, ' ');
+
+    let keyElement = document.getElementById("key");
+    keyElement.innerHTML = KEY.toString();
+
 
     for (let i = 0; i < NUM_STRINGS; i++) {
         const tr = tbl.insertRow();
@@ -133,7 +151,8 @@ document.body.onkeyup = function(e){
         }
         // Removes duplicates
         let cleanedNotesPlayed = [...new Set(notesPlayed)];
-        if (arraysEqual(cleanedNotesPlayed, toneSequence[tonePosition])) {
+        let keyIntervalsPlayed = cleanedNotesPlayed.map(n => (n - KEY + 12) % 12);
+        if (arraysEqual(keyIntervalsPlayed, toneSequence[tonePosition])) {
             tonePosition += 1;
             tonePosition %= toneSequence.length;
             let chordWindow = document.getElementById("chord_window");
@@ -146,4 +165,4 @@ document.body.onkeyup = function(e){
 // preloadAudio();
 tableCreate();
 
-export { setToneSequence };
+export { setToneSequence, getToneSequence, setKey, getKey };
