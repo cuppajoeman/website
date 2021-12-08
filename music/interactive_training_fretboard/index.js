@@ -5,7 +5,7 @@ const NUM_FRETS = 21;
 let MODE = "HARMONY";
 
 let tonePosition = 0;
-var toneSequence = [ [0, 4, 7, 11], [4, 7, 11, 2], [9, 1, 4, 7], [7, 11, 2, 5] ];
+var toneSequence = [ [0, 4, 7, 11], [2, 5, 9, 0], [4, 7, 11, 2], [5, 9, 0, 4], [7, 11, 2, 5], [9, 0, 4, 7], [11, 2, 5, 9]];
 
 function setToneSequence(newToneSequence) {
     toneSequence = newToneSequence;
