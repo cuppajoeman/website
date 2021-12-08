@@ -12,18 +12,6 @@ function setToneSequence(newToneSequence) {
     console.log(toneSequence);
 }
 
-function removeDuplicates(arr) {
-    let obj = {};
-    let ret_arr = [];
-    for (let i = 0; i < arr.length; i++) {
-        obj[arr[i]] = true;
-    }
-    for (let key in obj) {
-        ret_arr.push(key);
-    }
-    return ret_arr;
-}
-
 
 function arraysEqual(a, b) {
     a = a.slice(0);
@@ -155,7 +143,7 @@ document.body.onkeyup = function(e){
 
 }
 
-preloadAudio();
+// preloadAudio();
 tableCreate();
 
 export { setToneSequence };
