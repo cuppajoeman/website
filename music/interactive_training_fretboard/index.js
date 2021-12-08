@@ -4,12 +4,31 @@ const NUM_STRINGS = 6;
 const NUM_FRETS = 21;
 let MODE = "HARMONY";
 
+let tonePosition = 0;
+let toneSequence = [ [0, 4, 7, 11], [4, 7, 11, 2], [9, 1, 4, 7], [7, 11, 2, 5] ]
+
+function arraysEqual(a, b) {
+    a = a.slice(0);
+    b = b.slice(0);
+
+    if (a === b) return true;
+    if (a == null || b == null) return false;
+    if (a.length !== b.length) return false;
+
+    a.sort()
+    b.sort()
+
+    for (var i = 0; i < a.length; ++i) {
+        if (a[i] !== b[i]) return false;
+    }
+    return true;
+}
+
 function quotientRemainder(n, d) {
     let quotient = Math.floor(n/d);
     let remainder = n % d;
     return [quotient, remainder];
 }
-
 
 function constructNoteAndOctaveFromFretboardPosition(string, fret) {
     const inverted_y_index = (NUM_STRINGS - 1) - string;
@@ -30,14 +49,12 @@ function preloadAudio() {
 
 function tableCreate() {
 
-    const body = document.body,
+    // const body = document.body,
     tbl = document.createElement('table');
     tbl.style.border = '1px solid black';
 
-    let chordBox = document.createElement('div');
-    chordBox.classList.add("chord_window")
-    chordBox.appendChild(document.createTextNode("0 4 7 11"));
-
+    let chordWindow = document.getElementById("chord_window");
+    chordWindow.innerHTML = toneSequence[tonePosition].toString().replace(/,/g, ' ');
 
     for (let i = 0; i < NUM_STRINGS; i++) {
         const tr = tbl.insertRow();
@@ -77,8 +94,10 @@ function tableCreate() {
             }
         }
     }
-    body.appendChild(tbl);
-    body.appendChild(chordBox);
+
+    let fretboard = document.getElementById("fretboard")
+    fretboard.appendChild(tbl);
+    // body.appendChild(tbl);
 }
 
 document.body.onkeyup = function(e){
@@ -96,17 +115,22 @@ document.body.onkeyup = function(e){
     if(MODE === "HARMONY" && e.key === ' '){
         // Copy since we are modifying during iterations by using toggle
         let frettedNotes = Array.from(document.getElementsByClassName("fretted"));
-        let notes_played = [];
+        let notesPlayed = [];
         for (let i = 0; i < frettedNotes.length; i++) {
             let frettedNote = frettedNotes[i];
             const [octave, note] = frettedNote.id.split("_").map(Number)
-            notes_played.push(note);
+            notesPlayed.push(note);
             new Audio(`../guitar_samples/${octave}_${note}.flac`).play();
             frettedNote.style.transitionDuration = "0.001ms"
             frettedNote.style.backgroundColor = 'green';
             frettedNote.classList.toggle("fretted")
         }
-        console.log(notes_played)
+        if (arraysEqual(notesPlayed, toneSequence[tonePosition])) {
+            tonePosition += 1;
+            tonePosition %= toneSequence.length;
+            let chordWindow = document.getElementById("chord_window");
+            chordWindow.innerHTML = toneSequence[tonePosition].toString().replace(/,/g, ' ');
+        }
     }
 
 }

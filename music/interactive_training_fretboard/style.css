@@ -1,25 +1,37 @@
-.chord_window {
-    position: relative;
-    /*right: 30px;*/
-    /*border: 3px solid #73AD21;*/
-    text-align: center;
-    height: 10%;
-    font-size: 100%;
-    padding: 0;
+html,
+body {
+    height: 100%;
     margin: 0;
+    padding: 0;
 }
 
 table {
     /* FULLSCREEN TABLE */
-    position: absolute;
+    /*position: absolute;*/
     top: 10%;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 90%;
+    height: 100%;
     width: 100%;
     text-align:center;
     border-collapse: collapse;
+}
+
+#fretboard {
+    height: 90vh;
+    margin:0;
+    padding:0;
+}
+
+#chord_window {
+    height: 10vh;
+    margin:0;
+    padding:0;
+    text-align: center;
+    font-size: 8vh;
+    color: bisque;
+    background-color: darkblue;
 }
 
 .fretted {
