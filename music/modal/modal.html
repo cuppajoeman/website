@@ -1,24 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Interactive Fretboard</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="modal/modal.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="modal.css">
 </head>
 <body>
 
-<div id="top_bar">
-    <span class="float_left_absolute">𝓚: <span id="key" class="bold">0</span></span>
-    <span id="chord_window" class="bold"></span>
-    <span id="settings_button" class="float_right_absolute">⚙</span>
-</div>
-<div id="fretboard"></div>
-<script type="module"  src="index.js"></script>
+<h2>Animated Modal with Header and Footer</h2>
 
+<!-- Trigger/Open The Modal -->
+<button id="myBtn">Open Modal</button>
+
+<!-- The Modal -->
 <div id="myModal" class="modal">
+
+    <!-- Modal content -->
     <div class="modal-content">
         <div class="modal-header">
             <span class="close">&times;</span>
@@ -32,10 +28,8 @@
                 <ul><li>in this mode press space to sound your notes</li></ul>
             </ul>
             <hr/>
-            <p>Key</p>
-            <input style="background-color: rgb(25, 25, 50); color: white;" type="text">
             <p>Chord Sequence</p>
-            <textarea style="background-color: rgb(25, 25, 50); color: white; " name="chord_sequence_input" id="chord_sequence_input" rows="5" ></textarea>
+            <textarea name="chord_sequence_input" id="chord_sequence_input" rows="5" ></textarea>
             <hr/>
             <p>Chord Anchors</p>
             <input type="radio" id="age1" name="age" value="30">
@@ -53,8 +47,6 @@
         </div>
     </div>
 </div>
-
-<script type="module" src="modal/modal.js"></script>
-
+<script src="modal.js"></script>
 </body>
 </html>

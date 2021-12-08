@@ -5,7 +5,25 @@ const NUM_FRETS = 21;
 let MODE = "HARMONY";
 
 let tonePosition = 0;
-let toneSequence = [ [0, 4, 7, 11], [4, 7, 11, 2], [9, 1, 4, 7], [7, 11, 2, 5] ]
+var toneSequence = [ [0, 4, 7, 11], [4, 7, 11, 2], [9, 1, 4, 7], [7, 11, 2, 5] ];
+
+function setToneSequence(newToneSequence) {
+    toneSequence = newToneSequence;
+    console.log(toneSequence);
+}
+
+function removeDuplicates(arr) {
+    let obj = {};
+    let ret_arr = [];
+    for (let i = 0; i < arr.length; i++) {
+        obj[arr[i]] = true;
+    }
+    for (let key in obj) {
+        ret_arr.push(key);
+    }
+    return ret_arr;
+}
+
 
 function arraysEqual(a, b) {
     a = a.slice(0);
@@ -50,7 +68,7 @@ function preloadAudio() {
 function tableCreate() {
 
     // const body = document.body,
-    tbl = document.createElement('table');
+    let tbl = document.createElement('table');
     tbl.style.border = '1px solid black';
 
     let chordWindow = document.getElementById("chord_window");
@@ -125,7 +143,9 @@ document.body.onkeyup = function(e){
             frettedNote.style.backgroundColor = 'green';
             frettedNote.classList.toggle("fretted")
         }
-        if (arraysEqual(notesPlayed, toneSequence[tonePosition])) {
+        // Removes duplicates
+        let cleanedNotesPlayed = [...new Set(notesPlayed)];
+        if (arraysEqual(cleanedNotesPlayed, toneSequence[tonePosition])) {
             tonePosition += 1;
             tonePosition %= toneSequence.length;
             let chordWindow = document.getElementById("chord_window");
@@ -137,3 +157,5 @@ document.body.onkeyup = function(e){
 
 preloadAudio();
 tableCreate();
+
+export { setToneSequence };

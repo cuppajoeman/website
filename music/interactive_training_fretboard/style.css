@@ -18,13 +18,30 @@ table {
     border-collapse: collapse;
 }
 
+.float_left_absolute {
+   /*float: right;*/
+    position: absolute;
+    left: 5%;
+}
+
+.float_right_absolute {
+    /*float: right;*/
+    position: absolute;
+    right: 5%;
+}
+
 #fretboard {
     height: 90vh;
     margin:0;
     padding:0;
 }
 
-#chord_window {
+.bold {
+    font-weight: bold;
+}
+
+
+#top_bar {
     height: 10vh;
     margin:0;
     padding:0;
