@@ -55,6 +55,9 @@ table {
     background-color: blue !important;
 }
 
+.just_fretted {
+}
+
 .fret {
     background-color: #451004;
     transition: background-color 1000ms linear;
