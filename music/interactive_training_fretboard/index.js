@@ -11,6 +11,8 @@ var toneSequence = [ [0, 4, 7, 11], [2, 5, 9, 0], [4, 7, 11, 2], [5, 9, 0, 4], [
 
 function setToneSequence(newToneSequence) {
     toneSequence = newToneSequence;
+    let chordWindow = document.getElementById("chord_window");
+    chordWindow.innerHTML = toneSequence[tonePosition].toString().replace(/,/g, ' ');
 }
 
 function getToneSequence() {

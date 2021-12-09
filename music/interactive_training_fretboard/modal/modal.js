@@ -13,7 +13,6 @@ let saveButton = document.getElementById("save_button");
 let chordSequenceInput = document.getElementById("chord_sequence_input");
 let keyInput = document.getElementById("key_input");
 
-
 // When the user clicks the button, open the modal
 btn.onclick = function() {
     modal.style.display = "block";
@@ -32,7 +31,6 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
-
 
 function convertIntChordToStringChord(intChord) {
     return intChord.toString().replace(/,/g, ' ');
