@@ -357,8 +357,7 @@ function removeLoadingArea() {
 }
 
 
-let GO = document.getElementById("GO");
-GO.onclick = function () {
+window.onload = function () {
     constructLoadingArea();
     preloadAudio();
     removeLoadingArea();
