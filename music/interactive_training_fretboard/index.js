@@ -210,9 +210,8 @@ function preloadAudio() {
             let progressString = `${progressPercent}%`;
             progress.style.width = progressString;
             progress.innerHTML = progressString;
-            // console.log(`loading : ../guitar_samples/${octave}_${note}.flac`)
-            let x = new Audio(`../guitar_samples/${octave}_${note}.flac`);
-            x.play();
+            new Audio(`../guitar_samples/${octave}_${note}.flac`);
+            console.log(`loading : ../guitar_samples/${octave}_${note}.flac`)
         }
     }
 }
