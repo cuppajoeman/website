@@ -211,6 +211,7 @@ function preloadAudio() {
             progress.style.width = progressString;
             progress.innerHTML = progressString;
             let x = new Audio(`../guitar_samples/${octave}_${note}.flac`);
+            x.muted = true;
             x.play();
             console.log(`loading : ../guitar_samples/${octave}_${note}.flac`)
         }
