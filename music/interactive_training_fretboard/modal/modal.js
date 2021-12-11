@@ -1,4 +1,4 @@
-import { setToneSequence, getToneSequence, setKey, getKey } from "../index.js";
+import { setToneSequence, getToneSequence, setKey, getKey, setNotationMode, loadNotation} from "../index.js";
 
 // Get the modal
 var modal = document.getElementById("myModal");
@@ -12,6 +12,9 @@ let saveButton = document.getElementById("save_button");
 
 let chordSequenceInput = document.getElementById("chord_sequence_input");
 let keyInput = document.getElementById("key_input");
+
+let standardNotationRadioButton = document.getElementById("standard_notation");
+let integerNotationRadioButton = document.getElementById("integer_notation");
 
 // When the user clicks the button, open the modal
 btn.onclick = function() {
@@ -47,5 +50,11 @@ saveButton.onclick = function() {
     let stringChordList = rawSequence.split(",");
     setToneSequence(stringChordList.map(convertStringChordToIntChord));
     setKey(parseInt(keyInput.value));
+    if (standardNotationRadioButton.checked) {
+        setNotationMode("STANDARD");
+    } else if (integerNotationRadioButton.checked) {
+        setNotationMode("INTEGER");
+    }
+    loadNotation();
 }
 

@@ -4,6 +4,14 @@ const NUM_STRINGS = 6;
 const NUM_FRETS = 21;
 let MODE = "HARMONY";
 
+// TODO make a context class with all data and pass that around.
+// Then we won't have to reach in here with getters and setters we do
+// add in ability to have superset chords as well.
+// ability to randomize the chord sequence
+// ability to refret justPlayed for fast modification
+// generate random fret position and mark it
+
+
 let noteToInteger = {
     "C": 0,
     "C#/Db": 1,
@@ -19,6 +27,7 @@ let noteToInteger = {
     "B": 11,
 }
 
+
 let integerToNote = invertDictionary(noteToInteger);
 
 var KEY = getRandomInt(12);
@@ -31,17 +40,14 @@ function posMod(n, d) {
 }
 
 function normalizeIntegerChord(integerChord) {
-    console.log(integerChord);
     return integerChord.map(n => {
         return posMod(n - integerChord[0],12);
     });
 }
 
-
-// Next step is to take 2 5 9 0, extract first interval, which will be the root note (+key posmod), then to normalize the chord.
-// Once we've done that then we can can match it via the standardToInteger and then d
-
-let notationMode = "STANDARD";
+// Use an enum
+// let notationMode = "STANDARD";
+let notationMode = "INTEGER";
 
 // TODO generate these eventually
 let standardToInteger = {
@@ -111,6 +117,7 @@ let integerToStandard = invertDictionary(standardToInteger);
 
 // HELPERS
 
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
@@ -122,6 +129,8 @@ function invertDictionary(dictionary){
     }
     return ret;
 }
+
+// Setters getters
 
 function setToneSequence(newToneSequence) {
     toneSequence = newToneSequence;
@@ -140,7 +149,10 @@ function getToneSequence() {
     return toneSequence;
 }
 
-// all done.
+function setNotationMode(mode) {
+    notationMode = mode;
+}
+
 function setKey(newKey) {
     KEY = newKey;
     let keyElement = document.getElementById("key");
@@ -197,15 +209,18 @@ function preloadAudio() {
     }
 }
 
+function loadNotation() {
+    setToneSequence(toneSequence);
+    setKey(KEY);
+}
+
 function tableCreate() {
 
     // const body = document.body,
     let tbl = document.createElement('table');
     tbl.style.border = '1px solid black';
 
-    setToneSequence(toneSequence);
-    setKey(KEY);
-
+    loadNotation();
 
     for (let i = 0; i < NUM_STRINGS; i++) {
         const tr = tbl.insertRow();
@@ -310,4 +325,4 @@ document.body.onkeyup = function(e){
 // preloadAudio();
 tableCreate();
 
-export { setToneSequence, getToneSequence, setKey, getKey };
+export { setToneSequence, getToneSequence, setKey, getKey, setNotationMode, loadNotation };
