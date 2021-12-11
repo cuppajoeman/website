@@ -357,11 +357,13 @@ function removeLoadingArea() {
 }
 
 
-// alert("ready to load audio?")
-// constructLoadingArea();
-// preloadAudio();
-// removeLoadingArea();
-// console.log("yes");
-tableCreate();
+let GO = document.getElementById("GO");
+GO.onclick = function () {
+    constructLoadingArea();
+    preloadAudio();
+    removeLoadingArea();
+    console.log("yes");
+    tableCreate();
+}
 
 export { setToneSequence, getToneSequence, setKey, getKey, setNotationMode, loadNotation };
