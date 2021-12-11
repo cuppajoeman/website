@@ -210,7 +210,8 @@ function preloadAudio() {
             let progressString = `${progressPercent}%`;
             progress.style.width = progressString;
             progress.innerHTML = progressString;
-            new Audio(`../guitar_samples/${octave}_${note}.flac`);
+            x = new Audio(`../guitar_samples/${octave}_${note}.flac`);
+            x.play();
             console.log(`loading : ../guitar_samples/${octave}_${note}.flac`)
         }
     }
@@ -355,6 +356,7 @@ function removeLoadingArea() {
 }
 
 
+alert("ready to load audio?")
 constructLoadingArea();
 preloadAudio();
 removeLoadingArea();
