@@ -4,29 +4,153 @@ const NUM_STRINGS = 6;
 const NUM_FRETS = 21;
 let MODE = "HARMONY";
 
+let noteToInteger = {
+    "C": 0,
+    "C#/Db": 1,
+    "D": 2,
+    "D#/Eb": 3,
+    "E": 4,
+    "F": 5,
+    "F#/Gb": 6,
+    "G": 7,
+    "A#/Bb": 8,
+    "A": 9,
+    "A#/Bb": 10,
+    "B": 11,
+}
+
+let integerToNote = invertDictionary(noteToInteger);
+
 var KEY = getRandomInt(12);
 
 let tonePosition = 0;
-var toneSequence = [ [0, 4, 7, 11], [2, 5, 9, 0], [4, 7, 11, 2], [5, 9, 0, 4], [7, 11, 2, 5], [9, 0, 4, 7], [11, 2, 5, 9]];
+var toneSequence = [[0, 4, 7, 11], [2, 5, 9, 0], [4, 7, 11, 2], [5, 9, 0, 4], [7, 11, 2, 5], [9, 0, 4, 7], [11, 2, 5, 9]];
+
+function posMod(n, d) {
+    return ((n % d) + d) % d;
+}
+
+function normalizeIntegerChord(integerChord) {
+    console.log(integerChord);
+    return integerChord.map(n => {
+        return posMod(n - integerChord[0],12);
+    });
+}
+
+
+// Next step is to take 2 5 9 0, extract first interval, which will be the root note (+key posmod), then to normalize the chord.
+// Once we've done that then we can can match it via the standardToInteger and then d
+
+let notationMode = "STANDARD";
+
+// TODO generate these eventually
+let standardToInteger = {
+    "X": [0, 4, 7 ],
+    "X5": [0, 7 ],
+    "X2": [0, 2, 7 ],
+    "Xadd9": [0, 2, 4, 7 ],
+    "X+": [0, 4, 8 ],
+    "Xo": [0, 3, 6 ],
+    "Xsus": [0, 5, 7 ],
+    "X-": [0, 3, 7 ],
+    "XΔ7": [0, 4, 7, 11 ],
+    "X-7": [0, 3, 7, 10 ],
+    "X7": [0, 4, 7, 10 ],
+    "X7sus": [0, 5, 7, 10 ],
+    "X∅7": [0, 3, 6, 10 ],
+    "Xo7": [0, 3, 6, 9 ],
+    "XΔ9": [0, 2, 4, 7, 11 ],
+    "XΔ13": [0, 2, 4, 7, 9, 11 ],
+    "X6": [0, 4, 7, 9 ],
+    "X69": [0, 2, 4, 7, 9 ],
+    "XΔ7#11": [0, 4, 6, 7, 11 ],
+    "XΔ9#11": [0, 2, 4, 6, 7, 11 ],
+    "XΔ7#5": [0, 4, 8, 11 ],
+    "X-6": [0, 3, 7, 9 ],
+    "X-69": [0, 2, 3, 7, 9 ],
+    "X-Δ7": [0, 3, 7, 11 ],
+    "X-Δ9": [0, 2, 3, 7, 11 ],
+    "X-9": [0, 2, 3, 7, 10 ],
+    "X-11": [0, 2, 3, 5, 7, 10 ],
+    "X-7b5": [0, 3, 6, 10 ],
+    "X∅9": [0, 2, 3, 6, 10 ],
+    "X-b6": [0, 3, 7, 8 ],
+    "X-#5": [0, 3, 8 ],
+    "X9": [0, 2, 4, 7, 10 ],
+    "X7b9": [0, 1, 4, 7, 10 ],
+    "X7#9": [0, 3, 4, 7, 10 ],
+    "X7#11": [0, 4, 6, 7, 10 ],
+    "X7b5": [0, 4, 6, 10 ],
+    "X7#5": [0, 4, 8, 10 ],
+    "X9#11": [0, 2, 4, 6, 7, 10 ],
+    "X9b5": [0, 2, 4, 6, 10 ],
+    "X9#5": [0, 2, 4, 8, 10 ],
+    "X7b13": [0, 4, 7, 8, 10 ],
+    "X7#9#5": [0, 3, 4, 8, 10 ],
+    "X7#9b5": [0, 3, 4, 6 ],
+    "X7#9#11": [0, 3, 4, 6, 7, 10 ],
+    "X7b9#11": [0, 1, 4, 6, 7, 10 ],
+    "X7b9b5": [0, 1, 4, 6, 10 ],
+    "X7b9#5": [0, 1, 4, 8, 10 ],
+    "X7b9#9": [0, 1, 3, 4, 7, 10 ],
+    "X7b9b13": [0, 1, 4, 7, 8, 10 ],
+    "X7alt": [0, 1, 3, 4, 8, 10, 6 ],
+    "X13": [0, 2, 4, 5, 7, 9, 10 ],
+    "X13#11": [0, 2, 4, 6, 7, 9, 10 ],
+    "X13b9": [0, 1, 4, 5, 7, 9, 10 ],
+    "X13#9": [0, 3, 4, 5, 7, 9, 10 ],
+    "X7b9sus": [0, 1, 5, 7, 10 ],
+    "X7susadd3": [0, 4, 5, 7, 10 ],
+    "X9sus": [0, 2, 5, 7, 10 ],
+    "X13sus": [0, 2, 5, 7, 9, 10 ],
+    "X7b13sus": [0, 5, 7, 8, 10 ],
+    "X11": [0, 2, 4, 5, 7, 10 ],
+}
+
+let integerToStandard = invertDictionary(standardToInteger);
+
+// HELPERS
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
+function invertDictionary(dictionary){
+    var ret = {};
+    for(var key in dictionary){
+        ret[dictionary[key]] = key;
+    }
+    return ret;
+}
+
 function setToneSequence(newToneSequence) {
     toneSequence = newToneSequence;
     let chordWindow = document.getElementById("chord_window");
-    chordWindow.innerHTML = toneSequence[tonePosition].toString().replace(/,/g, ' ');
+
+    if (notationMode === "INTEGER") {
+        chordWindow.innerHTML = toneSequence[tonePosition].toString().replace(/,/g, ' ');
+    } else if (notationMode === "STANDARD") {
+        let integerChord = toneSequence[tonePosition];
+        let normalizedIntegerChord = integerToStandard[normalizeIntegerChord(integerChord)];
+        chordWindow.innerHTML = normalizedIntegerChord.replace(/X/g, integerToNote[KEY + integerChord[0]]);
+    }
 }
 
 function getToneSequence() {
     return toneSequence;
 }
 
+// all done.
 function setKey(newKey) {
     KEY = newKey;
     let keyElement = document.getElementById("key");
-    keyElement.innerHTML = newKey;
+    if (notationMode === "INTEGER") {
+        console.log("it is not")
+        keyElement.innerHTML = newKey.toString();
+    } else if (notationMode === "STANDARD") {
+        console.log("it is")
+        keyElement.innerHTML = integerToNote[newKey];
+    }
 }
 
 function getKey() {
@@ -59,9 +183,9 @@ function quotientRemainder(n, d) {
 function constructNoteAndOctaveFromFretboardPosition(string, fret) {
     const inverted_y_index = (NUM_STRINGS - 1) - string;
     let octave, note;
-    [octave, note] = quotientRemainder((BASE_STRINGS[inverted_y_index] + fret), 12)
-    octave += 3
-    return [octave, note]
+    [octave, note] = quotientRemainder((BASE_STRINGS[inverted_y_index] + fret), 12);
+    octave += 3;
+    return [octave, note];
 }
 
 function preloadAudio() {
@@ -79,11 +203,8 @@ function tableCreate() {
     let tbl = document.createElement('table');
     tbl.style.border = '1px solid black';
 
-    let chordWindow = document.getElementById("chord_window");
-    chordWindow.innerHTML = toneSequence[tonePosition].toString().replace(/,/g, ' ');
-
-    let keyElement = document.getElementById("key");
-    keyElement.innerHTML = KEY.toString();
+    setToneSequence(toneSequence);
+    setKey(KEY);
 
 
     for (let i = 0; i < NUM_STRINGS; i++) {
