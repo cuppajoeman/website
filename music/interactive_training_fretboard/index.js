@@ -211,8 +211,8 @@ function preloadAudio() {
             progress.style.width = progressString;
             progress.innerHTML = progressString;
             let x = new Audio(`../guitar_samples/${octave}_${note}.flac`);
-            x.muted = true;
-            x.play();
+            // x.muted = true;
+            // x.play();
             console.log(`loading : ../guitar_samples/${octave}_${note}.flac`)
         }
     }
@@ -357,11 +357,11 @@ function removeLoadingArea() {
 }
 
 
-alert("ready to load audio?")
-constructLoadingArea();
-preloadAudio();
-removeLoadingArea();
-console.log("yes");
+// alert("ready to load audio?")
+// constructLoadingArea();
+// preloadAudio();
+// removeLoadingArea();
+// console.log("yes");
 tableCreate();
 
 export { setToneSequence, getToneSequence, setKey, getKey, setNotationMode, loadNotation };
