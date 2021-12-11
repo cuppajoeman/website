@@ -27,7 +27,6 @@ let noteToInteger = {
     "B": 11,
 }
 
-
 let integerToNote = invertDictionary(noteToInteger);
 
 var KEY = getRandomInt(12);
@@ -157,10 +156,8 @@ function setKey(newKey) {
     KEY = newKey;
     let keyElement = document.getElementById("key");
     if (notationMode === "INTEGER") {
-        console.log("it is not")
         keyElement.innerHTML = newKey.toString();
     } else if (notationMode === "STANDARD") {
-        console.log("it is")
         keyElement.innerHTML = integerToNote[newKey];
     }
 }
@@ -201,9 +198,19 @@ function constructNoteAndOctaveFromFretboardPosition(string, fret) {
 }
 
 function preloadAudio() {
+    let progress = document.getElementById("progress");
     for (let i = 0; i < NUM_STRINGS; i++) {
         for (let j = 0; j < NUM_FRETS; j++) {
             const [octave, note] = constructNoteAndOctaveFromFretboardPosition(i, j);
+            // this makes sense since we iterate from 0 to 5 and then from 0 to 20
+            // so the final number is 120, which is 5 * 20 (we don't count last fret)
+            let total = (NUM_FRETS - 1) * NUM_STRINGS;
+            let numConstructed = i * j + j;
+            let progressPercent = numConstructed/total * 100;
+            let progressString = `${progressPercent}%`;
+            progress.style.width = progressString;
+            progress.innerHTML = progressString;
+            // console.log(`loading : ../guitar_samples/${octave}_${note}.flac`)
             new Audio(`../guitar_samples/${octave}_${note}.flac`);
         }
     }
@@ -322,7 +329,36 @@ document.body.onkeyup = function(e){
 
 }
 
-// preloadAudio();
+function constructLoadingArea() {
+    let loaderDiv = document.createElement('div');
+    loaderDiv.classList.add("centered_container");
+    loaderDiv.id = "loading_area";
+    loaderDiv.style.width = "80%";
+    let progressBar = document.createElement('div');
+    progressBar.id = "progress_bar";
+    let progress = document.createElement('div');
+    progress.id = "progress";
+    // progress.innerHTML = "10%";
+    let fretboard = document.getElementById("fretboard")
+    let textProgress = document.createElement('div');
+    textProgress.id = "text_progress";
+    progressBar.appendChild(progress);
+    loaderDiv.appendChild(progressBar);
+    loaderDiv.appendChild(textProgress);
+    fretboard.appendChild(loaderDiv);
+}
+
+function removeLoadingArea() {
+    let loadingArea = document.getElementById("loading_area");
+    let fretboard = document.getElementById("fretboard")
+    fretboard.removeChild(loadingArea);
+}
+
+
+constructLoadingArea();
+preloadAudio();
+removeLoadingArea();
+console.log("yes");
 tableCreate();
 
 export { setToneSequence, getToneSequence, setKey, getKey, setNotationMode, loadNotation };
