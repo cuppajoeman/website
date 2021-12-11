@@ -279,17 +279,34 @@ function tableCreate() {
     // body.appendChild(tbl);
 }
 
+function unmarkFrets() {
+    let markedFrets = Array.from(document.getElementsByClassName("marked"));
+    for (let i = 0; i < markedFrets.length; i++) {
+        let markedFret = markedFrets[i];
+        markedFret.classList.toggle("marked")
+    }
+}
+
 document.body.onkeyup = function(e){
-    if(e.key === 'H'){
+    if (e.key === 'H'){
         MODE = "HARMONY"
     }
     if(e.key === 'M'){
         MODE = "MELODY"
+        // Turn off fretted Notes
         let frettedNotes = Array.from(document.getElementsByClassName("fretted"));
         for (let i = 0; i < frettedNotes.length; i++) {
             let frettedNote = frettedNotes[i];
             frettedNote.classList.toggle("fretted")
         }
+    }
+    if (e.key === 'R') {
+        let frets = Array.from(document.getElementsByClassName("fret"));
+        let randomFret = frets[getRandomInt(frets.length)];
+        randomFret.classList.add("marked");
+    }
+    if (e.key === 'C') { // Clear
+        unmarkFrets();
     }
     if(MODE === "HARMONY" && e.key === ' '){
         // Copy since we are modifying during iterations by using toggle
