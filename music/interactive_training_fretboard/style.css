@@ -51,22 +51,30 @@ table {
     background-color: darkblue;
 }
 
+
+.fret {
+    background-color: #451004;
+    transition: background-color 250ms linear;
+    user-select: none;
+}
+
+
 .marked {
-    background-color: goldenrod !important;
+    background-color: goldenrod ;
 }
 
 .fretted {
-    background-color: blue !important;
+    background-color: blue ;
+}
+
+.activated{
+    transition: background-color 2s linear;
+    background-color: green;
 }
 
 .just_fretted {
 }
 
-.fret {
-    background-color: #451004;
-    transition: background-color 1000ms linear;
-    user-select: none;
-}
 
 .notransition {
     transition: none !important;

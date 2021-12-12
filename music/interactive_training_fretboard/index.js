@@ -9,8 +9,7 @@ let MODE = "HARMONY";
 // add in ability to have superset chords as well.
 // ability to randomize the chord sequence
 // ability to refret justPlayed for fast modification
-// generate random fret position and mark it
-
+// show current mode next to settings
 
 let noteToInteger = {
     "C": 0,
@@ -223,10 +222,31 @@ function loadNotation() {
     setKey(KEY);
 }
 
+function fretPosition(position) {
+    // Forces it so that you can only have a single finger per string
+    // position is a table cell
+    // fret is a verb here
+    console.log("hi")
+
+    let table = document.getElementById("fret_table");
+    for (let string of table.rows) {
+        if (string.contains(position)) {
+            for (let fret of string.cells) {
+                if (fret === position) {
+                    fret.classList.toggle("fretted");
+                } else {
+                    fret.classList.remove("fretted");
+                }
+            }
+        }
+    }
+}
+
 function tableCreate() {
 
     // const body = document.body,
     let tbl = document.createElement('table');
+    tbl.id = "fret_table";
     tbl.style.border = '1px solid black';
 
     loadNotation();
@@ -246,9 +266,10 @@ function tableCreate() {
             td.onclick = function () {
                 if (MODE === "HARMONY") {
                     // Makes it blue
-                    this.classList.toggle("fretted")
+                    // this.classList.toggle("fretted")
+                    fretPosition(td);
                     // "instantly"
-                    this.style.transitionDuration = "0.001ms"
+                    // this.style.transitionDuration = "0.001ms"
                 } else if (MODE === "MELODY") {
                     new Audio(`../guitar_samples/${octave}_${note}.flac`).play();
                     this.style.transitionDuration = "0.001ms"
@@ -258,8 +279,10 @@ function tableCreate() {
             td.addEventListener("transitionend", function() {
                 // This gets called when it turns to blue and when it turns green
                 if (this.classList.contains("just_played")) {
-                    this.style.transitionDuration = "2s"
-                    this.style.backgroundColor = '#300b02';
+                    this.style.transitionDuration = "250ms"
+                    // this.style.backgroundColor = '#300b02';
+                    // this.style.backgroundColor = 'blue';
+                    this.classList.remove("activated");
                 }
                 // this.classList.toggle("just_fretted");
             })
@@ -287,6 +310,14 @@ function unmarkFrets() {
     }
 }
 
+function clearPrevious() {
+    let frettedNotes = Array.from(document.getElementsByClassName("fretted"));
+    for (let i = 0; i < frettedNotes.length; i++) {
+        let frettedNote = frettedNotes[i];
+        frettedNote.classList.toggle("fretted");
+    }
+}
+
 document.body.onkeyup = function(e){
     if (e.key === 'H'){
         MODE = "HARMONY"
@@ -300,12 +331,15 @@ document.body.onkeyup = function(e){
             frettedNote.classList.toggle("fretted")
         }
     }
-    if (e.key === 'R') {
+    if (e.key === 'A') {
         let frets = Array.from(document.getElementsByClassName("fret"));
         let randomFret = frets[getRandomInt(frets.length)];
         randomFret.classList.add("marked");
     }
-    if (e.key === 'C') { // Clear
+    if (e.key === 'C') {
+        clearPrevious();
+    }
+    if (e.key === 'U') { // Unmark
         unmarkFrets();
     }
     if(MODE === "HARMONY" && e.key === ' '){
@@ -315,7 +349,6 @@ document.body.onkeyup = function(e){
         for (let i = 0; i < justFrettedNotes.length; i++) {
             let justFrettedNote = justFrettedNotes[i];
             justFrettedNote.classList.toggle("just_played");
-            justFrettedNote.style.backgroundColor = '#451004';
         }
         let frettedNotes = Array.from(document.getElementsByClassName("fretted"));
         let notesPlayed = [];
@@ -326,9 +359,10 @@ document.body.onkeyup = function(e){
             notesPlayed.push(note);
             new Audio(`../guitar_samples/${octave}_${note}.flac`).play();
             frettedNote.style.transitionDuration = "0.001ms"
-            frettedNote.style.backgroundColor = 'green';
+            // frettedNote.style.backgroundColor = 'green';
+            frettedNote.classList.add("activated");
             // Removing
-            frettedNote.classList.toggle("fretted");
+            // frettedNote.classList.toggle("fretted");
             // Adding a marker class to fretboard positions just played
             frettedNote.classList.toggle("just_played");
         }
@@ -372,7 +406,6 @@ function removeLoadingArea() {
     let fretboard = document.getElementById("fretboard")
     fretboard.removeChild(loadingArea);
 }
-
 
 window.onload = function () {
     constructLoadingArea();
