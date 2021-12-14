@@ -4,12 +4,31 @@ const NUM_STRINGS = 6;
 const NUM_FRETS = 21;
 let MODE = "HARMONY";
 
+import {songs} from "../songs.js";
+
+let songNames = Object.keys(songs);
+
 // TODO make a context class with all data and pass that around.
 // Then we won't have to reach in here with getters and setters we do
 // add in ability to have superset chords as well.
-// ability to randomize the chord sequence
+// ability to randomize the chord sequence as well as a random chord sequence
 // ability to refret justPlayed for fast modification
 // show current mode next to settings
+// add in isplayable into conideration when
+
+// Keyboard only navigation (a setting in the setting menu) (maybe just do vim controls lol, yeah this.)
+// press a letter from qwerty which gives you a selection of each of the strings 0 up to 5
+// if you are on a string which already has a fret selected the letters a/s followd by a number
+// add or subtract that many frets, and clamp between 0 and numFrets
+// You can also specify an absolute position by pressing some key and then a fret number
+
+// You use vim controls in normal mode and then pressing space will create/select a fret and then you can move it
+// or auto select based on if you're on it, I guess I can decide.
+
+// an option to load in my custom settings in the terminal that no one knows about
+
+// add information about other hotkeys to it. as well as format for the chord sequence.
+// add in parsing for different type of sequence.
 
 let noteToInteger = {
     "C": 0,
@@ -31,7 +50,8 @@ let integerToNote = invertDictionary(noteToInteger);
 var KEY = getRandomInt(12);
 
 let tonePosition = 0;
-var toneSequence = [[0, 4, 7, 11], [2, 5, 9, 0], [4, 7, 11, 2], [5, 9, 0, 4], [7, 11, 2, 5], [9, 0, 4, 7], [11, 2, 5, 9]];
+// var toneSequence = [[0, 4, 7, 11], [2, 5, 9, 0], [4, 7, 11, 2], [5, 9, 0, 4], [7, 11, 2, 5], [9, 0, 4, 7], [11, 2, 5, 9]];
+var toneSequence = songs["there_will_never_be_another_you"];
 
 function posMod(n, d) {
     return ((n % d) + d) % d;
@@ -121,8 +141,8 @@ function getRandomInt(max) {
 }
 
 function invertDictionary(dictionary){
-    var ret = {};
-    for(var key in dictionary){
+    let ret = {};
+    for(let key in dictionary){
         ret[dictionary[key]] = key;
     }
     return ret;
