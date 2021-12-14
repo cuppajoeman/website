@@ -51,7 +51,7 @@ var KEY = getRandomInt(12);
 
 let tonePosition = 0;
 // var toneSequence = [[0, 4, 7, 11], [2, 5, 9, 0], [4, 7, 11, 2], [5, 9, 0, 4], [7, 11, 2, 5], [9, 0, 4, 7], [11, 2, 5, 9]];
-var toneSequence = songs["there_will_never_be_another_you"];
+var toneSequence = songs["st_thomas"];
 
 function posMod(n, d) {
     return ((n % d) + d) % d;
@@ -338,6 +338,44 @@ function clearPrevious() {
     }
 }
 
+function playChord() {
+    // Copy since we are modifying during iterations by using toggle
+    let justFrettedNotes = Array.from(document.getElementsByClassName("just_played"));
+    // Unmark previous chord
+    for (let i = 0; i < justFrettedNotes.length; i++) {
+        let justFrettedNote = justFrettedNotes[i];
+        justFrettedNote.classList.toggle("just_played");
+    }
+    let frettedNotes = Array.from(document.getElementsByClassName("fretted"));
+    let notesPlayed = [];
+    // play sound and visual feedback on chord that is just played
+    for (let i = 0; i < frettedNotes.length; i++) {
+        let frettedNote = frettedNotes[i];
+        const [octave, note] = frettedNote.id.split("_").map(Number)
+        notesPlayed.push(note);
+        new Audio(`../guitar_samples/${octave}_${note}.flac`).play();
+        frettedNote.style.transitionDuration = "0.001ms"
+        // frettedNote.style.backgroundColor = 'green';
+        frettedNote.classList.add("activated");
+        // Removing
+        // frettedNote.classList.toggle("fretted");
+        // Adding a marker class to fretboard positions just played
+        frettedNote.classList.toggle("just_played");
+    }
+    // Removes duplicates
+    let cleanedNotesPlayed = [...new Set(notesPlayed)];
+    let keyIntervalsPlayed = cleanedNotesPlayed.map(n => (n - KEY + 12) % 12);
+    if (arraysEqual(keyIntervalsPlayed, toneSequence[tonePosition])) {
+        tonePosition += 1;
+        tonePosition %= toneSequence.length;
+        if (tonePosition === 0) {
+            setKey(getRandomInt(12));
+        }
+        let chordWindow = document.getElementById("chord_window");
+        chordWindow.innerHTML = toneSequence[tonePosition].toString().replace(/,/g, ' ');
+    }
+}
+
 document.body.onkeyup = function(e){
     if (e.key === 'H'){
         MODE = "HARMONY"
@@ -363,43 +401,8 @@ document.body.onkeyup = function(e){
         unmarkFrets();
     }
     if(MODE === "HARMONY" && e.key === ' '){
-        // Copy since we are modifying during iterations by using toggle
-        let justFrettedNotes = Array.from(document.getElementsByClassName("just_played"));
-        // Unmark previous chord
-        for (let i = 0; i < justFrettedNotes.length; i++) {
-            let justFrettedNote = justFrettedNotes[i];
-            justFrettedNote.classList.toggle("just_played");
-        }
-        let frettedNotes = Array.from(document.getElementsByClassName("fretted"));
-        let notesPlayed = [];
-        // play sound and visual feedback on chord that is just played
-        for (let i = 0; i < frettedNotes.length; i++) {
-            let frettedNote = frettedNotes[i];
-            const [octave, note] = frettedNote.id.split("_").map(Number)
-            notesPlayed.push(note);
-            new Audio(`../guitar_samples/${octave}_${note}.flac`).play();
-            frettedNote.style.transitionDuration = "0.001ms"
-            // frettedNote.style.backgroundColor = 'green';
-            frettedNote.classList.add("activated");
-            // Removing
-            // frettedNote.classList.toggle("fretted");
-            // Adding a marker class to fretboard positions just played
-            frettedNote.classList.toggle("just_played");
-        }
-        // Removes duplicates
-        let cleanedNotesPlayed = [...new Set(notesPlayed)];
-        let keyIntervalsPlayed = cleanedNotesPlayed.map(n => (n - KEY + 12) % 12);
-        if (arraysEqual(keyIntervalsPlayed, toneSequence[tonePosition])) {
-            tonePosition += 1;
-            tonePosition %= toneSequence.length;
-            if (tonePosition === 0) {
-                setKey(getRandomInt(12));
-            }
-            let chordWindow = document.getElementById("chord_window");
-            chordWindow.innerHTML = toneSequence[tonePosition].toString().replace(/,/g, ' ');
-        }
+        playChord();
     }
-
 }
 
 function constructLoadingArea() {
@@ -412,7 +415,7 @@ function constructLoadingArea() {
     let progress = document.createElement('div');
     progress.id = "progress";
     // progress.innerHTML = "10%";
-    let fretboard = document.getElementById("fretboard")
+    let fretboard = document.getElementById("fretboard");
     let textProgress = document.createElement('div');
     textProgress.id = "text_progress";
     progressBar.appendChild(progress);
