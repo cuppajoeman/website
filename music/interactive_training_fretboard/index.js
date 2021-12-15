@@ -51,7 +51,8 @@ var KEY = getRandomInt(12);
 
 let tonePosition = 0;
 // var toneSequence = [[0, 4, 7, 11], [2, 5, 9, 0], [4, 7, 11, 2], [5, 9, 0, 4], [7, 11, 2, 5], [9, 0, 4, 7], [11, 2, 5, 9]];
-var toneSequence = songs["st_thomas"];
+// var toneSequence = songs["st_thomas"];
+var toneSequence = Object.values(songs)[getRandomInt(Object.values(songs).length)]
 
 function posMod(n, d) {
     return ((n % d) + d) % d;
@@ -402,6 +403,7 @@ document.body.onkeyup = function(e){
     }
     if(MODE === "HARMONY" && e.key === ' '){
         playChord();
+        unmarkFrets();
     }
 }
 
