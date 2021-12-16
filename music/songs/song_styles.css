@@ -3,6 +3,12 @@
   width: 90%;
 }
 
+html, body {
+  margin: 0;
+  height: 100%;
+  /* Makes sure no scrolling is allowed */
+  overflow: auto;
+}
 
 .song_table tbody tr td  {
   /* width: 25%; */
