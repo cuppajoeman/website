@@ -1,0 +1,11 @@
+/* larger size for reading */
+.wrapper {
+  width: 90%;
+}
+
+
+.song_table tbody tr td  {
+  /* width: 25%; */
+  padding: 5px;
+  table-layout: fixed;
+}

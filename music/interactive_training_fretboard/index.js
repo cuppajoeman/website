@@ -136,7 +136,6 @@ let integerToStandard = invertDictionary(standardToInteger);
 
 // HELPERS
 
-
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
