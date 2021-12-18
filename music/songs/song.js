@@ -1,4 +1,9 @@
 // TODO next up add abililty to add comments to website
+// add ability to simplify song using a format like AABA inside of song
+// make module for helpers and such so I can use the to string from chord here and then do conversions easily.
+
+// add a fretboard seed whenever a new songs loads up
+// show list of songs and when you click one it loads it up and then you can go back to the list
 class SongDisplay {
     constructor(title, song, numBarsPerRow, minimumDivision) {
         this.song = song;
@@ -53,11 +58,23 @@ let songs = {
             [[2, 6, 9, 0], 2], [[2, 5, 9, 0], 1], [[7, 11, 2, 5], 1],
             [[0, 4, 7, 9], 2], [[2, 6, 9, 0], 2],
             [[2, 5, 9, 0], 1], [[7, 11, 2, 5], 1], [[0, 4, 7, 9], 1], [[2, 5, 9, 0], 0.5], [[7, 11, 2, 5], 0.5]
-        ]
+        ],
+    "there_will_never_be_another_you":
+        [
+            [[0, 4, 7, 11],2],[[ 11, 2, 5, 9],1],[[ 4, 8, 11, 2],1],
+            [[9, 0, 4, 7],2],[[ 7, 10, 2, 5],1],[[ 0, 4, 7, 10],1],
+            [[5, 9, 0, 4],1],[[ 5, 8, 0, 2],1],[[ 0, 4, 7, 11],1],[[ 9, 0, 4, 7],1],
+            [[2, 6, 9, 0],2],[[ 2, 5, 9, 0],1],[[ 7, 11, 2, 5],1],
+            [[0, 4, 7, 11],2],[[ 11, 2, 5, 9],1],[[ 4, 8, 11, 2],1],
+            [[9, 0, 4, 7],2],[[ 7, 10, 2, 5],1],[[ 0, 4, 7, 10],1],
+            [[5, 9, 0, 4],1],[[ 5, 8, 0, 2],1],[[ 0, 4, 7, 11],1],[[ 6, 9, 0, 3],0.5],[[ 11, 3, 6, 9],0.5],
+            [[4, 7, 2, 5],0.5],[[ 8, 0, 3, 7],0.5],[[ 7, 10, 2, 5],0.5],[[ 9, 1, 4, 7],0.5],[[ 2, 5, 9, 10],0.5],[[ 7, 11, 2, 5],0.5],[[ 0, 4, 7, 11],0.5],[[ 7, 11, 2, 5],0.5],
+        ],
 }
 
 let timeSignature = new TimeSignature(4, 0.25);
 let song = new Song(constructSong(songs["take_the_a_train"]), 3, timeSignature);
+// let song = new Song(constructSong(songs["there_will_never_be_another_you"]), 3, timeSignature);
 let songDisplay = new SongDisplay("Take the A Train", song, 4, 0.5);
 
 function tableCreate() {
