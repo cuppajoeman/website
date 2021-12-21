@@ -46,3 +46,10 @@ function constructSong(songSkeleton) {
     }
     return song;
 }
+
+let randomKey = document.getElementById("random_key");
+let fretboardSeed = document.getElementById("fretboard_seed");
+
+randomKey.appendChild(document.createTextNode(`𝓚: ${Math.floor(Math.random() * 12)}`));
+fretboardSeed.appendChild(document.createTextNode(`String: ${Math.floor(Math.random() * 6)} Fret: ${Math.floor(Math.random() * 22)}`));
+
