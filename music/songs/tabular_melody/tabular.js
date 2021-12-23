@@ -8,22 +8,45 @@ let q = h/2;
 let e = q/2;
 let s = e/2;
 
+let rhythmStringToValue = {
+    "w":w,
+    "h":h,
+    "q":q,
+    "e":e,
+    "s":s,
+}
+
 // add a fretboard seed whenever a new songs loads up
 // show list of songs and when you click one it loads it up and then you can go back to the list
 class SongDisplay {
-    constructor(title, song, numBarsPerRow, minimumDivision) {
-        this.song = song;
+    constructor(title, melody, changes, numBarsPerRow, minimumDivision) {
+        this.song = changes;
+        this.melody = melody;
         this.numBarsPerRow = numBarsPerRow;
         this.title = title;
         this.minimumDivision = minimumDivision
     }
 }
 
+
 class Changes {
     constructor(chords, key, timeSignature) {
         this.chords = chords;
         this.key = key;
         this.timeSignature = timeSignature;
+    }
+}
+
+class Melody {
+    constructor(measures) {
+        this.measures = measures;
+    }
+}
+
+class Measure {
+    constructor(notes, rhythm) {
+        this.notes = notes;
+        this.rhythm = rhythm;
     }
 }
 
@@ -51,6 +74,40 @@ function constructSong(songSkeleton) {
         song.push(chord);
     }
     return song;
+}
+
+
+function constructMelody(melodySkeleton) {
+    let melody = [];
+    for (const measureSkeleton of melodySkeleton) {
+        let melodySkeletonNotes = measureSkeleton[0].split(" ");
+        let melodySkeletonRhythm = measureSkeleton[1].split(" ");
+        console.log(melodySkeletonNotes, melodySkeletonRhythm);
+        console.assert(melodySkeletonNotes.length === melodySkeletonRhythm.length);
+        let measure = new Measure(melodySkeletonNotes, melodySkeletonRhythm);
+        melody.push(measure);
+    }
+    return melody;
+}
+
+function createFraction(numeratorContent, denominatorContent) {
+    let fraction = document.createElement("div");
+    fraction.classList.add("frac");
+
+    let numerator = document.createElement("span");
+    numerator.appendChild(document.createTextNode(numeratorContent));
+
+    let divisionSymbol = document.createElement("span");
+    divisionSymbol.appendChild(document.createTextNode("/"));
+    divisionSymbol.classList.add("symbol");
+
+    let denominator = document.createElement("span");
+    denominator.appendChild(document.createTextNode(denominatorContent));
+    denominator.classList.add("bottom");
+
+    fraction.append(numerator, divisionSymbol, denominator);
+
+    return fraction;
 }
 
 let songs = {
@@ -90,40 +147,39 @@ let songs = {
 }
 
 A = [
-    ["7", [4*q]],
-    ["7 4' 7 0'", [e, q + e, q, q]],
-    ["4' 8 8", [e, e, 3 * q]],
-    ["8", [w]],
-    ["9", [w]],
-    ["9 10 11 4' 7 6 5 1'", [e, e, e, e, e, e, e, e]],
-    ["0' 4 4", [e, e, 3 * q]],
-    ["4", [w]],
+    ["7", "w"],
+    ["7 4' 7 0'", "e qe q q"],
+    ["4' 8", "e hqe"],
+    ["8", "w"],
+    ["9", "w"],
+    ["9 10 11 4' 7 6 5 1'",  "e e e e e e e e"],
+    ["0' 4", "e hqe"],
+    ["4", "w"],
 ]
 
 B = [
-    ["9 0'", [e, e + 3 * q]],
-    ["4' 5 9 0'", [e, q + e, q, q]],
-    ["4' 9 9", [e, q + e + h]],
-    ["9", [w]],
-    ["9 0'", [e, e + 3 * q]],
-    ["4' 6 9 0'", [e, q + e, q, q]],
-    ["4' 9", [e, e + 3*q]],
-    ["9 8", [h, h]],
+    ["9 0'", "e heq"],
+    ["4' 5 9 0'", "e qe q q"],
+    ["4' 9", "e hqe"],
+    ["9", "w"],
+    ["9 0'", "e hqe"],
+    ["4' 6 9 0'", "e qe q q"],
+    ["4' 9", "e hqe"],
+    ["9 8", "h h"],
 ]
 
 A_prime = [
-    ["7", [w]],
-    ["7 4' 7 0'", [e, q + e, q, q]],
-    ["4' 8", [e, e + 3 * q]],
-    ["8", [w]],
-    ["9", [w]],
-    ["9 10 11 4' 7 6 5 1'", [e, e, e, e, e, e, e, e]],
-    ["0' 4 5 6", [e, q + e, q, q]],
-    ["7 9 11 0' R 0", [e, e, e, e, q, q]],
+    ["7", "w"],
+    ["7 4' 7 0'", "e qe q q"],
+    ["4' 8", "e hqe"],
+    ["8", "w"],
+    ["9", "w"],
+    ["9 10 11 4' 7 6 5 1'", "e e e e e e e e"],
+    ["0' 4 5 6", "e qe q q"],
+    ["7 9 11 0' R 0", "e e e e q q"],
 ]
 
 take_the_a_train = A.concat(A, B, A_prime);
-
 
 A = [
     ["7' 5' 9 0' 4'", [e, e, e, e, h]],
@@ -148,6 +204,7 @@ B = [
 ]
 
 let honey_suckle_rose = A.concat(A, B, A);
+
 
 // A = [
 //     ["R 7 0' R 11 R 9 7", [q, q, e, q, e, q, e]],
@@ -221,42 +278,47 @@ function createTitleFromCodeName(codename) {
 let timeSignature = new TimeSignature(4, 0.25);
 // let song = new Changes(constructSong(songs["take_the_a_train"]), 3, timeSignature);
 // let song = new Changes(constructSong(songs["there_will_never_be_another_you"]), 3, timeSignature);
-let songCodeName = "stella_by_starlight"
-let song = new Changes(constructSong(songs[songCodeName]), 3, timeSignature);
-let songDisplay = new SongDisplay(createTitleFromCodeName(songCodeName), song, 4, 0.5);
+let songCodeName = "take_the_a_train"
+let changes = new Changes(constructSong(songs[songCodeName]), 3, timeSignature);
+let melody = new Melody(constructMelody(take_the_a_train));
+let songDisplay = new SongDisplay(createTitleFromCodeName(songCodeName), melody, changes, 4, 0.5);
 
 function tableCreate() {
     const body = document.body, tbl = document.createElement('table');
     tbl.style.width = '100%';
     tbl.style.height = '80%';
     tbl.style.border = '5px solid white';
+    tbl.style.textAlign = 'center';
 
     let lineLength = 0;
     let tr ;
-    for (const chord of songDisplay.song.chords) {
+    for (const measure of songDisplay.melody.measures) {
+        console.log("here", measure);
         if (lineLength % (songDisplay.numBarsPerRow ) === 0) {
             tr = tbl.insertRow();
         }
-        for (let i = 0; i < chord.duration; i++) {
-            var td;
-            if (lineLength % 1 === 0) {
-                console.log("yes")
-                td = tr.insertCell();
-                td.style.border = '1px solid white';
-                td.style.fontSize = '2vw';
-            }
-            td.style.width = `${100/songDisplay.numBarsPerRow}%`;
-            if (i === 0) {
-                if (td.hasChildNodes()) {
-                    td.appendChild(document.createTextNode(" - " + chord.stringChord));
-                } else {
-                    td.appendChild(document.createTextNode(chord.stringChord));
-                }
-            } else {
-                td.appendChild(document.createTextNode("%"));
-            }
+        var td;
+        td = tr.insertCell();
+        td.style.border = '1px solid white';
+        // td.style.fontSize = '2vw';
+        td.style.width = `${100/songDisplay.numBarsPerRow}%`;
+        const melodyTable = document.createElement('table');
+        let noteRow = melodyTable.insertRow();
+        let rhythmRow = melodyTable.insertRow();
+        melodyTable.style.border = '2px solid white';
+        melodyTable.style.borderColor = "white";
+        melodyTable.classList.add("center");
+        for (let i = 0; i < measure.notes.length; i ++) {
+            let note = noteRow.insertCell();
+            note.appendChild(document.createTextNode(measure.notes[i]))
+            note.style.border = '1px solid white';
+
+            let rhythm = rhythmRow.insertCell();
+            rhythm.appendChild(document.createTextNode(measure.rhythm[i]))
+            rhythm.style.border = '1px solid white';
         }
-        lineLength += chord.duration;
+        td.appendChild(melodyTable);
+        lineLength += 1;
     }
     body.appendChild(tbl);
 }
