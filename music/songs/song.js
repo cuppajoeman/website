@@ -22,7 +22,7 @@ for (const songName in songs) {
     let changesURL = new URL(`https://${hostName}${changesPath}`);
     changesURL.searchParams.append('songName', songName);
     changesAnchor.href = changesURL.toString();
-    melodyAnchor.appendChild(document.createTextNode("Changes,"))
+    changesAnchor.appendChild(document.createTextNode("Changes,"))
 
     let melodyURL = new URL(`https://${hostName}${melodyPath}`);
     melodyURL.searchParams.append('songName', songName);
