@@ -10,21 +10,28 @@ let songsDiv = document.getElementById("songs");
 let songList = document.createElement("ul")
 for (const songName in songs) {
     let songListItem = document.createElement("li");
-    let songListItemAnchor = document.createElement("a");
+    let melodyAnchor = document.createElement("a");
+    let changesAnchor = document.createElement("a");
 
     let currUrl = new URL(document.URL).pathname;
     let hostName = new URL(document.URL).hostname;
     let basePath = currUrl.substr(0, currUrl.lastIndexOf("/"));
-    basePath += '/tabular/tabular.html'
+    let changesPath = basePath + '/tabular/tabular.html'
+    let melodyPath  = basePath + '/tabular_melody/tabular.html'
 
+    let changesURL = new URL(`https://${hostName}${changesPath}`);
+    changesURL.searchParams.append('songName', songName);
+    changesAnchor.href = changesURL.toString();
+    melodyAnchor.appendChild(document.createTextNode("Changes,"))
 
-    var url = new URL(`https://${hostName}${basePath}`);
-    url.searchParams.append('songName', songName);
+    let melodyURL = new URL(`https://${hostName}${melodyPath}`);
+    melodyURL.searchParams.append('songName', songName);
+    melodyAnchor.href = melodyURL.toString();
+    melodyAnchor.appendChild(document.createTextNode("Melody"))
 
-    songListItemAnchor.href = url;
-
-    songListItemAnchor.appendChild(document.createTextNode(songs[songName].title));
-    songListItem.appendChild(songListItemAnchor);
+    songListItem.appendChild(document.createTextNode(`${songs[songName].title}: `));
+    songListItem.appendChild(melodyAnchor);
+    songListItem.appendChild(changesAnchor);
     songList.appendChild(songListItem);
 }
 songsDiv.appendChild(songList);
