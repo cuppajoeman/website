@@ -285,7 +285,8 @@ let songDisplay = new SongDisplay(createTitleFromCodeName(songCodeName), melody,
 
 function tableCreate() {
     const body = document.body, tbl = document.createElement('table');
-    tbl.style.width = '100%';
+    tbl.classList.add("center");
+    tbl.style.width = '90%';
     tbl.style.height = '80%';
     tbl.style.border = '5px solid white';
     tbl.style.textAlign = 'center';

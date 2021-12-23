@@ -1,5 +1,5 @@
 body {
-  background-color:grey;
+  background-color:black;
   color:white;
 }
 img, video, source {
@@ -46,3 +46,14 @@ td {
 }
 
 
+
+/* when we are printing */
+
+@media print {
+  table {
+    border: solid black !important;
+  }
+  td {
+    border: solid black !important;
+  }
+}

@@ -227,9 +227,13 @@ let songDisplay = new SongDisplay(createTitleFromCodeName(songCodeName), song, 4
 
 function tableCreate() {
     const body = document.body, tbl = document.createElement('table');
-    tbl.style.width = '100%';
+    tbl.classList.add('center');
+    tbl.style.width = '90%';
     tbl.style.height = '80%';
+    // tbl.style.height = '100%';
     tbl.style.border = '5px solid white';
+    // tbl.style.paddingTop = `${1/Math.sqrt(2) * 100}%`
+    // tbl.style.paddingTop = '56.25%'
 
     let lineLength = 0;
     let tr ;
