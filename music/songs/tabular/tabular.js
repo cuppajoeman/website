@@ -49,5 +49,8 @@ function createTitle(songName) {
     document.body.appendChild(title);
 }
 
-createTitle("take_the_a_train");
-loadChanges("take_the_a_train");
+const parsedUrl = new URL(window.location.href);
+let songName = parsedUrl.searchParams.get("songName"); // "123"
+
+createTitle(songName);
+loadChanges(songName);
