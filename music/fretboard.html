@@ -8,7 +8,32 @@
 <body>
 
 <div class="wrapper">
+    <h1>Preliminaries</h1>
+    There are 12 notes in the musical system:
+    <table class="center" style="border: 1px solid white; width: 80%;border-collapse:separate; border-spacing:1em;">
+        <tr>
+            <td>C</td> <td>*</td> <td>D</td> <td>*</td> <td>E</td> <td>F</td> <td>*</td> <td>G</td> <td>*</td> <td>A</td> <td>*</td> <td>B</td> <td>C</td>
+        </tr>
+        <tr>
+            <td>0`</td> <td>1`</td> <td>2`</td> <td>3`</td> <td>4`</td> <td>5`</td> <td>6`</td> <td>7`</td> <td>8`</td> <td>9`</td> <td>10`</td> <td>11`</td> <td>0`</td>
+        </tr>
+    </table>
     <h1>Standard</h1>
+    <p>In the standard tuning of the guitar the notes of the nut are given by </p>
+    <table class="center" style="border: 1px solid white; width: 80%;border-collapse:separate; border-spacing:1em;">
+        <tr>
+            <td>E</td> <td>A</td> <td>D</td> <td>G</td> <td>B</td> <td>E</td>
+        </tr>
+    </table>
+    If we consider our root tone to be C, we can measure what the intervals are (measured in semitones) which gives us
+    <table class="center" style="border: 1px solid white; width: 80%;border-collapse:separate; border-spacing:1em;">
+        <tr>
+            <td>4`</td> <td>9`</td> <td>2`</td> <td>7`</td> <td>11`</td> <td>4`</td>
+        </tr>
+    </table>
+    by going from left to right we can extract the pattern 5 5 5 4 5 in terms of semitones you add to go from one to the other.
+    Going in the reverse direction would just yield the same pattern but with negatives.
+    From this we can derive all the different lines, where a zero represents some position you're currently at (anywhere on the fretboard). NOTE: The numbers in the following tables are not notes (which would have been denoted with a `), these are intervals.
     <table class="center" style="border: 1px solid white; width: 80%;border-collapse:separate; border-spacing:1em;">
         <tr>
             <td>0</td> <td>5</td> <td>10</td> <td>3</td> <td>7</td> <td>0</td>
@@ -44,11 +69,23 @@
             <td>5</td> <td>-2</td> <td>3</td> <td>-5</td> <td>0</td> <td>5</td>
         </tr>
     </table>
+    <h1>Example</h1>
+    <table class="center" style="border: 1px solid white; width: 80%;border-collapse:separate; border-spacing:1em;">
+        <tr>
+            <td>X</td> <td>I</td> <td>X</td> <td>X</td> <td>6</td> <td>X</td>
+        </tr>
+    </table>
+    <p>suppose we are interested in finding what interval I is, let's consider 6 as our root, if we're doing that then
+        we can consider the last row of the noramlized table to see that we need to subtract 2 from 6 to get our answer,
+        namely 4</p>
     <h1>Take Aways</h1>
     <p>We will define close, to be within 0 to 3 semitones of where you are now, far will be anything greater than that.</p>
-    <h2 class="hn_center">~> -X Y </h2>
-    <h2 class="hn_center"> Z -W <~</h2>
-    <p>Where X, Y, Z, W are positive and close</p>
+    <h2 class="hn_center">~> f c c f s </h2>
+    <h2 class="hn_center"> s f c c f <~</h2>
+    <p>Where f, c represent far and close respectively s represents the same</p>
+    <h1>Application</h1>
+    <p>The most difficult part of the guitar is horizontal movement across the fretboard, most people can figure out vertical movement quite quickly,
+    but for many people horizontal movement is blind. If you want to become better, improve your horizontal movement you can train it <a href="fretboard_trainer/fretboard.html">here</a></p>
 </div>
 
 </body>
