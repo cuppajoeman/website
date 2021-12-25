@@ -4,7 +4,7 @@ let randomKey = document.getElementById("random_key");
 let fretboardSeed = document.getElementById("fretboard_seed");
 
 randomKey.appendChild(document.createTextNode(`𝓚: ${Math.floor(Math.random() * 12)}`));
-fretboardSeed.appendChild(document.createTextNode(`String: ${Math.floor(Math.random() * 6)} Fret: ${Math.floor(Math.random() * 22)}`));
+fretboardSeed.appendChild(document.createTextNode(`String: ${Math.floor(Math.random() * 6)} Fret: ${Math.floor(Math.random() * 18)}`));
 
 let songsDiv = document.getElementById("songs");
 let songList = document.createElement("ul")
