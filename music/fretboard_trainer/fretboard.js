@@ -21,17 +21,18 @@ function generateNRandomNumbersNoReplacement(N, max) {
 }
 
 function isCorrect() {
+    let numFound = 0;
     for (let i = 0; i < fretLine.rows[0].cells.length; i ++) {
         let cell = fretLine.rows[0].cells[i];
         if (cell.innerHTML !== "X") {
             let interval = parseInt(cell.innerHTML, 10);
-            console.log(interval, shiftedNut[i]);
             if (interval !== shiftedNut[i]) {
                 return false;
             }
+            numFound += 1
         }
     }
-    return true;
+    return numFound >= 2;
 }
 
 function generateSituation() {
@@ -69,7 +70,7 @@ function selectText(element) {
 
 document.body.onkeydown = function(e){
     // Number 13 is the "Enter" key on the keyboard
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13 || e.key === " ") {
         e.preventDefault();
         if (isCorrect()) {
             generateSituation();
