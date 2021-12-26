@@ -1,6 +1,7 @@
 let fretLine = document.getElementById("fret_line");
 
-let nut = [4, 9, 2, 7, 11, 4];
+// let nut = [4, 9, 2, 7, 11, 4];
+let nut = [4, 9, 2, 7, 0, 5];
 
 var shiftedNut;
 
