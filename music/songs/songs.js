@@ -105,7 +105,7 @@ function constructTitleFromCodeName(codename) {
 }
 
 let randomToneCollection = generateRandomToneCollection();
-let randomTitle = `diatonic ${randomToneCollection.toString()}`;
+let randomTitle = `diatonic_${randomToneCollection.toString()}`;
 let randomChanges = addDurationToToneCollection(generateDiatonicChordsFromScheme(randomToneCollection))
 
 function generateRandomToneCollection(size=7) {
@@ -376,7 +376,7 @@ let songSkeletons = {
                 [[7, 11, 2, 5], w], [[8, 0, 3, 7], w], [[11, 2, 5, 8], w], [[0, 3, 7, 11], w],
             ]
         ],
-    [randomTitle]:
+    "random Diatonic":
         [
             "4/4",
             [],
