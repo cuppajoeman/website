@@ -300,6 +300,79 @@ let songSkeletons = {
 
             ]
         ],
+    "diatonic_major":
+        [
+            "4/4",
+            [],
+            [
+                [[0, 4, 7, 11], w], [[2, 5, 9, 0], w], [[4, 7, 11, 2], w], [[5, 9, 0, 4], w],
+                [[7, 11, 2, 5], w], [[9, 0, 4, 7], w], [[11, 2, 5, 9], w], [[0, 4, 7, 11], w],
+            ]
+        ],
+    "diatonic_minor":
+        [
+            "4/4",
+            [],
+            [
+                [[0, 3, 7, 10], w], [[2, 5, 8, 0], w], [[3, 7, 10, 2], w], [[5, 8, 0, 3], w],
+                [[7, 10, 2, 5], w], [[8, 0, 3, 7], w], [[10, 2, 5, 8], w], [[0, 3, 7, 10], w],
+            ]
+        ],
+    "diatonic_harmonic_minor":
+        [
+            "4/4",
+            [],
+            [
+                [[0, 3, 7, 11], w], [[2, 5, 8, 0], w], [[3, 7, 11, 2], w], [[5, 8, 0, 3], w],
+                [[7, 11, 2, 5], w], [[8, 0, 3, 7], w], [[11, 2, 5, 8], w], [[0, 3, 7, 11], w],
+            ]
+        ],
+    "special":
+        [
+            "4/4",
+            [],
+            [
+                addDurationToToneCollection(generateDiatonicChordsFromScheme(generateRandomToneCollection(),3))
+            ]
+        ],
+}
+
+function generateRandomToneCollection(size=7) {
+    let bucket = [];
+    for (let i=1;i<=11;i++) {
+        bucket.push(i);
+    }
+    function getRandomFromBucket() {
+        let randomIndex = Math.floor(Math.random()*bucket.length);
+        return bucket.splice(randomIndex, 1)[0];
+    }
+    let toneCollection = [0]; // Always contains 0
+    for (let i = 0; i < size - 1; i ++){
+        toneCollection.push(getRandomFromBucket())
+    }
+    toneCollection.sort();
+    return toneCollection;
+}
+
+function addDurationToToneCollection(toneCollection) {
+    let durationHarmonicToneCollection = [];
+    for (let i = 0; i < toneCollection.length; i ++) {
+        let harmonicToneCollection = toneCollection[i];
+        durationHarmonicToneCollection.push([harmonicToneCollection, w]);
+    }
+    return durationHarmonicToneCollection;
+}
+
+function generateDiatonicChordsFromScheme(toneCollection, skipNumber, subToneCollectionSize = 4) {
+    let subToneCollections = []
+    for (let i = 0; i < toneCollection.length; i ++) {
+        let subToneCollection = [];
+        for (let j = 0; j < subToneCollectionSize; j += skipNumber){
+            subToneCollection.push(toneCollection[ (i + j) % 12])
+        }
+        subToneCollections.push(subToneCollection)
+    }
+    return subToneCollections
 }
 
 
