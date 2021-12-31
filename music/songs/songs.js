@@ -110,9 +110,8 @@ function constructTitleFromCodeName(codename) {
 
 //random
 
-// let randomToneCollection = generateRandomToneCollection();
-let randomToneCollection = major_tone_collection;
-let randomChanges = addDurationToToneCollection(generateDiatonicChordsFromScheme(randomToneCollection, 4))
+let randomToneCollection = generateRandomToneCollection();
+let randomChanges = addDurationToToneCollection(generateDiatonicChordsFromScheme(randomToneCollection, 3))
 
 function generateRandomToneCollection(size=7) {
     let bucket = [];
@@ -350,11 +349,29 @@ let songSkeletons = {
 
             ]
         ],
-    "diatonic_major":
+    "diatonic_major_skip_2":
         [
             "4/4",
             [],
             addDurationToToneCollection(generateDiatonicChordsFromScheme(major_tone_collection, 2))
+        ],
+    "diatonic_major_skip_3":
+        [
+            "4/4",
+            [],
+            addDurationToToneCollection(generateDiatonicChordsFromScheme(major_tone_collection, 3))
+        ],
+    "diatonic_major_skip_4":
+        [
+            "4/4",
+            [],
+            addDurationToToneCollection(generateDiatonicChordsFromScheme(major_tone_collection, 4))
+        ],
+    "diatonic_major_skip_5":
+        [
+            "5/4",
+            [],
+            addDurationToToneCollection(generateDiatonicChordsFromScheme(major_tone_collection, 5))
         ],
     "diatonic_minor":
         [
