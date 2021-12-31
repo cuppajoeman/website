@@ -327,13 +327,17 @@ let songSkeletons = {
                 [[7, 11, 2, 5], w], [[8, 0, 3, 7], w], [[11, 2, 5, 8], w], [[0, 3, 7, 11], w],
             ]
         ],
-    "special":
+    randomTitle:
         [
             "4/4",
             [],
-            addDurationToToneCollection(generateDiatonicChordsFromScheme(generateRandomToneCollection(),3))
+            randomChanges
         ],
 }
+
+let randomToneCollection = generateRandomToneCollection();
+let randomTitle = `diatonic ${randomToneCollection.toString()}`;
+let randomChanges = addDurationToToneCollection(generateDiatonicChordsFromScheme(randomToneCollection))
 
 function generateRandomToneCollection(size=7) {
     let bucket = [];
@@ -368,13 +372,13 @@ function generateDiatonicChordsFromScheme(toneCollection, skipNumber, subToneCol
         let subToneCollection = [];
         let index = 0;
         for (let j = 0; j < subToneCollectionSize; j ++){
-            if (j === 0) {
-                first = toneCollection[ (i + index) % toneCollection.length];
-            }
             subToneCollection.push(toneCollection[ (i + index) % toneCollection.length])
             index += skipNumber;
         }
         subToneCollections.push(subToneCollection)
+        if (j === 0) {
+            first = subToneCollection
+        }
     }
     subToneCollections.push(first)
     return subToneCollections
