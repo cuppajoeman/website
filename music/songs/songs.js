@@ -370,7 +370,7 @@ function generateDiatonicChordsFromScheme(toneCollection, skipNumber, subToneCol
         let index = 0;
         for (let j = 0; j < subToneCollectionSize; j ++){
             index += skipNumber;
-            subToneCollection.push(toneCollection[ (i + index) % 12])
+            subToneCollection.push(toneCollection[ (i + index) % toneCollection.length])
         }
         subToneCollections.push(subToneCollection)
     }
