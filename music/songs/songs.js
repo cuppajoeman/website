@@ -112,7 +112,7 @@ function constructTitleFromCodeName(codename) {
 
 // let randomToneCollection = generateRandomToneCollection();
 let randomToneCollection = major_tone_collection;
-let randomChanges = addDurationToToneCollection(generateDiatonicChordsFromScheme(randomToneCollection, 3))
+let randomChanges = addDurationToToneCollection(generateDiatonicChordsFromScheme(randomToneCollection, 4))
 
 function generateRandomToneCollection(size=7) {
     let bucket = [];
