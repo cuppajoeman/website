@@ -369,9 +369,21 @@ let songSkeletons = {
         ],
     "diatonic_major_skip_5":
         [
-            "5/4",
+            "4/4",
             [],
             addDurationToToneCollection(generateDiatonicChordsFromScheme(major_tone_collection, 5))
+        ],
+    "diatonic_major_skip_6":
+        [
+            "4/4",
+            [],
+            addDurationToToneCollection(generateDiatonicChordsFromScheme(major_tone_collection, 6))
+        ],
+    "diatonic_major_skip_7":
+        [
+            "4/4",
+            [],
+            addDurationToToneCollection(generateDiatonicChordsFromScheme(major_tone_collection, 7))
         ],
     "diatonic_minor":
         [
