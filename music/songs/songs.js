@@ -105,6 +105,57 @@ function constructTitleFromCodeName(codename) {
 }
 
 
+
+let randomToneCollection = generateRandomToneCollection();
+let randomTitle = `diatonic ${randomToneCollection.toString()}`;
+let randomChanges = addDurationToToneCollection(generateDiatonicChordsFromScheme(randomToneCollection))
+
+function generateRandomToneCollection(size=7) {
+    let bucket = [];
+    for (let i=1;i<=11;i++) {
+        bucket.push(i);
+    }
+    function getRandomFromBucket() {
+        let randomIndex = Math.floor(Math.random()*bucket.length);
+        return bucket.splice(randomIndex, 1)[0];
+    }
+    let toneCollection = [0]; // Always contains 0
+    for (let i = 0; i < size - 1; i ++){
+        toneCollection.push(getRandomFromBucket())
+    }
+    toneCollection.sort(function(a,b){return a - b});
+    return toneCollection;
+}
+
+function addDurationToToneCollection(toneCollection) {
+    let durationHarmonicToneCollection = [];
+    for (let i = 0; i < toneCollection.length; i ++) {
+        let harmonicToneCollection = toneCollection[i];
+        durationHarmonicToneCollection.push([harmonicToneCollection, w]);
+    }
+    return durationHarmonicToneCollection;
+}
+
+function generateDiatonicChordsFromScheme(toneCollection, skipNumber, subToneCollectionSize = 4) {
+    let subToneCollections = []
+    let first;
+    for (let i = 0; i < toneCollection.length; i ++) {
+        let subToneCollection = [];
+        let index = 0;
+        for (let j = 0; j < subToneCollectionSize; j ++){
+            subToneCollection.push(toneCollection[ (i + index) % toneCollection.length])
+            index += skipNumber;
+        }
+        subToneCollections.push(subToneCollection)
+        if (j === 0) {
+            first = subToneCollection
+        }
+    }
+    subToneCollections.push(first)
+    return subToneCollections
+}
+
+
 let songSkeletons = {
     "take_the_a_train":
     [
@@ -335,54 +386,6 @@ let songSkeletons = {
         ],
 }
 
-let randomToneCollection = generateRandomToneCollection();
-let randomTitle = `diatonic ${randomToneCollection.toString()}`;
-let randomChanges = addDurationToToneCollection(generateDiatonicChordsFromScheme(randomToneCollection))
-
-function generateRandomToneCollection(size=7) {
-    let bucket = [];
-    for (let i=1;i<=11;i++) {
-        bucket.push(i);
-    }
-    function getRandomFromBucket() {
-        let randomIndex = Math.floor(Math.random()*bucket.length);
-        return bucket.splice(randomIndex, 1)[0];
-    }
-    let toneCollection = [0]; // Always contains 0
-    for (let i = 0; i < size - 1; i ++){
-        toneCollection.push(getRandomFromBucket())
-    }
-    toneCollection.sort(function(a,b){return a - b});
-    return toneCollection;
-}
-
-function addDurationToToneCollection(toneCollection) {
-    let durationHarmonicToneCollection = [];
-    for (let i = 0; i < toneCollection.length; i ++) {
-        let harmonicToneCollection = toneCollection[i];
-        durationHarmonicToneCollection.push([harmonicToneCollection, w]);
-    }
-    return durationHarmonicToneCollection;
-}
-
-function generateDiatonicChordsFromScheme(toneCollection, skipNumber, subToneCollectionSize = 4) {
-    let subToneCollections = []
-    let first;
-    for (let i = 0; i < toneCollection.length; i ++) {
-        let subToneCollection = [];
-        let index = 0;
-        for (let j = 0; j < subToneCollectionSize; j ++){
-            subToneCollection.push(toneCollection[ (i + index) % toneCollection.length])
-            index += skipNumber;
-        }
-        subToneCollections.push(subToneCollection)
-        if (j === 0) {
-            first = subToneCollection
-        }
-    }
-    subToneCollections.push(first)
-    return subToneCollections
-}
 
 
 function constructObjectSongs() {
