@@ -8,6 +8,10 @@ let q = h/2;
 let e = q/2;
 let s = e/2;
 
+let major_tone_collection = [0, 2, 4, 5, 7, 9, 11]
+let minor_tone_collection = [0, 2, 3, 5, 7, 8, 10]
+let minor_harmonic_tone_collection = [0, 2, 3, 5, 7, 8, 11]
+
 let rhythmStringToValue = {
     "w":w,
     "h":h,
@@ -106,8 +110,8 @@ function constructTitleFromCodeName(codename) {
 
 //random
 
-let randomToneCollection = generateRandomToneCollection();
-let randomTitle = `diatonic_${randomToneCollection.toString()}`;
+// let randomToneCollection = generateRandomToneCollection();
+let randomToneCollection = major_tone_collection;
 let randomChanges = addDurationToToneCollection(generateDiatonicChordsFromScheme(randomToneCollection, 3))
 
 function generateRandomToneCollection(size=7) {
@@ -350,28 +354,19 @@ let songSkeletons = {
         [
             "4/4",
             [],
-            [
-                [[0, 4, 7, 11], w], [[2, 5, 9, 0], w], [[4, 7, 11, 2], w], [[5, 9, 0, 4], w],
-                [[7, 11, 2, 5], w], [[9, 0, 4, 7], w], [[11, 2, 5, 9], w], [[0, 4, 7, 11], w],
-            ]
+            addDurationToToneCollection(generateDiatonicChordsFromScheme(major_tone_collection, 2))
         ],
     "diatonic_minor":
         [
             "4/4",
             [],
-            [
-                [[0, 3, 7, 10], w], [[2, 5, 8, 0], w], [[3, 7, 10, 2], w], [[5, 8, 0, 3], w],
-                [[7, 10, 2, 5], w], [[8, 0, 3, 7], w], [[10, 2, 5, 8], w], [[0, 3, 7, 10], w],
-            ]
+            addDurationToToneCollection(generateDiatonicChordsFromScheme(minor_tone_collection, 2))
         ],
     "diatonic_harmonic_minor":
         [
             "4/4",
             [],
-            [
-                [[0, 3, 7, 11], w], [[2, 5, 8, 0], w], [[3, 7, 11, 2], w], [[5, 8, 0, 3], w],
-                [[7, 11, 2, 5], w], [[8, 0, 3, 7], w], [[11, 2, 5, 8], w], [[0, 3, 7, 11], w],
-            ]
+            addDurationToToneCollection(generateDiatonicChordsFromScheme(minor_harmonic_tone_collection, 2))
         ],
     "random Diatonic":
         [
