@@ -147,7 +147,7 @@ function generateDiatonicChordsFromScheme(toneCollection, skipNumber, subToneCol
             index += skipNumber;
         }
         subToneCollections.push(subToneCollection)
-        if (j === 0) {
+        if (i === 0) {
             first = subToneCollection
         }
     }
