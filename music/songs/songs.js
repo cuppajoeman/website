@@ -104,9 +104,11 @@ function constructTitleFromCodeName(codename) {
     return words.join(" ");
 }
 
+//random
+
 let randomToneCollection = generateRandomToneCollection();
 let randomTitle = `diatonic_${randomToneCollection.toString()}`;
-let randomChanges = addDurationToToneCollection(generateDiatonicChordsFromScheme(randomToneCollection))
+let randomChanges = addDurationToToneCollection(generateDiatonicChordsFromScheme(randomToneCollection, 3))
 
 function generateRandomToneCollection(size=7) {
     let bucket = [];
