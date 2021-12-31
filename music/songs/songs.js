@@ -184,10 +184,8 @@ let songSkeletons = {
         [
             "4/4",
             [
-                ["11, 0 2"], ["4 2 4 9 7 4"], ["2 0 9 R 0 4 5"], ["7 9 7 4 0 4"],
-                ["e e e"],   ["q.e e e e e e"],["e e q e e e e"], ["q.e e e e e e"],
-                ["2 R 11 0 2"], ["4 2 4 9 7 4"], ["2 0 9 R 11 0 2"],
-                ["h e e e e"], ["eq e e e e e"], ["e e q e e e e"],
+                ["11, 0 2", "e e e"], ["4 2 4 9 7 4", "q.e e e e e e"], ["2 0 9 R 0 4 5", "e e q e e e e"], ["7 9 7 4 0 4", "q.e e e e e e"],
+                ["2 R 11 0 2", "h e e e e"], ["4 2 4 9 7 4", "eq e e e e e"], ["2 0 9 R 11 0 2", "e e q e e e e"],
             ],
             []
         ],
@@ -420,7 +418,7 @@ let songSkeletons = {
         [
             "4/4",
             [],
-            addDurationToToneColledrum backign trackction(generateDiatonicChordsFromScheme(major_tone_collection, 6))
+            addDurationToToneCollection(generateDiatonicChordsFromScheme(major_tone_collection, 6))
         ],
     "diatonic_major_skip_7":
         [
