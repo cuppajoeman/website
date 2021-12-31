@@ -350,7 +350,7 @@ function generateRandomToneCollection(size=7) {
     for (let i = 0; i < size - 1; i ++){
         toneCollection.push(getRandomFromBucket())
     }
-    toneCollection.sort();
+    toneCollection.sort(function(a,b){return a - b});
     return toneCollection;
 }
 
