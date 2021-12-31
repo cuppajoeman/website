@@ -397,6 +397,12 @@ let songSkeletons = {
             [],
             addDurationToToneCollection(generateDiatonicChordsFromScheme(minor_harmonic_tone_collection, 2))
         ],
+    "whole_tone":
+        [
+            "4/4",
+            [],
+            addDurationToToneCollection(generateDiatonicChordsFromScheme([0, 2, 4, 6, 8, 10], 2))
+        ],
     "random Diatonic":
         [
             "4/4",
