@@ -136,20 +136,15 @@ function addDurationToToneCollection(toneCollection) {
 
 function generateDiatonicChordsFromScheme(toneCollection, skipNumber, subToneCollectionSize = 4) {
     let subToneCollections = []
-    let first;
     for (let i = 0; i < toneCollection.length; i ++) {
-        let subToneCollection = [];
+        let subToneCollection = [toneCollection];
         let index = 0;
         for (let j = 0; j < subToneCollectionSize; j ++){
             subToneCollection.push(toneCollection[ (i + index) % toneCollection.length])
             index += skipNumber;
         }
         subToneCollections.push(subToneCollection)
-        if (i === 0) {
-            first = subToneCollection
-        }
     }
-    subToneCollections.push(first)
     return subToneCollections
 }
 
