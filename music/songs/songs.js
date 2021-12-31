@@ -331,9 +331,7 @@ let songSkeletons = {
         [
             "4/4",
             [],
-            [
-                addDurationToToneCollection(generateDiatonicChordsFromScheme(generateRandomToneCollection(),3))
-            ]
+            addDurationToToneCollection(generateDiatonicChordsFromScheme(generateRandomToneCollection(),3))
         ],
 }
 
