@@ -47,6 +47,11 @@ li {
   width: 100%;
 }
 
+.inverted {
+  background-color:white;
+  color:black;
+}
+
 /*center align items in table cells */
 td {
   text-align:center;

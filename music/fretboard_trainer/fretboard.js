@@ -42,15 +42,17 @@ function generateSituation() {
     let intervalOffset = interval - nut[stringSet[0]];
     shiftedNut = nut.map(x => posMod(x + intervalOffset, 12));
     for (let i = 0; i < 6; i ++) {
+        let fretPos = fretLine.rows[0].cells[i];
         if (i === stringSet[0])  {
-            fretLine.rows[0].cells[i].innerHTML = interval.toString();
+            fretPos.innerHTML = interval.toString();
+            fretPos.classList.add("inverted");
         } else {
-            fretLine.rows[0].cells[i].innerHTML = "X";
+            fretPos.innerHTML = "X";
+            fretPos.classList.remove("inverted");
         }
     }
     selectText(fretLine.rows[0].cells[stringSet[1]]);
 }
-
 generateSituation();
 
 function selectText(element) {
