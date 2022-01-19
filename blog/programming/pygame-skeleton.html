@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pygame Skeleton</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+
+<p>Here is some minimal code to start a pygame project:</p>
+
+<pre>
+    <code>
+        import pygame
+        pygame.init()
+
+        screen = pygame.display.set_mode((640, 480))
+
+
+        running = True
+        while running:
+        current_time = pygame.time.get_ticks()
+
+        for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+        running = False
+        pygame.quit()
+
+        screen.fill(pygame.Color("black"))
+
+        pygame.display.flip()
+    </code>
+</pre>
+
+</body>
+</html>
