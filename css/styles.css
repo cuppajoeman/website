@@ -32,6 +32,10 @@ li {
   transform: translate(-50%, -50%);
 }
 
+.text_center {
+  text-align: center;
+}
+
 .hn_center {
   text-align:center;  
 }
@@ -42,6 +46,10 @@ li {
   margin: 0 auto; /* center */
 }
 
+.thin_wrapper {
+  width: 50%;     /* specify a width! */
+  margin: 0 auto; /* center */
+}
 
 .full_width {
   width: 100%;
@@ -50,6 +58,14 @@ li {
 .inverted {
   background-color:white;
   color:black;
+}
+
+/* code blocks */
+pre code {
+  background-color: dimgrey;
+  border: 1px solid green;
+  display: block;
+  padding: 10px;
 }
 
 /*center align items in table cells */
