@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>your map to mathlib</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+    <div class="thin_wrapper">
+        <h1 class="text_center">mathlib map</h1>
+        <h2>motivation</h2>
+
+        <p>
+            When I first found out about mathlib, I found it difficult to find theorems that I was interested in,
+            I wanted to find some elementary facts about natural numbers after completing the natural number game.
+        </p>
+
+        It was this theorem
+        <pre>
+            <code>
+@[protected, simp]
+theorem nat.zero_eq_mul {a b : ℕ} :
+0 = a * b ↔ a = 0 ∨ b = 0
+            </code>
+        </pre>
+
+        <p>
+            Since I had thought this had to do with number theory I looked under the number theory section in mathlib, after
+            lots of searching I realized it wasn't there. Instead it was in data.nat.basic, and upon further discussion,
+            I learned by talking to someone else that data is where basic facts are stored.
+        </p>
+
+        <p>
+            Due to some of the confusion I've had with mathlib, I decided to start this page where we explain the structure.
+            This page can added to
+        </p>
+
+        <h2>naming conventions</h2>
+
+        <ul>
+            <li><b>nat</b> - natural numbers</li>
+            <li><b>fun</b> - function</li>
+            <li><b>int</b> - integers</li>
+            <li><b>zmod</b> - integers mod n</li>
+        </ul>
+
+        <h2>where to look</h2>
+
+        <h3>elementary results</h3>
+        <p>If you are looking for an elementary result, start your search in <b>data</b>, </p>
+
+
+    <script src="https://utteranc.es/client.js"
+            repo="cuppajoeman/utterances-comments"
+            issue-term="pathname"
+            theme="github-dark"
+            crossorigin="anonymous"
+            async>
+    </script>
+
+
+</body>
+</html>
