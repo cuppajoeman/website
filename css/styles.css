@@ -1,6 +1,7 @@
 body {
   background-color:black;
   color:white;
+  /* break words that get too long */
 }
 img, video, source {
   display:block;
@@ -39,6 +40,7 @@ li {
 .hn_center {
   text-align:center;  
 }
+
 
 /* Used to give a page some centering and not take up full screen */
 .wrapper {
@@ -90,3 +92,30 @@ table {
     border: solid black !important;
   }
 }
+/* line behind the header */
+
+.line_behind {
+  width: auto;
+  position: relative;
+  text-align: center
+}
+
+.line {
+  content:" ";
+  border-top: 3px solid white;
+  position: absolute;
+  width:100%;
+  top: 50%;
+  left: 0;
+  z-index: -1;
+}
+
+.line_text {
+  display:inline-block;
+  background-color: black;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* and then do */
+/*<div class="line-behind"><span class="line"></span> <h3>Begin My Giving Journey</h3> </div>*/
