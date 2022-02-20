@@ -54,7 +54,7 @@ function generateSituation() {
     selectText(fretLine.rows[0].cells[stringSet[1]]);
 }
 
-function selectRandomEmptyFret(e) {
+function getEmptyFrets() {
     let currentlySelected = window.getSelection().anchorNode;
     let emptyFrets = [];
     for (let i = 0; i < 6; i ++) {
@@ -63,6 +63,11 @@ function selectRandomEmptyFret(e) {
             emptyFrets.push(fret)
         }
     }
+    return emptyFrets;
+}
+
+function selectRandomEmptyFret(e) {
+    emptyFrets = getEmptyFrets();
     if (emptyFrets.length === 0) {
         return;
     } else {
@@ -92,13 +97,14 @@ function selectText(element) {
 
 document.body.onkeydown = function(e){
     // Number 13 is the "Enter" key on the keyboard
-    if (e.keyCode === 13 || e.key === " ") {
+    if (e.key === " ") {
         e.preventDefault();
-        if (isCorrect()) {
-            generateSituation();
+        if (getEmptyFrets().length === 0) {
+            if (isCorrect()) {
+                generateSituation();
+            }
+        } else {
+            selectRandomEmptyFret(e);
         }
-    }
-    if (e.key === "n" || e.key === "Tab") {
-        selectRandomEmptyFret(e);
     }
 }
