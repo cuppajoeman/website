@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Text Around Cirle using Tikz</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+
+<div class="thin_wrapper">
+    <h1 class="text_center">spacing text equally around a circle using tikz</h1>
+    <pre>
+        <code>
+\documentclass[preview]{standalone}
+\usepackage{tikz}
+
+\begin{document}
+    \begin{tikzpicture}
+        \def \n {12}
+        \def \radius {2}
+        \def \startangle {-90}
+
+        \foreach \s in {1,...,\n}{
+            \pgfmathsetmacro{\angle}{\startangle + 360/\n*\s}
+            \pgfmathsetmacro{\label}{int(mod(5 * (\s), \n))}
+            \draw (\angle:-\radius) node {\huge $\label$};
+        };
+
+    \end{tikzpicture}
+\end{document}
+        </code>
+    </pre>
+    <p>Alternatively if you want to have custom text you can define an array like this:</p>
+    <pre>
+        <code>
+\documentclass[preview]{standalone}
+\usepackage{tikz}
+
+\begin{document}
+    \begin{tikzpicture}
+        \def \intervals {{0, 5, 10, 3, 8, 1, 6, 11, 4, 9, 2, 7}}
+        \def \n {12}
+        \def \radius {2}
+        \def \startangle {-90}
+
+        \foreach \s in {1,...,\n}{
+            \pgfmathsetmacro{\angle}{\startangle + 360/\n*\s}
+            \pgfmathsetmacro{\label}{\intervals[\s - 1]}
+            \draw (\angle:-\radius) node {\huge $\label$};
+        };
+
+    \end{tikzpicture}
+\end{document}
+        </code>
+    </pre>
+    <p>It probably wouldn't be that hard to extend this so that the text is rotated as well.</p>
+</div>
+
+<script src="https://utteranc.es/client.js"
+        repo="cuppajoeman/utterances-comments"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+
+</body>
+</html>
