@@ -55,7 +55,8 @@
     </pre>
     <p>
         Since I wanted this as an SVG all I did was replaced the first two lines with: <code>\documentclass[tikz,convert={outfile=\jobname.svg}]{standalone}</code>
-    and then compiled it with <code>pdflatex -shell-escape circle.tex</code>
+        and then compiled it with <code>pdflatex -shell-escape circle.tex</code> I verified that it looked the way I wanted with <code>display circle.svg</code>
+        which is available as long as you have imagemagick.
     </p>
 
 
