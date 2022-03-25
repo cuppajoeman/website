@@ -1,12 +1,13 @@
-const BASE_STRINGS = [4, 9, 14, 19, 23, 28]
-const MARKERS = [3, 5, 7, 9, 12, 15, 17, 19, 21]
+const BASE_STRINGS = [4, 9, 14, 19, 24, 29];
+const MARKERS = [3, 5, 7, 9, 12, 15, 17, 19, 21];
 const NUM_STRINGS = 6;
 const NUM_FRETS = 21;
 let MODE = "HARMONY";
 
-import {songs} from "../songs.js";
+// A marked fret is one for visualization purposes only
+// An activated fret is one that is being played at the moment (happens only for an instant)
+// fretted means that the fret has been clicked on and is ready to be activated
 
-let songNames = Object.keys(songs);
 
 // TODO make a context class with all data and pass that around.
 // Then we won't have to reach in here with getters and setters we do
@@ -39,7 +40,7 @@ let noteToInteger = {
     "F": 5,
     "F#/Gb": 6,
     "G": 7,
-    "A#/Bb": 8,
+    "G#/Ab": 8,
     "A": 9,
     "A#/Bb": 10,
     "B": 11,
@@ -50,9 +51,9 @@ let integerToNote = invertDictionary(noteToInteger);
 var KEY = getRandomInt(12);
 
 let tonePosition = 0;
-// var toneSequence = [[0, 4, 7, 11], [2, 5, 9, 0], [4, 7, 11, 2], [5, 9, 0, 4], [7, 11, 2, 5], [9, 0, 4, 7], [11, 2, 5, 9]];
+var toneSequence = [[0, 4, 7, 11], [2, 5, 9, 0], [4, 7, 11, 2], [5, 9, 0, 4], [7, 11, 2, 5], [9, 0, 4, 7], [11, 2, 5, 9]];
 // var toneSequence = songs["st_thomas"];
-var toneSequence = Object.values(songs)[getRandomInt(Object.values(songs).length)]
+// var toneSequence = Object.values(songs)[getRandomInt(Object.values(songs).length)]
 
 function posMod(n, d) {
     return ((n % d) + d) % d;
@@ -285,11 +286,7 @@ function tableCreate() {
             td.id = `${octave}_${note}`;
             td.onclick = function () {
                 if (MODE === "HARMONY") {
-                    // Makes it blue
-                    // this.classList.toggle("fretted")
                     fretPosition(td);
-                    // "instantly"
-                    // this.style.transitionDuration = "0.001ms"
                 } else if (MODE === "MELODY") {
                     new Audio(`../guitar_samples/${octave}_${note}.flac`).play();
                     this.style.transitionDuration = "0.001ms"
@@ -297,14 +294,11 @@ function tableCreate() {
                 }
             }
             td.addEventListener("transitionend", function() {
-                // This gets called when it turns to blue and when it turns green
+                // This gets called when it turns to blue or when it turns green
+                // After one is activated it gets the just_played tag
                 if (this.classList.contains("just_played")) {
-                    this.style.transitionDuration = "250ms"
-                    // this.style.backgroundColor = '#300b02';
-                    // this.style.backgroundColor = 'blue';
                     this.classList.remove("activated");
                 }
-                // this.classList.toggle("just_fretted");
             })
             if (MARKERS.includes(j)) {
                 td.style.borderRight = '3px solid black';
@@ -334,6 +328,7 @@ function clearPrevious() {
     let frettedNotes = Array.from(document.getElementsByClassName("fretted"));
     for (let i = 0; i < frettedNotes.length; i++) {
         let frettedNote = frettedNotes[i];
+
         frettedNote.classList.toggle("fretted");
     }
 }
@@ -354,15 +349,11 @@ function playChord() {
         const [octave, note] = frettedNote.id.split("_").map(Number)
         notesPlayed.push(note);
         new Audio(`../guitar_samples/${octave}_${note}.flac`).play();
-        frettedNote.style.transitionDuration = "0.001ms"
-        // frettedNote.style.backgroundColor = 'green';
+        // frettedNote.style.transitionDuration = "0.001ms"
         frettedNote.classList.add("activated");
-        // Removing
-        // frettedNote.classList.toggle("fretted");
-        // Adding a marker class to fretboard positions just played
         frettedNote.classList.toggle("just_played");
     }
-    // Removes duplicates
+    // Removes duplicates (octave equivalence)
     let cleanedNotesPlayed = [...new Set(notesPlayed)];
     let keyIntervalsPlayed = cleanedNotesPlayed.map(n => (n - KEY + 12) % 12);
     if (arraysEqual(keyIntervalsPlayed, toneSequence[tonePosition])) {
@@ -402,7 +393,8 @@ document.body.onkeyup = function(e){
     }
     if(MODE === "HARMONY" && e.key === ' '){
         playChord();
-        unmarkFrets();
+        // unmarkFrets();
+        clearPrevious();
     }
 }
 
