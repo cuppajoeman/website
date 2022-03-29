@@ -55,7 +55,7 @@
     </table>
     <p>Also note that for the symbol X9, we can see it uses the intervals 0 2 4 7 10,
         so it&#39;s a combination of X7 plus the 9th (remember 9th is the interval 2 based
-        on the tables above). Also note that for  X13 we have the intervals<br>0 2 4 5 7 9 10 so it&#39;s combining X9 with the 13th scale degree. In practice we
+        on the tables above). Also note that for  X13 we have the intervals 0 2 4 5 7 9 10 so it&#39;s combining X9 with the 13th scale degree. In practice we
         don&#39;t need to play all those notes at once to get the idea of X13 across, in
         general we can remove intervals which represent simple harmonics (being a
         harmonic means that it is very similar to the root tone), so it can be
@@ -322,14 +322,66 @@
             <td>0 2 4 5 7 10</td>
         </tr>
         </tbody></table>
-    <h2>Substitutions</h2>
+    <h3>Substitutions</h3>
     <h3>Tritone</h3>
     <p> Given any 7 11 2 5 you can replace it by a 1 5 8 11. The reasoning behind this substitution is that it maintains the
     same chord quality with two matching notes
     </p>
     <h1>Tone Collections</h1>
     <p>In general, in music we can find a certain pattern across all of the main scales we can use, the invariant I have personally taken
-    away from it is that in a scale is a tone collection such that there are no more than two consecutive semitones.</p>
+    away from it is that in a scale is a tone collection such that there are no more than two consecutive semitones with seven notes.
+    Based on this we can construct all tone collections, they have been grouped by similarity</p>
 
+    <ul>
+        <li>0, 1, 3, 4, 6, 7, 10 | 0, 1, 3, 4, 6, 7, 9</li>
+
+        <li>0, 1, 3, 4, 6, 8, 10 | 0, 1, 3, 4, 6, 8, 9 | 0, 1, 3, 4, 6, 9, 10</li>
+
+        <li>0, 1, 3, 4, 7, 8, 10 | 0, 1, 3, 4, 7, 9, 10</li>
+
+        <li>0, 1, 3, 5, 6, 8, 10 | 0, 1, 3, 5, 6, 8, 9 | 0, 1, 3, 5, 6, 9, 10</li>
+
+        <li>0, 1, 3, 5, 7, 8, 10 | 0, 1, 3, 5, 7, 9, 10 | 0, 1, 3, 6, 7, 9, 10</li>
+
+        <li>0, 1, 4, 5, 7, 8, 10 | 0, 1, 4, 5, 7, 9, 10 | 0, 1, 4, 6, 7, 9, 10</li>
+
+        <li>0, 2, 3, 5, 6, 8, 10 | 0, 2, 3, 5, 6, 8, 11 | 0, 2, 3, 5, 6, 8, 9</li>
+
+        <li>0, 2, 3, 5, 6, 9, 10 | 0, 2, 3, 5, 6, 9, 11</li>
+
+        <li>0, 2, 3, 5, 7, 8, 10 | 0, 2, 3, 5, 7, 8, 11</li>
+
+        <li>0, 2, 3, 5, 7, 9, 10 | 0, 2, 3, 5, 7, 9, 11</li>
+
+        <li>0, 2, 3, 5, 8, 9, 11</li>
+
+        <li>0, 2, 3, 6, 7, 9, 10 | 0, 2, 3, 6, 7, 9, 11</li>
+
+        <li>0, 2, 3, 6, 8, 9, 11</li>
+
+        <li>0, 2, 4, 5, 7, 8, 10 | 0, 2, 4, 5, 7, 8, 11</li>
+
+        <li>0, 2, 4, 5, 7, 9, 10 | 0, 2, 4, 5, 7, 9, 11</li>
+
+        <li>0, 2, 4, 5, 8, 9, 11</li>
+
+        <li>0, 2, 4, 6, 7, 9, 10 | 0, 2, 4, 6, 7, 9, 11</li>
+
+        <li>0, 2, 4, 6, 8, 9, 11 | 0, 2, 5, 6, 8, 9, 11</li>
+
+        <li>0, 3, 4, 6, 7, 9, 10 | 0, 3, 4, 6, 7, 9, 11</li>
+
+        <li>0, 3, 4, 6, 8, 9, 11 | 0, 3, 5, 6, 8, 9, 11</li>
+    </ul>
+
+    <script src="https://utteranc.es/client.js"
+            repo="cuppajoeman/utterances-comments"
+            issue-term="pathname"
+            theme="github-dark"
+            crossorigin="anonymous"
+            async>
+    </script>
+
+    </div>
 </body>
 </html>
