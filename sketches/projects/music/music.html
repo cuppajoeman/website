@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <!-- P5js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.4/p5.min.js"></script>
+
+  <!-- DOM Addon -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.4/addons/p5.dom.min.js"></script>
+
+  <!-- Sound Addon -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.4/addons/p5.sound.min.js"></script>
+</head>
+
+<body>
+  <div class="canvas_container"></div>
+  
+  <style>
+    .p5canvas {
+      left: 0;
+      top: 0;
+      position: absolute;
+    }
+    
+    body {
+      overflow: hidden;
+    }
+  </style>
+  
+  <script>
+    let progress = 0;
+
+    function preload(){
+      // sound = loadSound('assets/ice_dream.mp3');
+    }
+
+    function setup() {
+      canvas = createCanvas(window.innerWidth, window.innerHeight);
+      canvas.position(0, 0);
+      canvas.class("p5canvas");
+      noFill();
+
+      mic = new p5.AudioIn();
+      mic.start();
+      fft = new p5.FFT();
+      fft.setInput(mic);
+      // togglePlay()
+      // canvas.mouseClicked(togglePlay);
+      // fft = new p5.FFT();
+      // sound.amp(0.2);
+    }
+
+    function mousePressed() {
+      if (mouseX > 0 && mouseX < windowWidth && mouseY > 0 && mouseY < windowHeight) {
+        let fs = fullscreen();
+        fullscreen(!fs);
+      }
+    }
+
+    function draw() {
+      translate(width/2, height/2)
+
+      let spectrum = fft.analyze();
+
+      background(0)
+
+      noStroke();
+      fill(154, 117, 191);
+      // for (let i = 0; i< spectrum.length; i++){
+      //   let x = map(i, 0, spectrum.length, 0, width) - width/2;
+      //   let h = -height + map(spectrum[i], 0, 255, height, 0);
+      //   rect(x, height/2, width / spectrum.length, h )
+      // }
+
+      // for (let i = 0; i< spectrum.length; i++){
+      //   let x = map(i, 0, spectrum.length, width, 0) - width/2;
+      //   let h = -height + map(spectrum[i], 0, 255, height, 0);
+      //   rect(x * sin(progress) * random(1, 3), h * cos(progress) * random(1,8), width / spectrum.length, h )
+      // }
+
+      let waveform = fft.waveform();
+
+      // beginShape();
+      // let radius = min(width, height)/2;
+      // for (let i = 0; i < waveform.length; i++){
+      //   let ang = map(i, 0, waveform.length, 0, 2 * PI);
+      //   let amount = map( waveform[i], -1, 1, -30 * noise(progress), 30 * noise(progress));
+      //   let x =  cos(ang) * radius * amount
+      //   let y =  sin(ang) * radius * amount
+      //   vertex(x,y);
+      // }
+      // endShape();
+
+
+      let radius = min(width, height)/2;
+      for (let i = 0; i < waveform.length; i++){
+        let ang = map(i, 0, waveform.length, 0, 2 * PI);
+        let amount = map( waveform[i], -1, 1, 0, radius);
+        push()
+        // translate(-width/2, -height/2)
+        rotate(ang)
+        rect(0, 0, 10, amount)
+        pop()
+      }
+
+
+      progress += 0.01;
+
+    }
+
+    window.onresize = function() {
+      var w = window.innerWidth;
+      var h = window.innerHeight;
+      canvas.resize(w, h);
+      width = w;
+      height = h;
+    }
+
+    function togglePlay() {
+      if (sound.isPlaying()) {
+        sound.pause();
+      } else {
+        sound.loop();
+      }
+    }
+  </script>
+</body>
+
+</html>
