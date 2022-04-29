@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Music</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+
+<body>
+    <div class="thin_wrapper">
+        <h1 class="text_center">Anchor Intervals</h1>
+        <!-- <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">resources</h2></div> -->
+        <p>
+            In our previous lesson we touched on considering notes with respect to some anchor note, for example if our
+            anchor note was 8* (Ab) then the note 9* would be considered as 1. Whenever we specify a note like this, it
+            will be called an anchor interval and no asterisk will be written.
+        </p>
+
+        <p>
+            Additionally you might have noticed that when we set our anchor note to be 11*, that every note's anchor
+            interval became one more than it's actual number, for example 3* was 4 and 9* was 10. This was no mere
+            coincidence, in this lesson we will explore what's actually going on here.
+        </p>
+
+        <p>
+            For a new example, let's set our anchor note to be 2* (D) and let's consider notes with respect to that
+            anchor note. If we consider 4*, we can see that that's 2 up from 2*, so it's interval with respect to the
+            anchor note would be 2.
+        </p>
+
+        <p>
+            But the question we really just answered was, which number do we add to 2* to get to 4*, and that number is
+            2. In a different way our question was just 2* + x = 4*, which can be rearranged to be x = 4* - 2* which is
+            equal to 2.
+        </p>
+
+        <p>
+            Due to this we have gained a method to determine the interval between any two notes, so given a note X* and
+            a note Y*, the interval from X* to Y* is Y* - X*.
+        </p>
+
+        <p>
+            Though we might ponder the following question, what is the interval from 2* to 0*, based on the above
+            examples, it might be easy to say -2, but another way to think about it is that if you add 9 to 2* you would
+            get 11*, and since our system of notes repeats (... 9* 10* 11* 0* 1* 2* 3* 4* 5* 6* 7* 8* 9* 10* 11* 0* 1*
+            2* ...), then we can see going one more step leads us to 0. So due to that, we can say that the interval
+            from 2* to 0* is 10. Since if we add 10 to 2*, we get to 0*.
+        </p>
+
+        <p>
+            Because of the above, we never have to use negative numbers if we don't want to. So the interval from 9* to
+            0* could be thought of 3 instead of -9.
+        </p>
+
+    </div>
+
+    <!-- <script src="https://utteranc.es/client.js" repo="cuppajoeman/utterances-comments" issue-term="pathname"
+        theme="github-dark" crossorigin="anonymous" async>
+        </script> -->
+</body>
+
+</html>
