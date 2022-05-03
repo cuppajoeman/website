@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <!-- P5js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.4/p5.min.js"></script>
+
+  <!-- DOM Addon -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.4/addons/p5.dom.min.js"></script>
+
+  <!-- Sound Addon -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.4/addons/p5.sound.min.js"></script>
+
+</head>
+
+<body>
+  <div class="canvas_container"></div>
+  
+  <style>
+    .p5canvas {
+      left: 0;
+      top: 0;
+      position: absolute;
+    }
+    
+    body {
+      overflow: hidden;
+    }
+  </style>
+  
+  <script>
+
+    let progress = 0;
+    let running = true;
+
+    function preload(){
+      sound = loadSound('assets/time_dilation.mp3');
+    }
+
+    function setup() {
+      canvas = createCanvas(windowWidth, windowHeight, WEBGL);
+      canvas.position(0, 0);
+      canvas.class("p5canvas");
+
+
+      togglePlay()
+      // canvas.mouseClicked(togglePlay);
+      fft = new p5.FFT();
+      sound.amp(0.2);
+    }
+
+
+    function mousePressed() {
+      if (mouseX > 0 && mouseX < windowWidth && mouseY > 0 && mouseY < windowHeight) {
+        let fs = fullscreen();
+        fullscreen(!fs);
+      }
+
+    }
+
+    function draw() {
+      // translate(width/2, height/2)
+
+
+      let spectrum = fft.analyze();
+
+      background(0)
+
+      noStroke()
+
+      normalMaterial();
+
+      let xBumper = 0;
+      let yBumper = 0
+
+      if (70 < spectrum[682]) {
+        xBumper = 1
+        // background(100)
+        // push()
+        // transform(width/2, height/2)
+        // pop()
+      }
+
+      let ticAmount = abs(55 - spectrum[647])/200
+      let tacAmount = abs(70 - spectrum[682])/200
+
+      if (55 < spectrum[647]) {
+        yBumper = 1
+        // background(200, 0, 0)
+      }
+
+
+      push();
+      let ang = frameCount * 0.01 % (2 * PI);
+      rotateZ(ang * ticAmount);
+      rotateX(ang * tacAmount);
+      rotateY(ang);
+
+      torus(100);
+      pop();
+
+      push();
+      rotateZ(ang * ticAmount + PI );
+      rotateX(ang - PI );
+      rotateY(ang * tacAmount + PI/4);
+
+      torus(200);
+      pop();
+
+      push();
+      rotateZ(ang * ticAmount + PI/4 );
+      rotateX(ang + 3/4 * PI );
+      rotateY(ang * tacAmount + PI);
+
+      torus(300);
+      pop();
+
+      push()
+      rotateZ(ang);
+      rotateX(ang);
+      rotateY(ang);
+      translate(cos(ang) * ticAmount, sin(frameCount * 0.01) * ticAmount, 0)
+      box(100 * ticAmount * tacAmount + 50)
+      pop()
+
+      if (!sound.isPlaying()) {
+        noLoop();
+        console.log('finished song.');
+        return;
+      }
+
+      progress += 1;
+
+
+    }
+
+    window.onresize = function() {
+      var w = window.innerWidth;
+      var h = window.innerHeight;
+      canvas.resize(w, h);
+      width = w;
+      height = h;
+    }
+
+    function togglePlay() {
+      if (sound.isPlaying()) {
+        sound.pause();
+      } else {
+        sound.loop();
+      }
+    }
+  </script>
+</body>
+
+</html>
