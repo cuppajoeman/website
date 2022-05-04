@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Music</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+
+<body>
+<div class="thin_wrapper">
+    <h1 class="text_center">Fretboard Movement</h1>
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Vertical</h2></div>
+    <p>
+        Vertical movement on the fretboard is much simpler than horizontal movement. You might have already realized,
+        but to make it formal, given that your finger is at some fret on the fretboard and has some ai x (where x is one
+        of 0 1 2 3 4 5 6 7 8 9 10 11), the note produced when you move up the fretboard by n many frets has the ai x +
+        n. (Note that when we say up, that means movement towards the center of the instrument meaning that the pitch
+        goes up)
+    </p>
+
+    <p>
+        Concretely let's set our anchor as 0*, then the 3rd fret on string 9* is a 0, and when we go up to 7 frets, then
+        the new ai is 0 + 7 which is just 7.
+    </p>
+
+    <p>
+        Similarly when we have an ai of x and we move down by n steps our new ai is x - n. An example for this one will
+        be 7* minor with a 10 on string 2* at fret 3. If we release our finger from the string, we will have gone down
+        by 3 frets and therefore our new ai is 7.
+    </p>
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Horizontal</h2></div>
+
+    <p>
+        Horizontal movement is more complicated. But by remembering our tuning we can figure everything out.
+    </p>
+
+    <p>
+        To start things off let's start with a 0 on the thickest string without worrying about which fret it is at or
+        what the anchor note is. We are aware that moving one string up (where up represents the direction towards the
+        thinner strings, where the pitch goes up) increases our current ai by 5, this is true because of the way we have
+        tuned our instrument.
+    </p>
+
+    <p>
+        So the thickest string at some fret is 0, at the same fret on the next string up we have 5, then on the next we
+        would have 10, after that we would get 3, since 10 + 5 = 15 = 12 + 3 (and our system is cyclic by 12 steps).
+        Continuing on we would have 8 and then 1:
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <td>0</td>
+            <td>5</td>
+            <td>10</td>
+            <td>3</td>
+            <td>8</td>
+            <td>1</td>
+        </tr>
+        </thead>
+    </table>
+
+    (this represents a horizontal slice across the fretboard)
+
+    <p>
+        We could do the same procedure but this time going down the strings, so we have a 0 on our thinnest string at
+        some fret and so moving backwards we would subtract 5 from our current ai, to get 7 (5 steps before 0 is 7,
+        since 7 + 5 = 0), again would be 2, then 9, then 4 then finally 11. To give us
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <td>11</td>
+            <td>4</td>
+            <td>9</td>
+            <td>2</td>
+            <td>7</td>
+            <td>0</td>
+        </tr>
+        </thead>
+    </table>
+
+    <p>
+        Going back to our first example, which starts with an ai of 0, we can generalize that even further, considering
+        that our first ai was actually x (where we know x represnts one of the possible ai's) then our horizontal slice
+        would be:
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <td>x + 0</td>
+            <td>x + 5</td>
+            <td>x + 10</td>
+            <td>x + 3</td>
+            <td>x + 8</td>
+            <td>x + 1</td>
+        </tr>
+        </thead>
+    </table>
+
+    <p>
+        So, for example, if x = 3, then the horizontal slice would become
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <td>3</td>
+            <td>8</td>
+            <td>1</td>
+            <td>6</td>
+            <td>11</td>
+            <td>4</td>
+        </tr>
+        </thead>
+    </table>
+
+
+    <div class="line_behind"><span class="line"></span>
+        <h3 class="line_text">Inverse Interlude</h3></div>
+
+    <p>
+        Earlier on we discussed that we would never use negative numbers to represent notes or ai's, the reason behind
+        this was that we only want a single way to notate a note or an ai. But we don't have any such restriction when
+        we are performing calculations of computations. And not having this restriction turns out to be quite useful.
+    </p>
+
+    <p>
+        To understand why this might be useful, consider an ai of 10, if we wanted to know the ai produced by 10 + 10,
+        then one method might be to do 10 + 10 = 20 = 12 + 8 = 8, so the ai is 8. But an easier understanding would be
+        that going up 10 steps is the same as going down 2 (to see why start at 0 go back 2, you get 11 and then 10), so
+        instead of having to figure out 10 + 10, we can just compute 10 - 2 = 8 which is much quicker. In this type of
+        situation we can call -2 and 10 inverses of each other by 12.
+    </p>
+
+    <p>
+        From the above discussion we can derive each of the inverses:
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <th>ai</th>
+            <th>that ai's inverse</th>
+            <th>smallest of the two<br></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>-11</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>-10</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>-9</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>-8</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>-7</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>-6</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>-5</td>
+            <td>-5</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>-4</td>
+            <td>-4</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>-3<br></td>
+            <td>-3</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>-2</td>
+            <td>-2</td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>-1</td>
+            <td>-1</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>
+        The above table will always allow us to minimize computations whenever possible as we will only have to ever
+        consider numbers from the range -6 to 6 when adding or subtracting.
+    </p>
+
+    <div class="line_behind"><span class="line"></span>
+        <h3 class="line_text">Simplifying our Slice</h3></div>
+
+    <p>
+        If you recall from before, we determined that given some ai x, that the horizontal movement would produce the
+        following
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <td>x + 0</td>
+            <td>x + 5</td>
+            <td>x + 10</td>
+            <td>x + 3</td>
+            <td>x + 8</td>
+            <td>x + 1</td>
+        </tr>
+        </thead>
+    </table>
+
+    <p>
+        But we know now that we can simplify some of the calculations, so using the inverse table, we get
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <td>x + 0</td>
+            <td>x + 5</td>
+            <td>x - 2</td>
+            <td>x + 3</td>
+            <td>x - 4</td>
+            <td>x + 1</td>
+        </tr>
+        </thead>
+    </table>
+
+    <p>
+        We can also do the same with the reverse table, which originally looked like this:
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <td>x + 11</td>
+            <td>x + 4</td>
+            <td>x + 9</td>
+            <td>x + 2</td>
+            <td>x + 7</td>
+            <td>x + 0</td>
+        </tr>
+        </thead>
+    </table>
+
+    <p>
+        Which gets simplified to
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <td>x - 1</td>
+            <td>x + 4</td>
+            <td>x - 3</td>
+            <td>x + 2</td>
+            <td>x - 5</td>
+            <td>x + 0</td>
+        </tr>
+        </thead>
+    </table>
+
+    <div class="line_behind"><span class="line"></span>
+        <h3 class="line_text">Examples</h3></div>
+
+    <p>
+        No worries if the above isn't perfectly clear straight away, we'll make it clear with many examples.
+    </p>
+
+    <h4>Question</h4>
+
+    <p>
+        Consider an ai of 2, on some fret, what would go in the question mark?
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <td>2</td>
+            <td>X</td>
+            <td>?</td>
+            <td>X</td>
+            <td>X</td>
+            <td>X</td>
+        </tr>
+        </thead>
+    </table>
+
+    <h4>Solution</h4>
+
+    <p>
+        We can start with:
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <td>x + 0</td>
+            <td>x + 5</td>
+            <td>x - 2</td>
+            <td>x + 3</td>
+            <td>x - 4</td>
+            <td>x + 1</td>
+        </tr>
+        </thead>
+    </table>
+
+    <p>
+        If we were to replace x by 2, then we can see that the ? = 0
+    </p>
+
+
+    <h4>Question</h4>
+
+    <p>
+        Consider an ai of 4, on some fret, what would go in the question mark?
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <td>X</td>
+            <td>X</td>
+            <td>?</td>
+            <td>X</td>
+            <td>X</td>
+            <td>4</td>
+        </tr>
+        </thead>
+    </table>
+
+    <h4>Solution</h4>
+
+    <p>
+        We can start with the other table:
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <td>x - 1</td>
+            <td>x + 4</td>
+            <td>x - 3</td>
+            <td>x + 2</td>
+            <td>x - 5</td>
+            <td>x + 0</td>
+        </tr>
+        </thead>
+    </table>
+
+    <p>
+        If we were to replace x by 4, then we can see that the ? = 1
+    </p>
+
+    <h4>Question</h4>
+
+    <p>
+        Consider an ai of 8, on some fret, what would go in the question mark?
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <td>X</td>
+            <td>?</td>
+            <td>X</td>
+            <td>8</td>
+            <td>X</td>
+            <td>X</td>
+        </tr>
+        </thead>
+    </table>
+
+    <h4>Solution</h4>
+
+    <p>
+        We notice that none of our current tables have the x + 0 at the right location, so replacing x by 8 isn't going
+        to work like it did previously. Instead we just have to understand the way the tables have come about anyways.
+    </p>
+
+    <p>
+        When we derived the table :
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <td>x - 1</td>
+            <td>x + 4</td>
+            <td>x - 3</td>
+            <td>x + 2</td>
+            <td>x - 5</td>
+            <td>x + 0</td>
+        </tr>
+        </thead>
+    </table>
+
+    <p>
+        We can see that going two strings down made us subtract 5 twice which was the same as -10 which is the same as
+        +2. This fact holds true no matter which string you start on, so in this case moving two strings left from the
+        8, gives us 8 + 2 = 10.
+    </p>
+
+    <div class="line_behind"><span class="line"></span>
+        <h3 class="line_text">Horizontal Movement Overlay</h3></div>
+
+    <p>
+        From the work done with the examples, we were able to figure out that there is a more general way to understand
+        our movement tables, originally we had seen that the following table works
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <td>x - 1</td>
+            <td>x + 4</td>
+            <td>x - 3</td>
+            <td>x + 2</td>
+            <td>x - 5</td>
+            <td>x + 0</td>
+        </tr>
+        </thead>
+    </table>
+
+    <p>
+        But for example, the fact that when you go two strings left makes you go up by 2, isn't just a property that is
+        true for the thinnest string, it holds true for any string since moving left by two reduces your current number
+        by 10, or rather adds 2. So in a sense every one of the results gotten from the two tables earlier hold in the
+        same manner so we can combine them to create a horizontal movement overlay (note that the numbers do not
+        represent ai's, but distances that need to be added to get to a new ai).
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <td>6</td>
+            <td>-1</td>
+            <td>4<br></td>
+            <td>-3</td>
+            <td>2</td>
+            <td>-5</td>
+            <td>0</td>
+            <td>5</td>
+            <td>-2</td>
+            <td>3</td>
+            <td>-4</td>
+            <td>1</td>
+            <td>-6<br></td>
+        </tr>
+        </thead>
+    </table>
+
+    <p>
+        To see how to use this overlay we can use the following example where our goal is to find out what the ? is.
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <td>X</td>
+            <td>3</td>
+            <td>X</td>
+            <td>X</td>
+            <td>X</td>
+            <td>?</td>
+        </tr>
+        </thead>
+    </table>
+
+    <p>
+        We can then see
+    </p>
+
+    <table class="center">
+        <thead>
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>X</td>
+            <td>3</td>
+            <td>X</td>
+            <td>X</td>
+            <td>X</td>
+            <td>?</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>-1</td>
+            <td>4<br></td>
+            <td>-3</td>
+            <td>2</td>
+            <td>-5</td>
+            <td>0</td>
+            <td>5</td>
+            <td>-2</td>
+            <td>3</td>
+            <td>-4</td>
+            <td>1</td>
+            <td>-6<br></td>
+        </tr>
+        </thead>
+    </table>
+
+    <p>
+        That we just have to subtract 4 from our current ai which gives us 11.
+    </p>
+
+    <p>
+        So by placing it so that it's 0 aligns with the current ai we will be able to deduce the other note. In reality
+        we won't ever need all the information in the overlay though we just need to be able to recall the horizontal
+        distance and the change associated with that. So the overlay in another form can look like
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <th>distance from horizontal anchor point</th>
+            <th>&lt;- (direction)</th>
+            <th>-&gt; (direction)<br></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>-5</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>+2<br></td>
+            <td>-2</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>-3</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>+4</td>
+            <td>-4</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>-1</td>
+            <td>+1<br></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>
+        Due to it's mirrored form, this reduces the amount of information you need to know by half, as by moving in
+        opposite directions inverts the sign.
+    </p>
+
+    <p>
+        So finally coming back to the question we answered previously
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <td>X</td>
+            <td>3</td>
+            <td>X</td>
+            <td>X</td>
+            <td>X</td>
+            <td>?</td>
+        </tr>
+        </thead>
+    </table>
+
+    <p>
+        We can alternately just see that the ? is distance 4 away in the -> direction, and thus we must subtract 4, from
+        the above table giving us 11 even quicker.
+    </p>
+
+    <p>
+        The table we have just created defines the horizontal movement across the fretboard and should be trained so
+        that you become quick at using it. In order to do that you should use this <a
+            href="https://cuppajoeman.com/blog/music/fretboard_trainer/fretboard.html">training app</a>
+    </p>
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Diagonal</h2></div>
+
+    <p>
+        Instead of memorizing more information, we can simply break diagonal movement into it's horizontal and vertical
+        components and over time we will indirectly memorize it. So for example, given
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <td>X</td>
+            <td>X</td>
+            <td>X</td>
+            <td>X</td>
+            <td>1</td>
+            <td>X</td>
+        </tr>
+        <tr>
+            <td>X</td>
+            <td>X</td>
+            <td>X</td>
+            <td>X</td>
+            <td>X</td>
+            <td>X</td>
+        </tr>
+        <tr>
+            <td>?</td>
+            <td>X</td>
+            <td>X</td>
+            <td>X</td>
+            <td>X</td>
+            <td>X</td>
+        </tr>
+        </thead>
+    </table>
+
+    <p>
+        We can determine that the ? is 4 left so from our movement table, we can see that adds 4 to our current ai, and
+        then we are also 2 up in the vertical direction, so therefore we get 1 + 4 + 2 = 5 + 2 = 7 as the ?
+    </p>
+
+    <p>
+        In this manner we will be able to figure any type of movement across the fretboard.
+    </p>
+
+</div>
+</body>
+
+</html>
