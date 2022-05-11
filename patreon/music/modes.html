@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Music</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+
+<body>
+<div class="thin_wrapper">
+    <h1 class="text_center">Modes</h1>
+
+    <p>
+        Modes of an anchored interval collection are a group of new ai collections which are derived from the original
+        one by "rotating" the original.
+    </p>
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Major Modes</h2></div>
+
+    <p>
+        To make this idea more clear we'll start with the major modes, to start with we'll recall the generic major
+        scale ais, they would be 0 2 4 5 7 9 11. For the next little while we'll make an aside back into real notes
+        instead of just dealing with ai's, the reason for this is that the development of modes make the most sense when
+        it's done in this manner.
+    </p>
+
+    <p>
+        So let's say that we chose to start our scale on the note 7*. Then, we know that the way we derive the other
+        notes from that scale is by using the ai collection as a relative interval collection to get the notes 7* 9* 11*
+        0* 2* 4* 6*. From these notes we could always just "rotate" the scale and start on the 9* instead of the 7* to
+        get the notes in a different order so we would get 9* 11* 0* 2* 4* 6* 7*.
+    </p>
+
+    <p>
+        From this note collection we can pretend our anchor note is 9* now, and then we can figure out which ai
+        collection we have here. So by subtracting the 9* from each of these notes we get 0 2 3 5 7 9 10. This
+        represents the second mode of the major scale which goes by the name of Dorian. We can also see that due to the
+        manner in which we created these notes that starting a dorian on the scale on the 9* that we would get the same
+        notes as the original major on 7*, we can also think of the major scale on 7* as a mode, which we call the
+        Ionian mode
+    </p>
+
+    <p>
+        This is the traditional method for determining different modes based on notes, but as with most of the standard
+        methods, we can define our own anchored interval method as well. To do this we recall our original anchored
+        interval collection which is 0 2 4 5 7 9 11, and then we can "rotate" that, in order to rotate this, we want to
+        make the 2 a 0, so one way we can do that is to simply subtract 2 from everyting, this would yield 10 0 2 3 5 7
+        9, or ordered it looks like 0 2 3 5 7 9 10 (Dorian).
+    </p>
+
+    <p>
+        Let's get the next mode which is named the Phygrian, which can be obtained by rotating the Dorian once, or the
+        Ionian twice. We'll go with rotating the Dorian once, which can be done by again subtracting 2 from our dorian.
+        So our dorian 0 2 3 5 7 9 10 becomes 10 0 1 3 5 7 8 when ordered it is 0 1 3 5 7 8 10. We can repeat this
+        process as many times as we like until we get back to where we started. All summed up it looks like this table.
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <th>Mode Name</th>
+            <th>ai's involved</th>
+            <th>ai's ordered</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Ionian</td>
+            <td>0 2 4 5 7 9 11</td>
+            <td>0 2 4 5 7 9 11</td>
+        </tr>
+        <tr>
+            <td>Dorian</td>
+            <td>10 0 2 3 5 7 9</td>
+            <td>0 2 3 5 7 9 10</td>
+        </tr>
+        <tr>
+            <td>Phrygian<br></td>
+            <td>8 10 0 1 3 5 7</td>
+            <td>0 1 3 5 7 8 10</td>
+        </tr>
+        <tr>
+            <td>Lydian</td>
+            <td>7 9 11 0 2 4 6</td>
+            <td>0 2 4 6 7 9 11</td>
+        </tr>
+        <tr>
+            <td>Mixolydian</td>
+            <td>5 7 9 10 0 2 4<br></td>
+            <td>0 2 4 5 7 9 10</td>
+        </tr>
+        <tr>
+            <td>Aeolian</td>
+            <td>3 5 7 8 10 0 2</td>
+            <td>0 2 3 5 7 8 10</td>
+        </tr>
+        <tr>
+            <td>Locrian</td>
+            <td>1 3 5 6 8 10 0</td>
+            <td>0 1 3 5 6 8 10</td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+    </body>
+</html>

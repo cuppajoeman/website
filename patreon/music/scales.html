@@ -10,9 +10,13 @@
 <body>
 <div class="thin_wrapper">
     <h1 class="text_center">Scales</h1>
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Major</h2></div>
+
     <p>
         With the major scale you might know the standard way we construct it, which is by taking some root note and then
-        following the following pattern.
+        following the following pattern. Once done we call the collections.
     </p>
 
     <p class="text_center">
@@ -66,6 +70,14 @@
     </ul>
 
     <p>
+        Due to how we are adding these numbers relative to the root tone which in this case is 5*, then we can call this
+        collection of intervals (0 2 4 5 7 9 11) a relative interval collection or ric for short.
+    </p>
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Minor</h2></div>
+
+    <p>
         If we consider the minor scale, we have this pattern
     </p>
 
@@ -82,11 +94,80 @@
     </p>
 
     <p>
-        And with respect to the root note
+        And with respect to the root note, the relative interval collection is
     </p>
 
     <p class="text_center">
         0 2 3 5 7 8 10 0
+    </p>
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Relative Major/Minor</h2></div>
+
+    <p>
+        Something that's interesting to note is that a minor and major scale can define the same set of notes as each
+        other. The canonical example is that of 0* major and 9* minor, where the 0* major generates the notes 0* 2* 4*
+        5* 7* 9* 11*, and the 9* minor defines the note collection of 9* 11* 0* 2* 4* 5* 7* which are both the same.
+    </p>
+
+    <p>
+        In general, what that's saying is that given some note x*, that x* major is the same as (x-3)* minor, which can
+        be seen in generality as:
+    </p>
+
+    <p class="text_center">
+        Major: (x + 0)*, (x + 2)*, (x + 4)*, (x + 5)*, (x + 7)*, (x + 9)*, (x + 11)*
+    </p>
+
+    <p class="text_center">
+        Minor: (x - 3 + 0)*, (x - 3 + 2)*, (x - 3 + 3)*, (x - 3 + 5)*, (x - 3 + 7)*, (x - 3 + 8)*, (x - 3 + 10)*
+    </p>
+
+    <p>
+        Which simplifies down to
+    </p>
+
+    <p class="text_center">
+        (x + 9)*, (x + 11)*, (x + 0)*, (x + 2)*, (x + 4)*, (x + 5)*, (x + 7)*
+    </p>
+
+    <p>
+        When re-arranged yields:
+    </p>
+
+    <p class="text_center">
+        (x + 0)*, (x + 2)*, (x + 4)*, (x + 5)*, (x + 7)*, (x + 9)*, (x + 11)*
+    </p>
+
+    <p>
+        Thus it is now clear as to why these two relative interval collections which differ can generate a set of notes
+        which do not differ.
+    </p>
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Generalizing Relativity</h2></div>
+
+    <p>
+        We will end this discussion by taking the result into even more generality, we can further see that the relative
+        interval collection for a minor key is the same relative interval collection as the major, but with 3 added
+        everywhere. Consider:
+    </p>
+
+    <p class="text_center">
+        (Major + 3) = 0 + 3, 2 + 3, 4 + 3, 5 + 3, 7 + 3, 9 + 3, 11 + 3 = 3, 5, 7, 8, 10, 0, 2, = 0 2 3 5 7 8 10 (Minor)
+    </p>
+
+    <p>
+        Then it should be arithmetically clear that if we start a minor relative interval collection on the note (x -
+        3)*, then it then it would construct the same notes as the x* major since every +3 would be cancelled by the -3
+        when added during the note generation process.
+    </p>
+
+    <p>
+        So the most general result here is that if you take a relative interval collection and then add n to everyone of
+        it's intervals, and then generate notes from that modified ric from the note (x - n)*, then that generates the
+        same set of notes as using the original ric generating from x*, as the -n's and the +n's will cancel in the
+        generation process.
     </p>
 </div>
 
