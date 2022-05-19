@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Music</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+
+<body>
+<div class="thin_wrapper">
+    <h1 class="text_center">Chord Substitutions</h1>
+
+    <p>
+        During this article we will refer to chords by anchor interval collections, we will also be able to determine
+        the quality of any of the chords by the numbers involved in the ai collection.
+    </p>
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Anchor Interval Similarity</h2></div>
+
+    <p>
+        One common chord substitution is Amin7 in place of a Cmaj7, this example will give us insight into when we can
+        replace one chord for another.
+    </p>
+
+    <p>
+        Assuming our anchor note is 0*, then these two chords can be written as 9 0 4 7 and 0 4 7 11. Then straight away
+        something we can see is that these two ai collections both share 3 ais, namely 0 4 7, in this aspect these two
+        chords should sound similar and putting one in place of the other will work most of the time.
+    </p>
+
+    <p>
+        In that example we took two chords and by converting them into ai notation we were able to see that they are
+        similar. This shows us some more power of ai notation that the standard notation doesn't explcitily show us,
+        since a beginner could not look at Cmaj7 and Amin7 and tell us that they are similar without knowing the
+        structure of major and minor chords, but anyone could tell us that 0 4 7 11 and 0 4 7 9 are similar since the
+        symbols that they both use are similar.
+    </p>
+
+    <p>
+        Instead of taking two pre-existing chords and seeing if they are similar, we can work in the opposite way, if we
+        consider Cmaj7, then the ai's that it uses would be 0 4 7 11, and so if we take out the 7 and replace it with
+        other notes from 0* major we get new chords which have similarities to Cmaj7. So for example we could make 0 4 5
+        11, 0 4 2 11, 0 4 9 11, all of which would be suitable substitutions.
+    </p>
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Quality Similarity</h2></div>
+
+    <p>
+        One thing that we didn't mention is that there are ai's which are more important to a chord than others, for
+        example any ai which is 7 steps away from the root of that chord so the 7 in our 0 4 7 11 or the 4 in 9 0 4 7
+        isn't that important to include. The reason why it's not too important is that it creates one of the most simple
+        chord qualities, and so leaving it out won't change it too much.
+    </p>
+
+    <p>
+        On the other hand the 4 in the 0 4 7 11 and the 0 in the 9 0 4 7 are more important to include as they are one
+        of the defining ai's as when played against the root of each chord they have a more complex quality which define
+        the chord.
+    </p>
+
+    <p>
+        In this way we can compare two chords by the relative interval collection used to construct the ai's. So for
+        example, with Amin7 we know that the Xmin7 relative interval collection is 0 3 7 10 and that X is 9, so
+        generating ai's from that yields 9 0 4 7. On the other hand the relative interval collection of Dmin7 is also 0
+        3 7 10, and that the ai's that generates on 2 are 2 5 9 0. So we can see that these two chords have the same
+        quality.
+    </p>
+
+    <p>
+        From our previous analysis, it should be clear that the standard system has an advantage to be able to
+        differentiate with qualities, as if we see Dmin7 and Fmaj7, we can immediately see that these two chords differ
+        quality wise, but we're not sure about the ai's that it defines straight away (that's where the ai's
+        representation shines).
+    </p>
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Quality Comparison for Anchor Interval Notation</h2></div>
+
+    <p>
+        As we've seen ai notation for chords allows us to easily differentiate anchor interval wise, but lacks the
+        quality comparison which the standard notation provides readily. If we are in a situation where anchor
+        intervals are solely being used then, we should always know that there is a way to get the quality out of it.
+    </p>
+
+    <p>
+        To do this we can take any ai collection, say 9 0 4 7, then assuming that 9 is the root, then by subtracting 9
+        from each, or rather adding 3 everywhere, we can get 0 3 7 10, which is the relative interval collecition which
+        generates that ai collection.
+    </p>
+
+    <p>
+        An even faster way is that gets developed over time is to notice that if we just look at the two end points of
+        the chord in ai notation then we see 9 X X 7, which means that the 7 relative to 9 has a gap of 10, since 7 is
+        two less than 9. Similarly if we say 9 0 X X, we know that the interval between them is a 3 so by looking at
+        chords using this light we can start to read ai notation and at the same time extract out the quality of the
+        chord as well.
+    </p>
+
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Voicing Similarity</h2></div>
+
+    <p>
+        If you recall from earlier on we know that we can
+    </p>
+
+
+</div>
+</body>
+</html>
