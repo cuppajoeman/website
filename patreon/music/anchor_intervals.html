@@ -8,77 +8,198 @@
 </head>
 
 <body>
-    <div class="thin_wrapper">
-        <h1 class="text_center">Anchor Intervals</h1>
-        <!-- <div class="line_behind"><span class="line"></span>
-        <h2 class="line_text">resources</h2></div> -->
-        <p>
-            In our previous lesson we touched on considering notes with respect to some anchor note, for example if our
-            anchor note was 8* (Ab) then the note 9* would be considered as 1. Whenever we specify a note like this, it
-            will be called an anchor interval and no asterisk will be written.
-        </p>
+<div class="thin_wrapper">
+    <h1 class="text_center">Anchor Intervals</h1>
+    <!-- <div class="line_behind"><span class="line"></span>
+    <h2 class="line_text">resources</h2></div> -->
+    <p>
+        In our previous lesson we touched on considering notes with respect to some anchor note, for example if our
+        anchor note was 8* (Ab) then the note 9* would be considered as 1. Whenever we specify a note like this, it
+        will be called an anchor interval and no asterisk will be written.
+    </p>
 
-        <p>
-            More explicitly an anchor interval of a note is the interval between the anchor note and the note we're 
-            considering. We'll go into what this means throughout this article.
-        </p>
+    <p>
+        More explicitly an anchor interval of a note is the interval between the anchor note and the note we're
+        considering. We'll go into what this means throughout this article.
+    </p>
 
-        <p>
-            You might have noticed that when we set our anchor note to be 11*, that every note's anchor
-            interval became one more than it's actual number, for example 3* was 4 and 9* was 10. This was no mere
-            coincidence, in this lesson we will explore what's actually going on here.
-        </p>
+    <p>
+        You might have noticed that when we set our anchor note to be 11*, that every note's anchor
+        interval became one more than it's actual number, for example 3* was 4 and 9* was 10. This was no mere
+        coincidence, in this lesson we will explore what's actually going on here.
+    </p>
 
-        <p>
-            For a new example, let's set our anchor note to be 2* (D) and let's consider notes with respect to that
-            anchor note. If we consider 4*, we can see that that's 2 up from 2*, so it's interval with respect to the
-            anchor note would be 2.
-        </p>
+    <p>
+        For a new example, let's set our anchor note to be 2* (D) and let's consider notes with respect to that
+        anchor note. If we consider 4*, we can see that that's 2 up from 2*, so it's interval with respect to the
+        anchor note would be 2.
+    </p>
 
-        <p>
-            But the question we really just answered was, which number do we add to 2* to get to 4*, and that number is
-            2. In a different way our question was just 2* + x = 4*, which can be rearranged to be x = 4* - 2* which is
-            equal to 2.
-        </p>
+    <p>
+        But the question we really just answered was, which number do we add to 2* to get to 4*, and that number is
+        2. In a different way our question was just 2* + x = 4*, which can be rearranged to be x = 4* - 2* which is
+        equal to 2.
+    </p>
 
-        <p>
-            Due to this we have gained a method to determine the interval between any two notes, so given a note X* and
-            a note Y*, the interval from X* to Y* is Y* - X*.
-        </p>
+    <p>
+        Due to this we have gained a method to determine the interval between any two notes, so given a note X* and
+        a note Y*, the interval from X* to Y* is Y - X.
+    </p>
 
-        <p>
-            Though we might ponder the following question, what is the interval from 2* to 0*, based on the above
-            examples, it might be easy to say -2, but another way to think about it is that if you add 9 to 2* you would
-            get 11*, and since our system of notes repeats (... 9* 10* 11* 0* 1* 2* 3* 4* 5* 6* 7* 8* 9* 10* 11* 0* 1*
-            2* ...), then we can see going one more step leads us to 0. So due to that, we can say that the interval
-            from 2* to 0* is 10. Since if we add 10 to 2*, we get to 0*.
-        </p>
+    <p>
+        Though we might ponder the following question, what is the interval from 2* to 0*, based on the above
+        examples, it might be easy to say -2, but another way to think about it is that if you add 9 to 2* you would
+        get 11*, and since our system of notes repeats (... 9* 10* 11* 0* 1* 2* 3* 4* 5* 6* 7* 8* 9* 10* 11* 0* 1*
+        2* ...), then we can see going one more step leads us to 0. So due to that, we can say that the interval
+        from 2* to 0* is 10. Since if we add 10 to 2*, we get to 0*.
+    </p>
 
-        <p>
-            Because of the above, we never have to use negative numbers if we don't want to. So the interval from 9* to
-            0* could be thought of 3 instead of -9. So when we talk about intervals we will always consider the positive
-            version.
-        </p>
+    <p>
+        Because of the above, we never have to use negative numbers if we don't want to. So the interval from 9* to
+        0* could be thought of 3 instead of -9. So when we talk about intervals we will always consider the positive
+        version.
+    </p>
 
-        <p>
-            Now that we've discussed some of the fundamental properties about anchor intervals, we can discuss how we can 
-            determine any anchor interval. Let's start with a specific example, and then come up with the general method.
-        </p>
+    <p>
+        Now that we've discussed some of the fundamental properties about anchor intervals, we can discuss how we can
+        determine any anchor interval. Let's start with a specific example, and then come up with the general method.
+    </p>
 
-        <p>
-            So let's say our anchor note is set as 8* and our note is 6*, then since the interval from 8* to 6* is -2 or 
-            10, then 6*'s anchor interval is 10.
-        </p>
+    <p>
+        So let's say our anchor note is set as 8* and our note is 6*, then since the interval from 8* to 6* is -2 or
+        10, then 6*'s anchor interval is 10.
+    </p>
 
-        <p>
-            So given an anchor note of Y* and a note of X*, then we take the positive version of Y* - X* as the anchor interval.
-        </p>
+    <p>
+        So given an anchor note of Y* and a note of X*, then we take the positive version of Y* - X* as the anchor
+        interval.
+    </p>
 
-    </div>
 
-    <!-- <script src="https://utteranc.es/client.js" repo="cuppajoeman/utterances-comments" issue-term="pathname"
-        theme="github-dark" crossorigin="anonymous" async>
-        </script> -->
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Computing Anchor Intervals efficiently</h2></div>
+
+    <p>
+        First let's repeat the method we already know and see if we can improve it. Our current method is that we take
+        the anchor note X* and the other note we're considering Y*. Our goal is to figure out what the anchor interval
+        of that note is, since we know that the anchor interval is defined as the interval between the anchor note and
+        the other note, then all we have to do is figure out what Y - X is and we have our anchor interval.
+    </p>
+
+    <p>
+        One of the components of the above process which can be easier is if we could make X as small as possible so
+        that when we subtract it from Y we don't have to "move" very much. The way we can minimize this movement is by
+        using certain equivalent numbers to Y that are "smaller".
+    </p>
+
+    <p>
+        If we consider the number 9, we know that it's equivalent to -3 in the system, but also we can see that -3 uses
+        the number 3 which is smaller than 9. If you go back to the table found in the article about "Numbers in a
+        Cyclic System", then you'll see that for any number there is always a small version of it. To sum that up we can
+        see this table
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <th>Number</th>
+            <th>Equivalent</th>
+            <th>Small Representation</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>0<br></td>
+            <td>-0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>-11<br></td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>-10</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>-9<br></td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>-8</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>-7</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>-6</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>-5</td>
+            <td>-5</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>-4</td>
+            <td>-4</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>-3</td>
+            <td>-3</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>-2</td>
+            <td>-2<br></td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>-1</td>
+            <td>-1</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>
+        So for example if our anchor note was 8* and our other note was 2* then instead of computing 2 - 8 which
+        involves a larger jump, since 8 is the same as -4 in our system we could compute 2 - (-4) = 2 + 4 = 6.
+    </p>
+
+    <h3>The Process</h3>
+
+    <ul>
+        <li>
+            Take your anchor note and consider the smallest representation of that number. For example if my anchor note
+            was 8*, then I would be thinking of the number -4.
+        </li>
+        <li>
+            Now take your other note and subtract the small representation of the anchor note from your note, the result
+            is the anchor interval.
+        </li>
+    </ul>
+
+    <p>
+        Now that you have the process go train on the anchor interval trainer under the web applications until you are
+        fast.
+    </p>
+
+
+</div>
+
+<!-- <script src="https://utteranc.es/client.js" repo="cuppajoeman/utterances-comments" issue-term="pathname"
+    theme="github-dark" crossorigin="anonymous" async>
+    </script> -->
 </body>
 
 </html>
