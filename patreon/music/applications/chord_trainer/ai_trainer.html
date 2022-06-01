@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Music</title>
+    <link rel="stylesheet" href="../../../../css/styles.css">
+</head>
+<body>
+
+<!--<div id="info" class="thin_wrapper">-->
+
+<!--    <h1 class="text_center">Anchor Interval Training</h1>-->
+
+<!--    <div class="line_behind"><span class="line"></span>-->
+<!--        <h2 class="line_text">Description</h2></div>-->
+
+<!--    <p>-->
+<!--        In this web application we will prompt the user with an anchor note and another note, the user will then have to-->
+<!--        answer as to what the anchor interval is of the other note.-->
+<!--    </p>-->
+
+<!--    <div class="line_behind"><span class="line"></span>-->
+<!--        <h2 class="line_text">Setup</h2></div>-->
+
+
+<!--    <label for="num_ai"> How many anchor intervals would you like to compute for a given anchor note? (Default-->
+<!--        10) </label>-->
+
+<!--    <input type="number" id="num_ai" name="num_ai"-->
+<!--           min="1 max=" 100">-->
+
+<!--    <p>-->
+<!--    </p>-->
+
+<!--    <button id="start">-->
+<!--        start-->
+<!--    </button>-->
+<!--</div>-->
+
+
+<div id="training_area">
+    <div class="full_center">
+        <table id="fret_line"
+               style="font-size: xxx-large; border: 1px solid white; width: 80%;border-collapse:separate; border-spacing:1em; white-space: nowrap">
+            <tr>
+                <td>E</td>
+                <td>Dmaj7</td>
+                <td id="solution" contenteditable="true">10</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script src="ai_trainer.js"></script>
+
+</body>
+</html>
