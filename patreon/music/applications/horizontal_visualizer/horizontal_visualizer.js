@@ -25,7 +25,7 @@ function isCorrect() {
 
 function generateSituation() {
     direction = Math.random() <= 0.5 ? "up" : "down";
-    distance = Math.ceil(Math.random() * 4) ;
+    distance = Math.ceil(Math.random() * 5) ;
 
     imageElement.src = direction + ".png";
     questionElement.innerHTML = "distance : " + distance.toString(10);
