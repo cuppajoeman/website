@@ -37,6 +37,10 @@ li {
   text-align: center;
 }
 
+.boxed {
+  border: 2px solid white;
+}
+
 .hn_center {
   text-align:center;  
 }
