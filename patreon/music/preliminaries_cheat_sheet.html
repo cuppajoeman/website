@@ -9,14 +9,47 @@
 
 <body>
 <div class="thin_wrapper">
-    <h1 class="text_center">Anchor Intervals</h1>
-    <!-- <div class="line_behind"><span class="line"></span>
-    <h2 class="line_text">resources</h2></div> -->
-    <p>
-        In our previous lesson we touched on considering notes with respect to some anchor note, for example if our
-        anchor note was 8* (Ab) then the note 9* would be considered as 1. Whenever we specify a note like this, it
-        will be called an anchor interval and no asterisk will be written.
-    </p>
+    <h1 class="text_center">Preliminaries Cheat Sheet</h1>
+
+    <div class="line_behind"><span class="line"></span>
+    <h2 class="line_text">Mapping between Standard Notes and Number Notes</h2></div>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <th>C<br></th>
+            <th>o<br></th>
+            <th>D<br></th>
+            <th>o<br></th>
+            <th>E<br></th>
+            <th>F<br></th>
+            <th>o<br></th>
+            <th>G<br></th>
+            <th>o<br></th>
+            <th>A<br></th>
+            <th>o<br></th>
+            <th>B<br></th>
+            <th>C<br></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>0*<br></td>
+            <td>1*<br></td>
+            <td>2*<br></td>
+            <td>3*<br></td>
+            <td>4*<br></td>
+            <td>5*<br></td>
+            <td>6*<br></td>
+            <td>7*<br></td>
+            <td>8*<br></td>
+            <td>9*<br></td>
+            <td>10*<br></td>
+            <td>11*<br></td>
+            <td>0*<br></td>
+        </tr>
+        </tbody>
+    </table>
 
     <p>
         More explicitly an anchor interval of a note is the interval between the anchor note and the note we're
@@ -75,18 +108,91 @@
     <p>
         One of the components of the above process which can be easier is if we could make X as small as possible so
         that when we subtract it from Y we don't have to "move" very much. The way we can minimize this movement is by
-        using certain equivalent numbers to X that are "smaller".
+        using certain equivalent numbers to Y that are "smaller".
     </p>
+
+    <p>
+        If we consider the number 9, we know that it's equivalent to -3 in the system, but also we can see that -3 uses
+        the number 3 which is smaller than 9. If you go back to the table found in the article about "Numbers in a
+        Cyclic System", then you'll see that for any number there is always a small version of it. To sum that up we can
+        see this table
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <th>Number</th>
+            <th>Equivalent</th>
+            <th>Small Representation</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>0<br></td>
+            <td>-0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>-11<br></td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>-10</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>-9<br></td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>-8</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>-7</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>-6</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>-5</td>
+            <td>-5</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>-4</td>
+            <td>-4</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>-3</td>
+            <td>-3</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>-2</td>
+            <td>-2<br></td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>-1</td>
+            <td>-1</td>
+        </tr>
+        </tbody>
+    </table>
 
     <p>
         So for example if our anchor note was 8* and our other note was 2* then instead of computing 2 - 8 which
         involves a larger jump, since 8 is the same as -4 in our system we could compute 2 - (-4) = 2 + 4 = 6.
-    </p>
-
-    <p>
-        Right now we're talking about notes, but since we already know how to add and subtract notes then we can use the
-        efficient method for figuring out intervals which is to compute I(X*, Y*) as Y - s(X). If you don't remember
-        this then go back to "numbers in a cyclic system".
     </p>
 
     <h3>The Process</h3>
@@ -98,7 +204,7 @@
         </li>
         <li>
             Now take your other note and subtract the small representation of the anchor note from your note, the result
-            is the anchor interval. Note that if you're subtracting a negative number you can just add it.
+            is the anchor interval.
         </li>
     </ul>
 

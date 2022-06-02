@@ -187,6 +187,103 @@
         I(X, Y) = Y - X
     </p>
 
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Small Representation</h2></div>
+
+    <p>
+        We now know that given any number from 0 to 11, we have a number from -11 to 0 which is equivalent to it, we in
+        a table we can see all the equivalences, we can also choose the one which uses the smallest numbers
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <th>Number</th>
+            <th>Equivalent</th>
+            <th>Small Representation</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>0<br></td>
+            <td>-0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>-11<br></td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>-10</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>-9<br></td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>-8</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>-7</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>-6</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>-5</td>
+            <td>-5</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>-4</td>
+            <td>-4</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>-3</td>
+            <td>-3</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>-2</td>
+            <td>-2<br></td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>-1</td>
+            <td>-1</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>
+        The small representation is useful since it can represent a small distance offset, so if we wanted to know I(10,
+        0) can consider 0 - (-2) instead of 0 - 10 which is easier to figure out since the distance offset is smaller.
+    </p>
+
+    <p>
+        In this way we can make some notation which gives us the small representation of a number so that when we write
+        s(10) it really means -2 and when we write s(-8) it really means 4.
+    </p>
+
+    <p>
+        This gives us an efficient way to compute intervals, finally we can say that:
+    </p>
+
+    <p class="text_center boxed">
+       I(X, Y) = Y - s(X)
+    </p>
 
 </div>
 
