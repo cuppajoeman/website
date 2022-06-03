@@ -12,7 +12,7 @@
     <h1 class="text_center">Preliminaries Cheat Sheet</h1>
 
     <div class="line_behind"><span class="line"></span>
-    <h2 class="line_text">Mapping between Standard Notes and Number Notes</h2></div>
+        <h2 class="line_text">Mapping between Standard Notes and Number Notes</h2></div>
 
     <table class="center">
         <thead>
@@ -51,166 +51,77 @@
         </tbody>
     </table>
 
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Intervals</h2></div>
+
     <p>
-        More explicitly an anchor interval of a note is the interval between the anchor note and the note we're
-        considering. We'll go into what this means throughout this article.
+        An interval between two numbers is what you have to add to the first to get to the second, in other words:
+    </p>
+
+    <p class="text_center">
+        I(X, Y) = Y - X
     </p>
 
     <p>
-        You might have noticed that when we set our anchor note to be 11*, that every note's anchor
-        interval became one more than it's actual number, for example 3* was 4 and 9* was 10. This was no mere
-        coincidence, in this lesson we will explore what's actually going on here.
+        To compute that in the most efficient manner we can reduce the amount of distance we move by using the small
+        representation:
     </p>
 
-    <p>
-        For a new example, let's set our anchor note to be 2* (D) and let's consider notes with respect to that
-        anchor note. If we consider 4*, we can see that that's 2 up from 2*, so it's interval with respect to the
-        anchor note would be 2.
-    </p>
-
-    <p>
-        But the question we really just answered was, which number do we add to 2* to get to 4*, and that number is
-        2. In a different way our question was just 2* + x = 4*, which can be rearranged to be x = 4* - 2* which is
-        equal to 2.
-    </p>
-
-    <p>
-        Due to this we have gained a method to determine the interval between any two notes, so given a note X* and
-        a note Y*, the interval from X* to Y* is Y - X.
-    </p>
-
-    <p>
-        Now that we've discussed some of the fundamental properties about anchor intervals, we can discuss how we can
-        determine any anchor interval. Let's start with a specific example, and then come up with the general method.
-    </p>
-
-    <p>
-        So let's say our anchor note is set as 8* and our note is 6*, then since the interval from 8* to 6* is -2 or
-        10, then 6*'s anchor interval is 10.
-    </p>
-
-    <p>
-        So given an anchor note of Y* and a note of X*, then we take the positive version of Y* - X* as the anchor
-        interval.
+    <p class="text_center">
+        I(X, Y) = Y - s(X)
     </p>
 
 
     <div class="line_behind"><span class="line"></span>
-        <h2 class="line_text">Computing Anchor Intervals efficiently</h2></div>
+        <h2 class="line_text">Anchor Intervals</h2></div>
 
     <p>
-        First let's repeat the method we already know and see if we can improve it. Our current method is that we take
-        the anchor note X* and the other note we're considering Y*. Our goal is to figure out what the anchor interval
-        of that note is, since we know that the anchor interval is defined as the interval between the anchor note and
-        the other note, then all we have to do is figure out what Y - X is and we have our anchor interval.
+        To define an anchor interval you need an anchor note, and an other note, the anchor interval between them is
+        simply the interval between the anchor note and the other note.
     </p>
 
     <p>
-        One of the components of the above process which can be easier is if we could make X as small as possible so
-        that when we subtract it from Y we don't have to "move" very much. The way we can minimize this movement is by
-        using certain equivalent numbers to Y that are "smaller".
+        Thus given an anchor note A* and an other note N*, to efficiently determine the interval between them we
+        compute:
+    </p>
+
+    <p class="text_center">
+        I(A*, N*) = N - s(A)
+    </p>
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Scales</h2></div>
+
+    <p>
+        The relative interval collection of a major scale is:
+    </p>
+
+    <p class="text_center">
+        0 2 4 5 7 9 11
     </p>
 
     <p>
-        If we consider the number 9, we know that it's equivalent to -3 in the system, but also we can see that -3 uses
-        the number 3 which is smaller than 9. If you go back to the table found in the article about "Numbers in a
-        Cyclic System", then you'll see that for any number there is always a small version of it. To sum that up we can
-        see this table
+        and of the minor:
     </p>
 
-    <table class="center">
-        <thead>
-        <tr>
-            <th>Number</th>
-            <th>Equivalent</th>
-            <th>Small Representation</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>0<br></td>
-            <td>-0</td>
-            <td>0</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>-11<br></td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>-10</td>
-            <td>2</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>-9<br></td>
-            <td>3</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>-8</td>
-            <td>4</td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>-7</td>
-            <td>5</td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>-6</td>
-            <td>6</td>
-        </tr>
-        <tr>
-            <td>7</td>
-            <td>-5</td>
-            <td>-5</td>
-        </tr>
-        <tr>
-            <td>8</td>
-            <td>-4</td>
-            <td>-4</td>
-        </tr>
-        <tr>
-            <td>9</td>
-            <td>-3</td>
-            <td>-3</td>
-        </tr>
-        <tr>
-            <td>10</td>
-            <td>-2</td>
-            <td>-2<br></td>
-        </tr>
-        <tr>
-            <td>11</td>
-            <td>-1</td>
-            <td>-1</td>
-        </tr>
-        </tbody>
-    </table>
-
-    <p>
-        So for example if our anchor note was 8* and our other note was 2* then instead of computing 2 - 8 which
-        involves a larger jump, since 8 is the same as -4 in our system we could compute 2 - (-4) = 2 + 4 = 6.
+    <p class="text_center">
+        0 2 3 5 7 8 10
     </p>
 
-    <h3>The Process</h3>
-
-    <ul>
-        <li>
-            Take your anchor note and consider the smallest representation of that number. For example if my anchor note
-            was 8*, then I would be thinking of the number -4.
-        </li>
-        <li>
-            Now take your other note and subtract the small representation of the anchor note from your note, the result
-            is the anchor interval.
-        </li>
-    </ul>
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Guitar Tuned in Fourths</h2></div>
 
     <p>
-        Now that you have the process go train on the anchor interval trainer under the web applications until you are
-        fast.
+        The open strings of the guitar are:
+    </p>
+
+    <p class="text_center">
+        4* 9* 2* 7* 0* 5*
+    </p>
+
+    <p>
+        Note that the next note is computed by taking the one on it's left and adding 5, a fourth is an interval of 5
+        steps so this is why it's called fourths tuning.
     </p>
 
 
