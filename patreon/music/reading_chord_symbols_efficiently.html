@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Music</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+
+<body>
+<div class="thin_wrapper">
+    <h1 class="text_center">Reading Chord Symbols Efficiently</h1>
+
+    <p>
+        In order to read chord symbols quickly, you'll need a method which takes a chord and turns it into a set of
+        ai's, it's important because right now music notation is not written in anchor interval notation and thus if we
+        want to use our system we will have to convert it.
+    </p>
+
+    <p>
+        The first step in order to do this is to first know what each of the different qualities defines, so for example
+        if someone says dim 7 chord you should know that represent the relative interval collection of 0 3 6 9 or that
+        dom 7 b9 is 0 4 7 10 1.
+    </p>
+
+    <p>
+        As a reference you can see the following table which stores all this information
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <th>Chord Symbol</th>
+            <th>Steps above X</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>X</td>
+            <td>0 4 7</td>
+        </tr>
+        <tr>
+            <td>X+</td>
+            <td>0 4 8</td>
+        </tr>
+        <tr>
+            <td>Xo</td>
+            <td>0 3 6</td>
+        </tr>
+        <tr>
+            <td>X-</td>
+            <td>0 3 7</td>
+        </tr>
+        <tr>
+            <td>X^7</td>
+            <td>0 4 7 11</td>
+        </tr>
+        <tr>
+            <td>X-7</td>
+            <td>0 3 7 10</td>
+        </tr>
+        <tr>
+            <td>X-7b5</td>
+            <td>0 3 6 10</td>
+        </tr>
+        <tr>
+            <td>Xo7</td>
+            <td>0 3 6 9</td>
+        </tr>
+        <tr>
+            <td>X6</td>
+            <td>0 4 7 9</td>
+        </tr>
+        <tr>
+            <td>X7</td>
+            <td>0 4 7 10</td>
+        </tr>
+        <tr>
+            <td>X9</td>
+            <td>0 4 7 10 2</td>
+        </tr>
+        <tr>
+            <td>X11</td>
+            <td>0 4 7 10 2 5</td>
+        </tr>
+        <tr>
+            <td>X13</td>
+            <td>0 4 7 10 2 5 9</td>
+        </tr>
+        <tr>
+            <td>X(...)sus2</td>
+            <td>... 2 (replacing 3)</td>
+        </tr>
+        <tr>
+            <td>X(...)sus</td>
+            <td>... 5 (replacing 4 or 3)</td>
+        </tr>
+        <tr>
+            <td>X(...)b5</td>
+            <td>... 6</td>
+        </tr>
+        <tr>
+            <td>X(...)#5</td>
+            <td>... 8</td>
+        </tr>
+        <tr>
+            <td>X(...)9</td>
+            <td>... 2</td>
+        </tr>
+        <tr>
+            <td>X(...)b9</td>
+            <td>... 1</td>
+        </tr>
+        <tr>
+            <td>X(..)11</td>
+            <td>... 5</td>
+        </tr>
+        <tr>
+            <td>X(..)#11</td>
+            <td>... 6</td>
+        </tr>
+        <tr>
+            <td>X(...)b13</td>
+            <td>... 8</td>
+        </tr>
+        <tr>
+            <td>X(...)alt</td>
+            <td>... 1 8 6</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>
+        If we consider D#maj7#11 then first we can unravel the maj7 part which defines 0 4 7 11, then the #11 which
+        gives us 6, since it is one step away from the 7, playing both the 7 and 6 will add a lot of dissonance,
+        although that might be something you are looking for.
+    </p>
+
+    <p>
+        In general if there is an added note or alteration (like #11) on a chord then if it is at least two spaces away
+        from all neighboring intervals you can usually add that interval in rather than replacing as it won't cause any
+        unexpected dissonance.
+    </p>
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Stacking</h2></div>
+
+    <p>
+        If we recall from before we know that a chord specifies a root note and intervals above that root note (which
+        define the quality). If we're in the anchor system then we would also have an anchor note, and so the notes
+        involved in that chord would have their own anchor intervals.
+    </p>
+
+    <p>
+        In order to figure out these anchor intervals of the notes in a chord we'll take an example. Let's assume that
+        our anchor note is 5* and then we're looking at a A#maj7 chord, we know that A# is 10*, since maj7 defines 0 4 7
+        11 above 10* so to compute those notes we would do (10 + 0)* (10 + 4)* (10 + 7)* (10 + 11)* which is really just
+        10* 2* 5* 9*.
+    </p>
+
+    <p>
+        Now since our anchor note is 5* then in order to figure out the anchor intervals of the notes of the chord we
+        just have to subtract 5 from each, which gives us 5 9 0 4.
+    </p>
+
+    <p>
+        If we think about what just happened here, we first stacked the relative intervals onto the note 10*, and then
+        subtracted the anchor note 5*.
+    </p>
+
+    <p>
+        If we think about both operations that were done we first did (10 + 0)* (10 + 4)* (10 + 7)* (10 + 11)* and then
+        (10 + 0 - 5)* (10 + 4 - 5)* (10 + 7 - 5)* (10 + 11 - 5)* which is the same as (I(5, 10) + 0) (I(5, 10) + 4)
+        (I(5, 10) + 7) (I(5, 10) + 11).
+    </p>
+
+    <p>
+        Note: I(5, 10) is the anchor interval of 10* with respect to 5*.
+    </p>
+
+    <p>
+        Thus as a general process we see A#maj7, we take A# and we find it's anchor interval with respect to F (5*)
+        which turns out to be 5, now we take 0 4 7 11 and "stack" it onto 5 which produces 5 + 0, 5 + 4, 5 + 7, 5 + 11
+        which is really 5 9 0 4 (I used the small representation to do that quickly).
+    </p>
+
+    <p>
+        Notice how this process also produced the same numbers as our original method we were able to reduce it down to
+        mainly one step rather than a large addition then subtraction. Finally as a list it is
+    </p>
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Efficient Stacking</h2></div>
+
+    <ol>
+        <li>You have an anchor note of A* and you see the chord C*(...)</li>
+        <li>Figure out the anchor interval of C* which is I(A*, C*)</li>
+        <li>
+            Now figure out the relative intervals involved with (...) lets say they are X1 X2 X3 X4, now stack these
+            onto the anchor interval of C*, each of these produces the anchor interval of the note produced by C* + XY
+            as we've seen above.
+        </li>
+    </ol>
+
+</div>
+</body>
+
+</html>
