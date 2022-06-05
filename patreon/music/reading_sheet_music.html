@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Music</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+
+<body>
+<div class="thin_wrapper">
+    <h1 class="text_center">Reading Sheet Music</h1>
+
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">The Stave</h2></div>
+
+    <p>
+        The stave is a method of notating notes over time, the first stave is called the treble clef and defines these
+        notes:
+    </p>
+
+    <pre>
+                                                                                             ---A
+                                                                                        G
+--------------------------------------------------------------------------------F----------------
+                                                                        E
+----------------------------------------------------------------D--------------------------------
+                                                        C
+------------------------------------------------B------------------------------------------------
+                                        A
+--------------------------------G----------------------------------------------------------------
+                        F
+----------------E--------------------------------------------------------------------------------
+        D
+C---
+    </pre>
+
+    <p>
+        In the anchor system:
+    </p>
+    <pre>
+                                                                                             ---9*
+                                                                                        7*
+--------------------------------------------------------------------------------5*---------------
+                                                                        4*
+----------------------------------------------------------------2*-------------------------------
+                                                        0*
+------------------------------------------------11*----------------------------------------------
+                                        9*
+--------------------------------7*---------------------------------------------------------------
+                        5*
+----------------4*-------------------------------------------------------------------------------
+        2*
+0*--
+    </pre>
+
+    <p>
+        The way we specify a note is by drawing a filled circle on the stave like this
+    </p>
+
+    <pre>
+-------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------
+
+--------xxxxx------------------------------------------------------------------------------------
+       xxxxxxx
+--------xxxxx------------------------------------------------------------------------------------
+    </pre>
+
+    <p>
+        This note is a 5*.
+    </p>
+
+    <p>
+        Usually the standard clef contains 5 lines but more may be added if notes end up going higher than the five
+        lines, these lines are called ledger lines and look like this:
+    </p>
+
+    <pre>
+                                          xxxxx
+                                        -xxxxxxx-
+                                          xxxxx
+
+                                        ----------
+
+-------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------
+    </pre>
+
+    <p>
+        You might have realized that we have not defined what note this is based on our original lines, but to determine
+        it you just have to continue the pattern and realize that it is a 0*.
+    </p>
+
+    <p>
+        In general as we move upwards between consecutive lines and spaces then we ascend through the 0* major
+        scale and when we move down we descend it.
+    </p>
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Key Signatures</h2></div>
+
+    <p>
+        A key signature is notation which specifies a modification of the standard notes that we've just defined on a
+        stave. The symbol "b" represents a step down by one and a "#" represents a step up by one.
+    </p>
+
+    <pre>
+                                                                                                 ---9*
+                                                                                            7*
+------------------------------------------------------------------------------------5*---------------
+                                                                            4*
+--------------------------------------------------------------------2*-------------------------------
+                                                            0*
+b---------------------------------------------------10*----------------------------------------------
+                                            9*
+------------------------------------7*---------------------------------------------------------------
+                            5*
+--------------------4*-------------------------------------------------------------------------------
+            2*
+----0*--
+    </pre>
+
+    <p>
+        Notice that here the space that usually represents a 11* now represents an 10* as the "b" symbol is "flattening"
+        it. In addition to flattening just the specific 11* located at the same vertical position as the "b" it also
+        affects any other 11*'s for example the ones that would appear on ledger lines
+    </p>
+
+    <p>
+        The standard usage for key signatures is to specify a major or minor key, so for example if we look at the notes
+        defined in the above stave you might realize that it represents the notes in an 5* major scale since, those
+        notes are: 5* 7* 9* 10* 0* 2* 4* 5*, also since we know about relative keys this could also be thought of as the
+        2* minor which defines the same notes 2* 4* 5* 7* 9* 10* 0* 2*.
+    </p>
+
+    <pre>
+                                                                                                 ---9*
+                                                                                            7*
+------------------------------------------------------------------------------------5*---------------
+   b                                                                        3*
+--------------------------------------------------------------------2*-------------------------------
+                                                            0*
+b---------------------------------------------------10*----------------------------------------------
+                                            9*
+------------------------------------7*---------------------------------------------------------------
+                            5*
+--------------------3*-------------------------------------------------------------------------------
+            2*
+----0*--
+    </pre>
+
+    <p>
+        Note: Both 4*'s changed to 3*'s not just the one that matched in vertical position.
+    </p>
+
+    <p>
+        This key signature with two flats represents another key, this time it represents the 10* major key, as we can
+        see from 10* 0* 2* 3* 5* 7* 9* 10* or 7* minor.
+    </p>
+
+    <pre>
+                                                                                                 ---9*
+       #                                                                                    8*
+#-----------------------------------------------------------------------------------6*---------------
+                                                                            4*
+----------#---------------------------------------------------------3*-------------------------------
+   #                                                        1*
+----------------------------------------------------11*----------------------------------------------
+                                            9*
+------------------------------------8*---------------------------------------------------------------
+                            6*
+--------------------4*-------------------------------------------------------------------------------
+            3*
+----1*--
+    </pre>
+
+    <p>
+        The same idea applies for sharps, in this case it's representing 4* major: 4* 6* 8* 9* 11* 1* 3* 4* or 1* minor
+    </p>
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Anchored Stave</h2></div>
+
+    <p>
+        Since in the anchor system we don't really use notes that often, it'll be useful for us to be able to read
+        anchored intervals directly off the stave. Let's start with the example we ended with in the last section, the
+        one where our stave represented the notes in a 4* major scale.
+    </p>
+
+    <p>
+        Since we're working with a 4* major scale then the standard thing to do here would be to set our anchor note as
+        4*, and then replacing their notes by anchor intervals, we get:
+    </p>
+
+    <pre>
+                                                                                                 ---5
+       #                                                                                    4
+#-----------------------------------------------------------------------------------2----------------
+                                                                            0
+----------#---------------------------------------------------------11-------------------------------
+   #                                                        9
+----------------------------------------------------7------------------------------------------------
+                                            5
+------------------------------------4----------------------------------------------------------------
+                            2
+--------------------0--------------------------------------------------------------------------------
+            11
+----9---
+    </pre>
+
+    <p>
+        The main observation here is that it looks like the original stave except things have been "rotated" a little
+        bit so that the space that represented the 4* is now a 0. This should make sense since the original stave
+        represented a major scale and the new stave represents a major scale just starting from a different note.
+    </p>
+
+    <p>
+        This process of "anchoring" our stave will work with any key signature. The general process is to take the key
+        signature and then choose either the major or minor key that it represents, set your anchor as that keys root
+        and then determine the anchor intervals of the stave by subtracting the anchor from each note.
+    </p>
+
+</div>
+</body>
+
+</html>
