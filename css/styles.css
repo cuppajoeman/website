@@ -66,6 +66,10 @@ li {
   color:black;
 }
 
+.inverted_image {
+  filter: invert(100%);
+}
+
 /* code blocks */
 pre code {
   background-color: dimgrey;

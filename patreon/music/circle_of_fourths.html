@@ -36,71 +36,8 @@
     <!--        </tr>-->
     <!--    </table>-->
 
-    <table class="circle_of_fourths">
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>0</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td>7</td>
-            <td></td>
-            <td>5</td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>2</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>10</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>9</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>3</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>4</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>8</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td>11</td>
-            <td></td>
-            <td>1</td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>6</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
+
+    <img class="inverted_image" src="assets/images/circle_of_foruths.PNG" style="width: 50%; height: auto;">
 
     <p>
         The circle of fourths represents many important ideas in one place. The first and most important idea is the
@@ -119,405 +56,26 @@
     </p>
 
     <div class="line_behind"><span class="line"></span>
-        <h2 class="line_text">As a Relative Interval Circle</h2></div>
+        <h2 class="line_text">Finding Patterns</h2></div>
 
     <p>
-        Take the circle and then randomly choose a number on the circle:
+        The only thing you should remember about the circle of fourths is that it's built by adding 5 repeatedly, from
+        there we can derive many different patterns:
     </p>
 
-    <table class="center">
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>X</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>0</td>
-            <td>5</td>
-            <td>10</td>
-            <td>3</td>
-            <td>8</td>
-            <td>x: 1</td>
-            <td>6</td>
-            <td>11</td>
-            <td>4</td>
-            <td>9</td>
-            <td>2</td>
-            <td>7</td>
-            <td>0</td>
-            <td>5</td>
-            <td>10</td>
-            <td>3</td>
-            <td>8</td>
-        </tr>
-    </table>
+    <img class="inverted_image" src="assets/images/circle_many_patterns.PNG" style="width: 50%; height: auto;">
 
     <p>
-        Then let the number at that position X be labelled by x. Then all the numbers around it can be derived by
-        putting the original circle under it centering 0 on x and then using it as a ric like so:
-    </p>
-
-    <table class="center">
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>X</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>0</td>
-            <td>5</td>
-            <td>10</td>
-            <td>3</td>
-            <td>8</td>
-            <td>x: 1</td>
-            <td>6</td>
-            <td>11</td>
-            <td>4</td>
-            <td>9</td>
-            <td>2</td>
-            <td>7</td>
-            <td>0</td>
-            <td>5</td>
-            <td>10</td>
-            <td>3</td>
-            <td>8</td>
-        </tr>
-        <tr style="white-space: nowrap">
-            <td>x + 11</td>
-            <td>x + 4</td>
-            <td>x + 9</td>
-            <td>x + 2</td>
-            <td>x + 7</td>
-            <td>x + 0</td>
-            <td>x + 5</td>
-            <td>x + 10</td>
-            <td>x + 3</td>
-            <td>x + 8</td>
-            <td>x + 1</td>
-            <td>x + 6</td>
-            <td>x + 11</td>
-            <td>x + 4</td>
-            <td>x + 9</td>
-            <td>x + 2</td>
-            <td>x + 7</td>
-        </tr>
-    </table>
-
-    <p>
-        Personally I think that the computation that 1 + 11 = 0 is less intuitive then the fact that 1 - 1 = 0 and so to
-        reduce the amount of large jumps we have to make we can convert it to use numbers from the range -6 to 6 so we
-        get a new table:
-    </p>
-
-
-    <table class="center">
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>X</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>0</td>
-            <td>5</td>
-            <td>10</td>
-            <td>3</td>
-            <td>8</td>
-            <td>x: 1</td>
-            <td>6</td>
-            <td>11</td>
-            <td>4</td>
-            <td>9</td>
-            <td>2</td>
-            <td>7</td>
-            <td>0</td>
-            <td>5</td>
-            <td>10</td>
-            <td>3</td>
-            <td>8</td>
-        </tr>
-        <tr style="white-space: nowrap">
-            <td>x - 1</td>
-            <td>x + 4</td>
-            <td>x - 3</td>
-            <td>x + 2</td>
-            <td>x - 5</td>
-            <td>x + 0</td>
-            <td>x + 5</td>
-            <td>x - 2</td>
-            <td>x + 3</td>
-            <td>x - 4</td>
-            <td>x + 1</td>
-            <td>x - 6</td>
-            <td>x - 1</td>
-            <td>x + 4</td>
-            <td>x - 3</td>
-            <td>x + 2</td>
-            <td>x - 5</td>
-        </tr>
-    </table>
-
-    <p>
-        So by extracting those numbers we get a new small circle:
-    </p>
-
-    <table class="circle_of_fourths">
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>0</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td>-5</td>
-            <td></td>
-            <td>5</td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>2</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>-2</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>-3</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>3</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>4</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>-4</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td>-1</td>
-            <td></td>
-            <td>1</td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>6</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
-
-    <p class="text_center">
-        ... 0 5 -2 3 -4 1 -6 -1 4 -3 2 -5 0 5 -2 3 -4 ...
+        As you can see I've noted just a few of the different patterns in the circle, the main thing to note being that
+        if you jump over the same number of notes then the difference stays the same, for example by jumping by 3
+        (clockwise) each time we add 3 to the current note.
     </p>
 
     <p>
-        It's also important to note that the movement circle and the circle of fourths are the same as by considering
-        the additive inverse of each of the negative numbers in the movement circle, we get it back,
+        Since these interval jumps hold no matter where they are started on the circle, we'll say that they're
+        rotationally invariant (they don't change when you rotate them to different locations).
     </p>
 
-    <table class="circle_of_fourths">
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>0</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td>-5 > 7</td>
-            <td></td>
-            <td>5</td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>2</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>-2 > 10</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>-3 > 9</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>3</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>4</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>-4 > 8</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td>-1 > 11</td>
-            <td></td>
-            <td>1</td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>6</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
-
-    <p>
-        Whenever we use a circle of fifths in the manner we've done in the above tables we will consider them as a
-        movement circle, so we now have a movement circle and a small movement circle.
-    </p>
-
-    <p>
-        We can also see that the major scale is already embedded in the movement circles and that it's all in one
-        segment
-    </p>
-
-    <table class="circle_of_fourths">
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><span style="color: red;">0</span></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td><span style="color: red;">7</span></td>
-            <td></td>
-            <td><span style="color: red;">5</span></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><span style="color: red;">2</span></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>10</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><span style="color: red;">9</span></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>3</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><span style="color: red;">4</span></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>8</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td><span style="color: red;">11</span></td>
-            <td></td>
-            <td>1</td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>6</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
 
     <div class="line_behind"><span class="line"></span>
         <h2 class="line_text">Connection to the Instrument</h2></div>
@@ -528,9 +86,7 @@
         0 5
     </p>
 
-    <p class="text_center">
-        ... 0 5 10 3 8 1 6 11 <span style="color: red;">4 9 2 7 0 5</span> 10 3 8 ...
-    </p>
+    <img class="inverted_image" src="assets/images/circle_instrument.PNG" style="width: 50%; height: auto;">
 
     <p>
         And the notes of the open strings of the instrument are 4* 9* 2* 7* 0* 5* (almost a 0* major scale).
@@ -542,69 +98,40 @@
     </p>
 
     <div class="line_behind"><span class="line"></span>
-        <h2 class="line_text">It is Horizontal Movement</h2></div>
-
-    <p>
-        If you remember back to when we discussed horizontal movement across the fretboard that we answered questions
-        like X 4 X X ? X, and we were able to answer that ? = 7, since the circle of fourths is just an extension of the
-        horizontal movement in the fretboard, then all questions can be answered from it. So for example we can see that
-        the answer to the previous question is already encoded in the circle:
-    </p>
-
-    <p class="text_center">
-        ... 0 5 10 3 8 1 6 11 <span style="color: red;">4</span> 9 2 <span style="color: red;">7</span> 0 5 10 3 8 ...
-    </p>
-
-
-    <div class="line_behind"><span class="line"></span>
         <h2 class="line_text">Connection to Scales</h2></div>
 
     <p>
-        We might also notice that the ric associated with major scales is included in the circle:
+        When we looked at the connection to the instrument we saw that the circle almost contained the 0* major scale,
+        we can extend that pattern so that it does, like this:
     </p>
+
+    <img class="inverted_image" src="assets/images/circle_0_major..PNG" style="width: 50%; height: auto;">
 
     <p class="text_center">
         ... 0 5 10 3 8 1 6 <span style="color: red;">11 4 9 2 7 0 5</span> 10 3 8 ...
     </p>
 
     <p>
-        And the minor:
-    </p>
-
-    <p class="text_center">
-        ... 0 5 10 3 8 1 6 11 4 9 <span style="color: red;">2 7 0 5 10 3 8</span> ...
+        Additionally since we know that major and minor scales are connected, we can see that this also represents the
+        9* minor scale.
     </p>
 
     <p>
-        Moreover it actually explains the notes we get in any scale we just have to convert the circle to be talking
-        about notes first:
+        It also works for any major scale:
     </p>
 
-    <p class="text_center">
-        ... 0* 5* 10* 3* 8* 1* 6* 11* 4* 9* 2* 7* 0* 5* 10* 3* 8* ...
-    </p>
+    <img class="inverted_image" src="assets/images/circle_1_major.PNG" style="width: 50%; height: auto;">
 
     <p>
-        Then if we pick the note 0* we can see that the major scale started on this note has no alterations with
-        respect to 0* major, it should also be noted that the major scale is also located in this note circle:
+        To understand why it works for any scale we can see that the structure of the 0* major is encoded like this
     </p>
 
-    <p class="text_center">
-        ... 0* 5* 10* 3* 8* 1* 6* <span style="color: red;">11* 4* 9* 2* 7* 0* 5*</span> 10* 3* 8* ...
-    </p>
+    <img class="inverted_image" src="assets/images/circle_major_structure.PNG" style="width: 50%; height: auto;">
 
     <p>
-        The reason this makes sense is that if we consider the circle as an ordered ric then
-        we get the following
-    </p>
-
-
-    <div class="line_behind"><span class="line"></span>
-        <h2 class="line_text">Explains Phenomena in the Standard System</h2></div>
-
-    <p>
-        One of the most interesting things that the circle does in the standard system is in relation to key signatures.
-        In the standard system if we take the numbers on the circle and consider them to be notes,
+        Where 0* has been used to show what each skip around the circle does to modify 0*, so by choosing exactly the
+        notes in this fashion around any other note, we know it will form a major scale since patterns found on the
+        circle are rotationally invariant.
     </p>
 
 
