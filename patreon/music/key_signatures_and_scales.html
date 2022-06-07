@@ -85,13 +85,227 @@
 
     <p>
         Instead of randomly sharpening random notes and seeing if it creates a valid scale, we will figure out the
-        correct notes to modify through the circle of fifths:
+        correct notes to modify through the circle of fourths.
     </p>
 
     <p>
-        about to do that now...
+        We can first recall that all scales are embedded within the circle of fourths for example we can find the 1*
+        major:
     </p>
 
+
+    <img class="inverted_image" src="assets/circle_of_fourths/circle_1_major.PNG" style="width: 50%; height: auto;">
+
+    <p>
+        Which you should remember from our discussion on the circle of fourths. Now since these continuous sections of
+        the circles form scales, then what happens if we do a small shift to one scale to get another?
+    </p>
+
+
+    <img class="inverted_image" src="assets/key_signatures_and_scales/0_to_5.PNG" style="width: 50%; height: auto;">
+
+    <p>
+        We can see that the scale on the left is 0* major and the one on the right is 5* major, but the main thing to
+        note is that these two scales don't differ very much at all, the only difference is that the 11* has gone away
+        and the 10* has appeared.
+    </p>
+
+    <p>
+        So the notes in the 5* major scale would be the ones we would normally find in the 0* major scale except the 11*
+        is now a 10*, in other words the 11* has been flattened to be a 10*, meaning that if we wanted to write this
+        with a key signature it would look like this:
+    </p>
+
+    <pre>
+                                                                                                 ---9*
+                                                                                            7*
+------------------------------------------------------------------------------------5*---------------
+                                                                            4*
+--------------------------------------------------------------------2*-------------------------------
+                                                            0*
+b---------------------------------------------------10*----------------------------------------------
+                                            9*
+------------------------------------7*---------------------------------------------------------------
+                            5*
+--------------------4*-------------------------------------------------------------------------------
+            2*
+----0*--
+    </pre>
+
+    <p>
+        If we rotated the 5* major then we'd get the 10* major:
+    </p>
+
+
+    <img class="inverted_image" src="assets/key_signatures_and_scales/5_to_10.PNG" style="width: 50%; height: auto;">
+
+    <p>
+        Notice that this time the 4* has gone away and the 3* has entered, or we could say that the 4* has turned into
+        the 3* by going down by one step aka being flattened, so if we account for the flatting that happened when we
+        went from 0* major to 5* major and this new flattening then we would say that 11* -> 10* and 4* -> 3*. So our
+        key signature would look like:
+    </p>
+    <pre>
+                                                                                                 ---9*
+                                                                                            7*
+------------------------------------------------------------------------------------5*---------------
+     b                                                                      3*
+--------------------------------------------------------------------2*-------------------------------
+                                                            0*
+b---------------------------------------------------10*----------------------------------------------
+                                            9*
+------------------------------------7*---------------------------------------------------------------
+                            5*
+--------------------3*-------------------------------------------------------------------------------
+            2*
+----0*--
+    </pre>
+
+    <p>
+        Now that we've seen how one note leaves and another one enters as we rotate this section around the circle of
+        fourths, then we can continue this pattern to figure out what the key signature would be for all the other
+        scales.
+    </p>
+
+    <p>
+        So let's go back to our 10* major and rotate it once again, first of all the new scale is 3* major and 9* -> 8*
+        since 9* is no longer there and 8* is. So we can deduce that the key signature of 3* major is
+    </p>
+
+    <pre>
+                                                                                                 ---8*
+                                                                                            7*
+------------------------------------------------------------------------------------5*---------------
+     b                                                                      3*
+--------------------------------------------------------------------2*-------------------------------
+                                                            0*
+b---------------------------------------------------10*----------------------------------------------
+         b                                  8*
+------------------------------------7*---------------------------------------------------------------
+                            5*
+--------------------3*-------------------------------------------------------------------------------
+            2*
+----0*--
+    </pre>
+
+    <p>
+        For good measure we can do this one more time, changing our 3* major into an 8* major and 2* -> 1* so we have:
+    </p>
+    <pre>
+                                                                                                 ---8*
+                                                                                            7*
+------------------------------------------------------------------------------------5*---------------
+     b                                                                      3*
+--------------b-----------------------------------------------------1*-------------------------------
+                                                            0*
+b---------------------------------------------------10*----------------------------------------------
+         b                                  8*
+------------------------------------7*---------------------------------------------------------------
+                            5*
+--------------------3*-------------------------------------------------------------------------------
+            1*
+----0*--
+    </pre>
+
+    <p>
+        In our initial paragraph we showed a diagram of 4* major using sharps, but so far whenever we have rotated the
+        major segment clockwise around the circle notes have always gone down when they are modified. If that's true
+        then let's see what happens when we go counterclockwise.
+    </p>
+
+
+    <img class="inverted_image" src="assets/key_signatures_and_scales/sharps.PNG" style="width: 75%; height: auto;">
+
+    <p>
+        Thus rotating once more gives us 4* major with the sharps: 5* -> 6*, 0* -> 1*, 7* -> 8*, 2* -> 3* summing that
+        up in the key signature, we get exactly that:
+    </p>
+
+    <pre>
+                                                                                                 ---9*
+       #                                                                                    8*
+#-----------------------------------------------------------------------------------6*---------------
+                                                                            4*
+----------#---------------------------------------------------------3*-------------------------------
+   #                                                        1*
+----------------------------------------------------11*----------------------------------------------
+                                            9*
+------------------------------------8*---------------------------------------------------------------
+                            6*
+--------------------4*-------------------------------------------------------------------------------
+            3*
+----1*--
+    </pre>
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Take Away</h2></div>
+
+    <p>
+        Now that we have all this new information let's turn it into something usable. When we look at a key signature
+        the number of sharps that appear is the number of times we've rotated counter clockwise in the circle of
+        fourths, so assuming there were 3 sharps, then the scale is is (0*, 7*,) 2* major. If there were five flats,
+        then on the contrary we rotate clockwise five times around the circle to get our scale (0*, 5*, 10*, 3*) 8*
+        major.
+    </p>
+
+    <p>
+        Since moving around the circle is also the same as moving horizontally on the fretboard, we can associate flats
+        as moving -> some number of times and associate sharps with moving <- some number of times, for example we start
+        with 0* major, then if we look at the key signature and it has 2 sharps, then we add 2 to 0* (horizontal
+        movement rule) to get 2* major. By doing this we can re-use information that we already know from the fretboard.
+    </p>
+
+    <p>
+        Even though we talk about flattening and sharpening notes, this is being done so that it remains a
+        major/minor scale and since we work in anchored intervals we won't actually ever think of the notes we're
+        playing, therefore the purpose of this article is to allow us to grapple with notation built for people who do
+        play notes.
+    </p>
+
+    <p>
+        So for example when we see the following stave
+    </p>
+
+    <pre>
+                                                                                                 ---9*
+       #                                                                                    8*
+#-----------------------------------------------------------------------------------6*---------------
+                                                                            4*
+----------#---------------------------------------------------------3*-------------------------------
+   #                                                        1*
+----------------------------------------------------11*----------------------------------------------
+                                            9*
+------------------------------------8*---------------------------------------------------------------
+                            6*
+--------------------4*-------------------------------------------------------------------------------
+            3*
+----1*--
+    </pre>
+
+    <p>
+        What we do is first extract what scale it is, which we determined was 4* major and then anchor the stave like
+        this:
+    </p>
+
+    <pre>
+                                                                                                 ---11
+       #                                                                                    9
+#-----------------------------------------------------------------------------------7----------------
+                                                                            0
+----------#---------------------------------------------------------11-------------------------------
+   #                                                        9
+----------------------------------------------------7------------------------------------------------
+                                            5
+------------------------------------4----------------------------------------------------------------
+                            2
+--------------------0--------------------------------------------------------------------------------
+            11
+----9---
+    </pre>
+
+    <p>
+        So the only thing that ever changes for us is the location of 0.
+    </p>
 
 </div>
 </body>
