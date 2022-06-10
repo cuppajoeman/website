@@ -49,15 +49,16 @@ function isCorrect() {
 
 function generateSituation() {
     let stringSet = generateNRandomNumbersNoReplacement(2, 6);
-    let fretOffset = Math.floor(Math.random() * 7) - 3;
+    let fretPosition = Math.floor(Math.random() * 7)
+    let otherFretPosition = Math.floor(Math.random() * 7);
     let interval = Math.floor(Math.random() * 12);
-    let intervalOffset = interval - fretBoardSection[3][stringSet[0]];
+    let intervalOffset = interval - fretBoardSection[fretPosition][stringSet[0]];
     shiftedFretboard = fretBoardSection.map(row => row.map(x => posMod(x + intervalOffset, 12)));
 
     for (let row = 0 ; row < fretBoard.rows.length; row++) {
         for (let i = 0; i < 6; i ++) {
             let fretPos = fretBoard.rows[row].cells[i];
-            if (i === stringSet[0] && row === 3)  {
+            if (i === stringSet[0] && row === fretPosition)  {
                 fretPos.innerHTML = interval.toString();
                 fretPos.classList.add("inverted");
             } else {
@@ -67,7 +68,7 @@ function generateSituation() {
         }
 
     }
-    selectText(fretBoard.rows[3 + fretOffset].cells[stringSet[1]]);
+    selectText(fretBoard.rows[otherFretPosition].cells[stringSet[1]]);
 }
 generateSituation();
 
