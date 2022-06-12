@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Music</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+
+<body>
+<div class="thin_wrapper">
+    <h1 class="text_center">Beginner Cheat Sheet</h1>
+
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Knowing what you Play</h2></div>
+
+    <p>
+        Remember to always be aware of the anchor interval under your fingers at all times.
+    </p>
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Fretboard Movement</h2></div>
+
+    <p>
+        Vertical movement is movement which goes towards the bridge of the guitar, moving in this direction by n frets
+        increases your current anchor interval by n.
+    </p>
+
+    <p>
+        Horizontal movement is more complicated, but can be understood since each time you move horizontally it's adding
+        or subtracting 5, by doing this we generated the horizontal movement overlay:
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <td>6</td>
+            <td>-1</td>
+            <td>4<br></td>
+            <td>-3</td>
+            <td>2</td>
+            <td>-5</td>
+            <td>0</td>
+            <td>5</td>
+            <td>-2</td>
+            <td>3</td>
+            <td>-4</td>
+            <td>1</td>
+            <td>-6<br></td>
+        </tr>
+        </thead>
+    </table>
+
+    <p>
+        And another representation of that same thing:
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <th>distance from horizontal anchor point</th>
+            <th>&lt;- (direction)</th>
+            <th>-&gt; (direction)<br></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>-5</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>+2<br></td>
+            <td>-2</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>-3</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>+4</td>
+            <td>-4</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>-1</td>
+            <td>+1<br></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Harmonic Backdrop</h2></div>
+
+    <p>
+        The harmonic backdrop is an attribute of a song or any series of notes played over time. It represents the notes
+        which have been played while weighting them based on how many times they have been played. In general songs that
+        are played in a key will have the ais defined by that scale being the harmonic backdrop, so for a minor song
+        then we would have 0 2 3 5 7 8 10 as our harmonic backdrop.
+    </p>
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Modal Improvisation</h2></div>
+
+    <p>
+        This is the first type of improvisation you can do, by choosing a backing track which is modal, it means that
+        the harmonic backdrop doesn't change too much and therefore you can play the ais defined by that backdrop and it
+        will match the backdrop.
+    </p>
+
+    <p>
+        On the fretboard you will keep track of the current ai that you are playing and learn how your vertical and
+        horizontal movement will affect the ai you're playing.
+    </p>
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Modes</h2></div>
+
+    <p>
+        Modes of a scale are produced by rotating or changing the root note while leaving the intervals between the
+        notes the same, the main modes we think about are the ones derived from the major scale, and they are:
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <th>Mode Name</th>
+            <th>ai's involved</th>
+            <th>ai's ordered</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Ionian</td>
+            <td>0 2 4 5 7 9 11</td>
+            <td>0 2 4 5 7 9 11</td>
+        </tr>
+        <tr>
+            <td>Dorian</td>
+            <td>10 0 2 3 5 7 9</td>
+            <td>0 2 3 5 7 9 10</td>
+        </tr>
+        <tr>
+            <td>Phrygian<br></td>
+            <td>8 10 0 1 3 5 7</td>
+            <td>0 1 3 5 7 8 10</td>
+        </tr>
+        <tr>
+            <td>Lydian</td>
+            <td>7 9 11 0 2 4 6</td>
+            <td>0 2 4 6 7 9 11</td>
+        </tr>
+        <tr>
+            <td>Mixolydian</td>
+            <td>5 7 9 10 0 2 4<br></td>
+            <td>0 2 4 5 7 9 10</td>
+        </tr>
+        <tr>
+            <td>Aeolian</td>
+            <td>3 5 7 8 10 0 2</td>
+            <td>0 2 3 5 7 8 10</td>
+        </tr>
+        <tr>
+            <td>Locrian</td>
+            <td>1 3 5 6 8 10 0</td>
+            <td>0 1 3 5 6 8 10</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Chords</h2></div>
+
+    <p>
+        Chords are collections of notes played simultaneously (polyphony), the way we think about them is by setting an
+        anchor note and then considering these notes as anchor intervals, so with an anchor note of 2* and the chord 2*
+        6* 9*, we think about this chord as the collection of ais 0 4 7.
+    </p>
+
+    <p>
+        There are two main properties of a chord, it's quality and the ai's invovled with the chord, two chords with the
+        same quality but differeing ais will sound similar but not the exact same, two chords with the same ais but
+        different quality will sound similar but not the same, understanding these differences will come with time.
+    </p>
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Triads and Diatonic Chords</h2></div>
+
+    <p>
+        When given an ai collection, diatonic chords are ones that are formed only using ais defined by that collection.
+        When we work with the main scales it turns out that by choosing two notes that have one in between the distance
+        between them is 3 or 4, this is because the underlying scales are formed by taking notes and adding 2 or 1
+        between consecutive notes in a specific order.
+    </p>
+
+    <p>
+        The diatonic chords of a major scale are:
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <th>Starting ai</th>
+            <th>ai's in chord<br></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>0</td>
+            <td>0 4 7 11</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>2 5 9 0</td>
+        </tr>
+        <tr>
+            <td>4<br></td>
+            <td>4 7 11 2</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>5 9 0 4</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>7 11 2 5<br></td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>9 0 4 7</td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>11 2 5 9</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>
+        In the standard system chords are referenced by giving the root of the chord, and then a quality, the quality is
+        really a relative interval collection which is to be stacked onto the the root to produce other notes.
+    </p>
+
+    <p>
+        When working with chords you usually can leave out certain relative intervals that are defined by it's quality,
+        for example in most chords we have the relative interval of 7, that may be omitted since it doesn't add too much
+        complexity to the chord.
+    </p>
+
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Roman Numerals</h2></div>
+
+    <p>
+        In music roman numerals are used to index the diatonic chords associated with a scale. The way the chords are
+        indexed is based on the root of the chord.
+    </p>
+
+    <p>
+        The diatonic triads of a major scale are:
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <th>Numeral</th>
+            <th>Root</th>
+            <th>Anchor Inteval Collection</th>
+            <th>Relative Interval Collection<br></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>I</td>
+            <td>0</td>
+            <td>0 4 7 11</td>
+            <td>0 4 7 11 (Major 7th)</td>
+        </tr>
+        <tr>
+            <td>ii</td>
+            <td>2</td>
+            <td>2 5 9 0</td>
+            <td>0 3 7 10 (Minor 7th)</td>
+        </tr>
+        <tr>
+            <td>iii<br></td>
+            <td>4</td>
+            <td>4 7 11 2</td>
+            <td>0 3 7 10 (Minor 7th)</td>
+        </tr>
+        <tr>
+            <td>VI</td>
+            <td>5<br></td>
+            <td>5 9 0 4</td>
+            <td>0 4 7 11 (Major 7th)</td>
+        </tr>
+        <tr>
+            <td>V<br></td>
+            <td>7</td>
+            <td>7 11 2 5</td>
+            <td>0 4 7 10 (Dominant 7th)</td>
+        </tr>
+        <tr>
+            <td>iv</td>
+            <td>9</td>
+            <td>9 0 4 7</td>
+            <td>0 3 7 10 (Minor 7th)</td>
+        </tr>
+        <tr>
+            <td>iiv</td>
+            <td>11</td>
+            <td>11 2 5 9</td>
+            <td>0 3 6 10 (Half Diminished 7th)</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>
+        The relative minor of a major starts on 9, so therefore to figure out the chord and qualities associated with
+        the minor you just have to pretend like iv is i and go from there.
+    </p>
+
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Reading Chord Symbols Efficiently</h2></div>
+
+    <p>
+        In order to read chord symbols quickly, you'll need a method which takes a chord and turns it into a set of
+        ai's, it's important because right now music notation is not written in anchor interval notation and thus if we
+        want to use our system we will have to convert it.
+    </p>
+
+    <p>
+        You'll need to be able to take a quality and turn it into a relative interval collection, so here is a list of
+        all the main chord qualities and their associated relative interval collections:
+    </p>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <th>Chord Symbol</th>
+            <th>Steps above X</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>X</td>
+            <td>0 4 7</td>
+        </tr>
+        <tr>
+            <td>X+</td>
+            <td>0 4 8</td>
+        </tr>
+        <tr>
+            <td>Xo</td>
+            <td>0 3 6</td>
+        </tr>
+        <tr>
+            <td>X-</td>
+            <td>0 3 7</td>
+        </tr>
+        <tr>
+            <td>X^7</td>
+            <td>0 4 7 11</td>
+        </tr>
+        <tr>
+            <td>X-7</td>
+            <td>0 3 7 10</td>
+        </tr>
+        <tr>
+            <td>X-7b5</td>
+            <td>0 3 6 10</td>
+        </tr>
+        <tr>
+            <td>Xo7</td>
+            <td>0 3 6 9</td>
+        </tr>
+        <tr>
+            <td>X6</td>
+            <td>0 4 7 9</td>
+        </tr>
+        <tr>
+            <td>X7</td>
+            <td>0 4 7 10</td>
+        </tr>
+        <tr>
+            <td>X9</td>
+            <td>0 4 7 10 2</td>
+        </tr>
+        <tr>
+            <td>X11</td>
+            <td>0 4 7 10 2 5</td>
+        </tr>
+        <tr>
+            <td>X13</td>
+            <td>0 4 7 10 2 5 9</td>
+        </tr>
+        <tr>
+            <td>X(...)sus2</td>
+            <td>... 2 (replacing 3)</td>
+        </tr>
+        <tr>
+            <td>X(...)sus</td>
+            <td>... 5 (replacing 4 or 3)</td>
+        </tr>
+        <tr>
+            <td>X(...)b5</td>
+            <td>... 6</td>
+        </tr>
+        <tr>
+            <td>X(...)#5</td>
+            <td>... 8</td>
+        </tr>
+        <tr>
+            <td>X(...)9</td>
+            <td>... 2</td>
+        </tr>
+        <tr>
+            <td>X(...)b9</td>
+            <td>... 1</td>
+        </tr>
+        <tr>
+            <td>X(..)11</td>
+            <td>... 5</td>
+        </tr>
+        <tr>
+            <td>X(..)#11</td>
+            <td>... 6</td>
+        </tr>
+        <tr>
+            <td>X(...)b13</td>
+            <td>... 8</td>
+        </tr>
+        <tr>
+            <td>X(...)alt</td>
+            <td>... 1 8 6</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>
+        Now that we have this reference let's go into to building them quickly, the process is:
+    </p>
+
+    <ol>
+        <li>You have an anchor note of A* and you see the chord C*(...)</li>
+        <li>Figure out the anchor interval of C* which is I(A*, C*)</li>
+        <li>
+            Now figure out the relative intervals involved with (...) lets say they are X1 X2 X3 X4, now stack these
+            onto the anchor interval of C*, each of these produces the anchor interval of the note produced by C* + XY
+            as we've seen above, when you stack you should use the small representation to minimize movement.
+        </li>
+    </ol>
+
+</div>
+</body>
+
+</html>
