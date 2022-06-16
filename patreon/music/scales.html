@@ -15,8 +15,8 @@
         <h2 class="line_text">Major</h2></div>
 
     <p>
-        With the major scale you might know the standard way we construct it, which is by taking some root note and then
-        following the following pattern. Once done we call the collections.
+        With the major scale there is a standard way we construct it, which is by taking some root note and then
+        following the following pattern:
     </p>
 
     <p class="text_center">
@@ -24,20 +24,20 @@
     </p>
 
     <p>
-        Where W stands as a Whole Tone and H stands as a Half Tone. So starting on C, we get the following notes:
-    </p>
-
-    <p class="text_center">
-        C D E F G A B C
-    </p>
-
-    <p>
-        Another way to write this could be in line with our previous system so we can take our W H pattern and write it
-        as
+        Where W stands as a whole tone (a jump of distance 2) and H stands as a half tone (a jump of distance 1). So we
+        can re-write that as:
     </p>
 
     <p class="text_center">
         2 2 1 2 2 2 1
+    </p>
+
+    <p>
+        So starting on C (0*), we get the following notes:
+    </p>
+
+    <p class="text_center">
+        0* (+2) 2* (+2) 4* (+1) 5* (+2) 7* (+2) 9* (+2) 11* (+1) 0*
     </p>
 
     <p>
@@ -47,6 +47,26 @@
 
     <p class="text_center">
         0 2 4 5 7 9 11 0
+    </p>
+
+    <p>
+        Since
+    </p>
+
+    <ul>
+        <li>0 = 0</li>
+        <li>2 = 2</li>
+        <li>4 = 2 + 2</li>
+        <li>5 = 2 + 2 + 1</li>
+        <li>7 = 2 + 2 + 1 + 2</li>
+        <li>9 = 2 + 2 + 1 + 2 + 2</li>
+        <li>11 = 2 + 2 + 1 + 2 + 2 + 2</li>
+        <li>0 = 2 + 2 + 1 + 2 + 2 + 2 + 1</li>
+    </ul>
+
+    <p>
+        If we were to set our anchor note to the root of the scale, then these intervals are now anchor intervals which
+        means that, this collection of ais defines the major scale.
     </p>
 
     <p>
@@ -70,9 +90,9 @@
     </ul>
 
     <p>
-        Due to how we are adding these numbers relative to the root tone which in this case is 5*, then we can call this
-        collection of intervals (0 2 4 5 7 9 11) a relative interval collection or ric for short.
+        Notice here we're adding a number to a note, which produces another note.
     </p>
+
 
     <div class="line_behind"><span class="line"></span>
         <h2 class="line_text">Minor</h2></div>
@@ -94,12 +114,58 @@
     </p>
 
     <p>
-        And with respect to the root note, the relative interval collection is
+        And with respect to the root note, the ai collection is:
     </p>
 
     <p class="text_center">
         0 2 3 5 7 8 10 0
     </p>
+
+    <div class="line_behind"><span class="line"></span>
+        <h2 class="line_text">Other Scales</h2></div>
+
+    <table class="center">
+        <thead>
+        <tr>
+            <th>Scale Name<br></th>
+            <th>AI Collection</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Major<br></td>
+            <td>0 2 4 5 7 9 11</td>
+        </tr>
+        <tr>
+            <td>Minor</td>
+            <td>0 2 3 5 7 8 10</td>
+        </tr>
+        <tr>
+            <td>Harmonic Minor</td>
+            <td>0 2 3 5 7 8 11</td>
+        </tr>
+        <tr>
+            <td>Melodic Minor</td>
+            <td>0 2 3 5 7 9 11</td>
+        </tr>
+        <tr>
+            <td>Whole Tone Scale</td>
+            <td>0 2 4 6 8 10</td>
+        </tr>
+        <tr>
+            <td>Acoustic Scale</td>
+            <td>0 2 4 6 7 9 10</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <p>
+        Additionally there many other scales which can be found <a
+            href="https://en.wikipedia.org/wiki/List_of_musical_scales_and_modes">here</a>, and we will have a separate
+        discussion about modes later on.
+    </p>
+
 
     <div class="line_behind"><span class="line"></span>
         <h2 class="line_text">Relative Major/Minor</h2></div>
@@ -144,31 +210,31 @@
         which do not differ.
     </p>
 
-    <div class="line_behind"><span class="line"></span>
-        <h2 class="line_text">Generalizing Relativity</h2></div>
+    <!--    <div class="line_behind"><span class="line"></span>-->
+    <!--        <h2 class="line_text">Generalizing Relativity</h2></div>-->
 
-    <p>
-        We will end this discussion by taking the result into even more generality, we can further see that the relative
-        interval collection for a minor key is the same relative interval collection as the major, but with 3 added
-        everywhere. Consider:
-    </p>
+    <!--    <p>-->
+    <!--        We will end this discussion by taking the result into even more generality, we can further see that the relative-->
+    <!--        interval collection for a minor key is the same relative interval collection as the major, but with 3 added-->
+    <!--        everywhere. Consider:-->
+    <!--    </p>-->
 
-    <p class="text_center">
-        (Major + 3) = 0 + 3, 2 + 3, 4 + 3, 5 + 3, 7 + 3, 9 + 3, 11 + 3 = 3, 5, 7, 8, 10, 0, 2, = 0 2 3 5 7 8 10 (Minor)
-    </p>
+    <!--    <p class="text_center">-->
+    <!--        (Major + 3) = 0 + 3, 2 + 3, 4 + 3, 5 + 3, 7 + 3, 9 + 3, 11 + 3 = 3, 5, 7, 8, 10, 0, 2, = 0 2 3 5 7 8 10 (Minor)-->
+    <!--    </p>-->
 
-    <p>
-        Then it should be arithmetically clear that if we start a minor relative interval collection on the note (x -
-        3)*, then it then it would construct the same notes as the x* major since every +3 would be cancelled by the -3
-        when added during the note generation process.
-    </p>
+    <!--    <p>-->
+    <!--        Then it should be arithmetically clear that if we start a minor relative interval collection on the note (x - -->
+    <!--        3)*, then it then it would construct the same notes as the x* major since every +3 would be cancelled by the -3-->
+    <!--        when added during the note generation process.-->
+    <!--    </p>-->
 
-    <p>
-        So the most general result here is that if you take a relative interval collection and then add n to everyone of
-        it's intervals, and then generate notes from that modified ric from the note (x - n)*, then that generates the
-        same set of notes as using the original ric generating from x*, as the -n's and the +n's will cancel in the
-        generation process.
-    </p>
+    <!--    <p>-->
+    <!--        So the most general result here is that if you take a relative interval collection and then add n to everyone of-->
+    <!--        it's intervals, and then generate notes from that modified ric from the note (x - n)*, then that generates the-->
+    <!--        same set of notes as using the original ric generating from x*, as the -n's and the +n's will cancel in the-->
+    <!--        generation process.-->
+    <!--    </p>-->
 </div>
 
 <!-- <script src="https://utteranc.es/client.js" repo="cuppajoeman/utterances-comments" issue-term="pathname"
