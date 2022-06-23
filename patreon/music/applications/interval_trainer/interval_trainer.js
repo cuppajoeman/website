@@ -9,34 +9,31 @@
 // };
 
 
-const NOTE_NUMBER_TO_STANDARD_NAME = [
-    "C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "G#/Ab", "A", "A#/Bb", "B"
+const INTERVAL_TO_NUM_SEMITONES = [
+    "P1", "m2", "M2", "m3", "M3", "P4", "Tt", "P5", "m6", "M6", "m7", "M7"
 ]
 
 let fretLine = document.getElementById("fret_line");
 
 let numSolved = 0;
-let generatedNoteName;
-let generatedNoteNumber;
+let generatedIntervalName;
+let generatedInterval;
 
 function isCorrect() {
-    const solution = parseInt(document.getElementById("solution").innerHTML.slice(0, -1));
-    return solution === generatedNoteNumber;
+    const solution = parseInt(document.getElementById("solution").innerHTML);
+    return solution === generatedInterval;
 }
 
 function generateSituation() {
-    generatedNoteNumber = Math.floor(Math.random() * 12);
-    generatedNoteName = NOTE_NUMBER_TO_STANDARD_NAME[generatedNoteNumber];
+    generatedInterval = Math.floor(Math.random() * 12);
+    generatedIntervalName = INTERVAL_TO_NUM_SEMITONES[generatedInterval];
 
-    if (generatedNoteName.includes("/")) {
-        generatedNoteName = generatedNoteName.split("/")[Math.floor(Math.random() * 2)];
-    }
+    fretLine.rows[0].cells[0].innerHTML = generatedIntervalName
 
-    fretLine.rows[0].cells[0].innerHTML = generatedNoteName
+    fretLine.rows[0].cells[1].innerHTML = "X";
 
     selectText(fretLine.rows[0].cells[1]);
 
-    fretLine.rows[0].cells[1].innerHTML =  "*";
 
 }
 generateSituation();
