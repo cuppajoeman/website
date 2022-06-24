@@ -35,38 +35,55 @@ let fretLine = document.getElementById("fret_line");
 
 var numSolved = 0;
 var numAiPerAc = 10;
-var anchorNote;
-var otherNote;
+let anchorNoteNumber;
+let anchorNoteName;
+let rootNoteName;
+let rootNoteNumber;
+let chordQualityName;
 
 
 function posMod(n, d) {
     return ((n % d) + d) % d;
 }
 
+function eqSet(as, bs) {
+    if (as.size !== bs.size) return false;
+    for (var a of as) if (!bs.has(a)) return false;
+    return true;
+}
+
 function isCorrect() {
-    const solution = parseInt(document.getElementById("solution").innerHTML);
-    return posMod(otherNote - anchorNote, 12) === solution
+
+    // slice to remove <br>
+    let userSolution = new Set(document.getElementById("solution").innerHTML.slice(0, -4).split(' ').map(Number));
+
+    let rootAI = posMod(rootNoteNumber - anchorNoteNumber, 12);
+
+    let solution = new Set(FOUR_NOTE_QUALITIES[chordQualityName].map(x => posMod(x + rootAI, 12)))
+
+    return eqSet(solution, userSolution);
 }
 
 function generateSituation() {
+
     if (numSolved % numAiPerAc === 0) {
-        anchorNote = Math.floor(Math.random() * 12);
+        anchorNoteNumber = Math.floor(Math.random() * 12);
     }
-    otherNote = Math.floor(Math.random() * 12);
+    anchorNoteName = NOTE_NUMBER_TO_STANDARD_NAME[anchorNoteNumber];
+
+    rootNoteNumber = Math.floor(Math.random() * 12);
+    rootNoteName = NOTE_NUMBER_TO_STANDARD_NAME[rootNoteNumber];
 
     // Randomly chooses to use a sharp or flat
-    let standardAnchorNote = NOTE_NUMBER_TO_STANDARD_NAME[anchorNote];
-    let standardOtherNote = NOTE_NUMBER_TO_STANDARD_NAME[otherNote];
-
-    if (standardAnchorNote.includes("/")) {
-        standardAnchorNote = NOTE_NUMBER_TO_STANDARD_NAME[anchorNote].split("/")[Math.round(Math.random())];
+    if (rootNoteName.includes("/")) {
+        rootNoteName = rootNoteName.split("/")[Math.round(Math.random() * 2)];
     }
 
-    if (standardOtherNote.includes("/")) {
-        standardOtherNote = NOTE_NUMBER_TO_STANDARD_NAME[otherNote].split("/")[Math.round(Math.random())];
+    if (anchorNoteName.includes("/")) {
+        anchorNoteName = anchorNoteName.split("/")[Math.round(Math.random() * 2)];
     }
 
-    let randomChordName = Object.keys(FOUR_NOTE_QUALITIES)[Math.floor(Math.random() * Object.keys(FOUR_NOTE_QUALITIES).length)];
+    chordQualityName = Object.keys(FOUR_NOTE_QUALITIES)[Math.floor(Math.random() * Object.keys(FOUR_NOTE_QUALITIES).length)];
 
     let alteration = "";
     // if (Math.random() < 0.1) {
@@ -74,8 +91,8 @@ function generateSituation() {
        alteration = Object.keys(QUALITY_ALTERATIONS)[Math.floor(Math.random() * Object.keys(QUALITY_ALTERATIONS).length)];
     }
 
-    fretLine.rows[0].cells[0].innerHTML = standardAnchorNote;
-    fretLine.rows[0].cells[1].innerHTML = standardOtherNote + randomChordName + alteration;
+    fretLine.rows[0].cells[0].innerHTML = anchorNoteName;
+    fretLine.rows[0].cells[1].innerHTML = rootNoteName + " " + chordQualityName + alteration;
     fretLine.rows[0].cells[2].innerHTML = "X";
 
     selectText(fretLine.rows[0].cells[2]);
@@ -102,7 +119,7 @@ function selectText(element) {
 
 document.body.onkeydown = function (e) {
     // Number 13 is the "Enter" key on the keyboard
-    if (e.keyCode === 13 || e.key === " ") {
+    if (e.keyCode === 13) {
         e.preventDefault();
         if (isCorrect()) {
             numSolved += 1;
