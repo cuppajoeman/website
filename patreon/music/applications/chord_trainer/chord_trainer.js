@@ -76,11 +76,11 @@ function generateSituation() {
 
     // Randomly chooses to use a sharp or flat
     if (rootNoteName.includes("/")) {
-        rootNoteName = rootNoteName.split("/")[Math.round(Math.random() * 2)];
+        rootNoteName = rootNoteName.split("/")[Math.floor(Math.random() * 2)];
     }
 
     if (anchorNoteName.includes("/")) {
-        anchorNoteName = anchorNoteName.split("/")[Math.round(Math.random() * 2)];
+        anchorNoteName = anchorNoteName.split("/")[Math.floor(Math.random() * 2)];
     }
 
     chordQualityName = Object.keys(FOUR_NOTE_QUALITIES)[Math.floor(Math.random() * Object.keys(FOUR_NOTE_QUALITIES).length)];
