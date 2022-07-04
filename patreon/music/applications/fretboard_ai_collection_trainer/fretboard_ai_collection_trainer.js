@@ -209,4 +209,5 @@ function onEvent (e) {
 }
 
 document.body.onkeydown = onEvent;
+document.body.onkeyup = updateColoring;
 document.body.onclick = onEvent;
