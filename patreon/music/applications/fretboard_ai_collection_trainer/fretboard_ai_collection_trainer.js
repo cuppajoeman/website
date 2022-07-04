@@ -1,4 +1,7 @@
-const BLANK_CHAR = "🞨";
+const BLANK_CHAR = "";
+
+const NUM_STRINGS = 6;
+const NUM_FRETS = 7;
 
 let fretBoardSection = [
     [4, 9, 2, 7, 0, 5],
@@ -52,14 +55,21 @@ function eqSet(as, bs) {
 
 function isCorrect() {
 
+    let td = document.activeElement;
+    let table = td.parentElement.parentElement;
+
     let selectedAnchorIntervals = [];
+    let wrongNumberFound = false;
     for (let row = 0; row < fretBoard.rows.length; row++) {
         for (let i = 0; i < fretBoard.rows[row].cells.length; i ++) {
             let cell = fretBoard.rows[row].cells[i];
             if (cell.innerHTML !== BLANK_CHAR) {
                 let interval = parseInt(cell.innerHTML, 10);
                 if (interval !== shiftedFretboard[row][i]) {
-                    return false;
+                    table.rows[row].cells[i].style.backgroundColor = "red";
+                    console.log(table.rows[row].cells[i]);
+                    wrongNumberFound = true
+
                 }
                 selectedAnchorIntervals.push(interval)
             }
@@ -67,7 +77,7 @@ function isCorrect() {
 
     }
 
-    return eqSet( new Set(selectedAnchorIntervals), new Set(anchorIntervals));
+    return ! wrongNumberFound && eqSet( new Set(selectedAnchorIntervals), new Set(anchorIntervals));
 }
 
 function generateSituation() {
@@ -89,8 +99,10 @@ function generateSituation() {
             let fretPos = fretBoard.rows[row].cells[i];
             if (i === stringNum && row === fretPosition)  {
                 fretPos.innerHTML = requiredAI.toString();
-                fretPos.classList.add("inverted");
+                // fretPos.classList.add("inverted");
+                fretPos.style.backgroundColor = "grey";
             } else {
+
                 fretPos.innerHTML = BLANK_CHAR;
                 fretPos.classList.remove("inverted");
             }
@@ -117,25 +129,84 @@ function selectText(element) {
     }
 }
 
-document.body.onkeydown = function (e) {
-    // Number 13 is the "Enter" key on the keyboard
 
-
+function updateColoring() {
     for (let row = 0; row < fretBoard.rows.length; row++) {
+
         for (let i = 0; i < fretBoard.rows[row].cells.length; i ++) {
             let cell = fretBoard.rows[row].cells[i];
             if (cell.innerHTML === "<br>") {
                 cell.innerHTML = BLANK_CHAR;
+                cell.style.backgroundColor = "black";
+            } else if (cell.innerHTML === BLANK_CHAR) {
+                cell.style.backgroundColor = "black";
+            } else {
+                // has number in it
+                if (cell.style.backgroundColor !== "red") {
+                    cell.style.backgroundColor = "grey";
+                }
             }
         }
 
     }
+}
+
+function moveAround(event) {
+    let newTD;
+
+    let td = document.activeElement;
+    let table = td.parentElement.parentElement;
+
+    let currRow = td.parentElement
+    let currRowIndex = Array.prototype.slice.call(table.children).indexOf(currRow);
+    let currColIndex = Array.prototype.slice.call(currRow.children).indexOf(td);
+
+    switch (event.key) {
+        case "j":
+        case "ArrowDown":
+            newTD = table.rows[(currRowIndex + 1) % NUM_FRETS].cells[currColIndex];
+            break;
+        case "k":
+        case "ArrowUp":
+            newTD = table.rows[posMod((currRowIndex - 1) , NUM_FRETS)].cells[currColIndex];
+            break;
+        case "h":
+        case "ArrowLeft":
+            newTD = table.rows[currRowIndex].cells[posMod((currColIndex - 1), NUM_STRINGS)];
+            break;
+        case "l":
+        case "ArrowRight":
+            newTD = table.rows[currRowIndex].cells[(currColIndex + 1) % NUM_STRINGS];
+            break;
+        case "c":
+            td.innerHTML = "";
+            updateColoring();
+            break;
+        default:
+            return; // Quit when this doesn't handle the key event.
+    }
+
+    event.preventDefault();
+
+    newTD.focus();
+}
+
+function onEvent (e) {
+    // Number 13 is the "Enter" key on the keyboard
+
+    updateColoring();
+
+    moveAround(e);
 
     if (e.keyCode === 13 || e.key === " ") {
         e.preventDefault();
         if (isCorrect()) {
             numSolved += 1;
             generateSituation();
+            updateColoring();
         }
     }
 }
+
+document.body.onkeydown = onEvent;
+document.body.onclick = onEvent;

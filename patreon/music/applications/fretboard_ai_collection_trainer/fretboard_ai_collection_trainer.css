@@ -1,0 +1,9 @@
+#fret_board tr td {
+    min-width: 30px;
+    /* remove caret*/
+    color: transparent;text-shadow: 0 0 0 white;
+}
+
+#fret_board tr {
+    height: 60px;
+}
