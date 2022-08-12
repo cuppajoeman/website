@@ -9,7 +9,7 @@ window.onload = function() {
         let [dropdownLi, dropdownUl] = dropdown.children;
 
         dropdownLi.style.cursor = 'pointer';
-        dropdownLi.innerHTML = '🠢 ' + dropdownLi.innerHTML.slice(2);
+        dropdownLi.innerHTML = `${unactivatedDropdownSymbol} ${dropdownLi.innerHTML.slice(2)}`;
         dropdownUl.style.display = "none"
 
         dropdownLi.onmouseenter = function () {
