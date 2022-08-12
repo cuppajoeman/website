@@ -1,6 +1,9 @@
 window.onload = function() {
     let dropdowns = document.getElementsByClassName('dropdown');
 
+    let activatedDropdownSymbol = "↓";
+    let unactivatedDropdownSymbol = "→";
+
     for(let i = 0; i < dropdowns.length; i++) {
         let dropdown = dropdowns[i];
         let [dropdownLi, dropdownUl] = dropdown.children;
@@ -20,10 +23,10 @@ window.onload = function() {
         dropdownLi.onclick = function () {
             if (dropdownUl.style.display === "none") {
                 dropdownUl.style.display = "block";
-                dropdownLi.innerHTML = '🠣 ' + dropdownLi.innerHTML.slice(2);
+                dropdownLi.innerHTML = `${activatedDropdownSymbol} ${dropdownLi.innerHTML.slice(2)}`;
             } else {
                 dropdownUl.style.display = "none";
-                dropdownLi.innerHTML = '🠢 ' + dropdownLi.innerHTML.slice(2);
+                dropdownLi.innerHTML = `${unactivatedDropdownSymbol} ${dropdownLi.innerHTML.slice(2)}`;
             }
         }
 
