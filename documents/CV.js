@@ -1,8 +1,8 @@
 window.onload = function() {
     let dropdowns = document.getElementsByClassName('dropdown');
 
-    let activatedDropdownSymbol = "↓";
-    let unactivatedDropdownSymbol = "→";
+    let activatedDropdownSymbol = "-";
+    let unactivatedDropdownSymbol = "+";
 
     for(let i = 0; i < dropdowns.length; i++) {
         let dropdown = dropdowns[i];
