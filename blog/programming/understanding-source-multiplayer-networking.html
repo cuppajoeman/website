@@ -224,8 +224,31 @@
     </ol>
 
     <p>
-        The main thing we can learn from this situation is that the players position 
+        The main thing we can learn from this situation is that if we send a packet to the server with an intent based on
+        the game state as we see it then that intent will not propagate as we expected due to the fact that while that packet
+        is travelling to the server, other packets are being processed which make the game state differ more and more from the state
+        it was at when we sent our user command.
     </p>
+
+One way we can combat this issue is by time travelling, or rather
+lag compensation. To do this let's consider a single client connected
+to the server. For this client we can build a rapport of their connection
+to the server by measuring how long it takes for a packet to reach the server,
+and if we're unable we can figure out an estimate of it by taking the round
+trip time, subtracting any computation time and dividing by 2 under the assumption
+that it takes roughly the same amount of time for a packet to travel to the server
+as it does to come back. 
+
+With this estimate the server can figure out when a given packet was sent by taking
+the time it was received at and subtracting our estimated travel time.
+
+Note if there is a significant difference between the to and from times we can add
+logic where the client also sends an expected received time and the server can compare
+This to an actual received time and correct for this error.
+
+Once we are aware of when the user command was actually issued we can use this information
+to go back in time on the server toll moving each player back to their locations at that
+time and then check if shots fired actually connect with anyone.
 
 
 
