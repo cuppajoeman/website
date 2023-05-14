@@ -159,24 +159,32 @@
         command. In reality they would have been moving and sending user commands before this moment.
     </p>
 
-    <h4>Noticable Ping</h4>
-
-    <p>
-        Noticable ping will allow us to discuss the issues of ping in the most clear way, so we'll do most of the examples this way.
-    </p>
+    <h4>Good enough ping</h4>
 
     <p>
         Since there' no way to accurately play a game with 1 minute of ping since every user command you sent would be
-        experienced 1 minute after it happened. Then let's consider a more imaginable situation where we have 0.5 seconds of ping,
-        or 500ms of ping, 250ms there, and 250ms back.
+        experienced 1 minute after it happened.  In order to play in this environment you would have to guess what is
+        going to happen in 30 seconds, and make send user commands now, that reflect that.
     </p>
 
     <p>
-        In this situation we can move the player around and it is only slightly behind of where we expect it to be in our mind
-        based on the user command we've just issued. Now let's consider a two blinded players one of which is stationary
-        and looking forward with an enemy player in view (if they could see), and the enemy player just running from one side of the
-        players view to the other (on a flat plane).
+        Obviously there's no way to play a real time game in the above manner, so let's consider a ping of 1 second.
+        In this situation we can view the game and react to it, and our user commands would only be processed .5 seconds
+        after what we see. The thing is that the game wouldn't "line up" with what buttons you are pressing and so it
+        would feel also disorienting.
     </p>
+
+    <p>
+        Ping which is good enough is a ping amount which makes it so that the time between pressing keys on the keyboard
+        and seeing those reflected changes is short enough so that they "line up" and there doesn't seem to be a disconnect
+        between pressing the buttons and what you see in game.
+    </p>
+
+    <p>
+        Then let's consider ping which is good enough, say within the range 20ms to 70ms. Now when we play the game, we
+        can consider the reflected changes as being what we're currently doing at this moment in time.
+    </p>
+
 
     <h5>Two stationary players</h5>
 
@@ -230,25 +238,45 @@
         it was at when we sent our user command.
     </p>
 
-One way we can combat this issue is by time travelling, or rather
-lag compensation. To do this let's consider a single client connected
-to the server. For this client we can build a rapport of their connection
-to the server by measuring how long it takes for a packet to reach the server,
-and if we're unable we can figure out an estimate of it by taking the round
-trip time, subtracting any computation time and dividing by 2 under the assumption
-that it takes roughly the same amount of time for a packet to travel to the server
-as it does to come back. 
+    <h2>lag compensation</h2>
 
-With this estimate the server can figure out when a given packet was sent by taking
-the time it was received at and subtracting our estimated travel time.
+    <p>
+        One way we can combat this issue is by time travelling, or rather
+        lag compensation. To do this let's consider a single client connected
+        to the server. For this client we can build a rapport of their connection
+        to the server by measuring how long it takes for a packet to reach the server,
+        and if we're unable we can figure out an estimate of it by taking the round
+        trip time, subtracting any computation time and dividing by 2 under the assumption
+        that it takes roughly the same amount of time for a packet to travel to the server
+        as it does to come back.
+    </p>
 
-Note if there is a significant difference between the to and from times we can add
-logic where the client also sends an expected received time and the server can compare
-This to an actual received time and correct for this error.
+    <p>
+        With this estimate the server can figure out when a given packet was sent by taking
+        the time it was received at and subtracting our estimated travel time.
+    </p>
 
-Once we are aware of when the user command was actually issued we can use this information
-to go back in time on the server toll moving each player back to their locations at that
-time and then check if shots fired actually connect with anyone.
+    <p>
+        Note if there is a significant difference between the to and from times we can add
+        logic where the client also sends an expected received time and the server can compare
+        This to an actual received time and correct for this error.
+    </p>
+
+    <p>
+        Once we are aware of when the user command was actually issued we can use this information
+        to go back in time on the server, moving each player back to their locations at that
+        time and then check if shots fired actually connect with anyone.
+    </p>
+
+    <p>
+        This means that your game should have infrastructure which stores about 1 second of game
+        states on the server with a given time stamp of when it was created. And this will allow us
+        to find the closest state.
+    </p>
+
+
+
+
 
 
 
