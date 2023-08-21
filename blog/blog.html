@@ -12,7 +12,34 @@
 </head>
 <body>
 <ul>
+  <h1>math</h1>
+  {% for post in collections.math  %}
   <li>
+    <a href="{{ post.url }}">{{ post.data.title }}</a>
+  </li>
+  {% endfor %}
+
+  <h1>programming</h1>
+  {% for post in collections.programming  %}
+  <li>
+    <a href="{{ post.url }}">{{ post.data.title }}</a>
+  </li>
+  {% endfor %}
+
+  <h1>hardware</h1>
+  {% for post in collections.hardware  %}
+  <li>
+    <a href="{{ post.url }}">{{ post.data.title }}</a>
+  </li>
+  {% endfor %}
+
+  <h1>skateboard</h1>
+  {% for post in collections.skateboard  %}
+  <li>
+    <a href="{{ post.url }}">{{ post.data.title }}</a>
+  </li>
+  {% endfor %}
+  <!-- <li>
     <h1><a href="programming/programming.html">programming</a></h1>
   </li>
   <li>
@@ -20,7 +47,7 @@
   </li>
   <li>
     <h1><a href="hardware/hardware.html">hardware</a></h1>
-  </li>
+  </li> -->
 </ul>
 </body>
 </html>

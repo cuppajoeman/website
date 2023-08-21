@@ -1,289 +1,271 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>understanding source multiplayer networking</title>
-    <link rel="stylesheet" href="../../css/styles.css">
-</head>
-<body>
+---
+title: understanding source multiplayer networking
+---
+<h1>understanding source multiplayer networking</h1>
 
-<div class="thin_wrapper">
-    <h1>understanding source multiplayer networking</h1>
+<p>
+    This acticle assumes that you've read, or at least at tried to get through <a href="https://developer.valvesoftware.com/wiki/Source_Multiplayer_Networking">source's multiplayer article</a>.
+    The purpose of this article is to explain the parts that I personally thought were hard to understand, and can be read in tadem with it as an aid.
+</p>
 
+<p>
+    The first step in understanding source multiplayer networking is to know the parties involved,
+    there are clients which represent people who play the game, and there is a server which they
+    are connected to.
+</p>
+
+<p>
+    Looking at the client specifically, it has input and output, the input being keypresses, mousepresses and
+    mouse movements. A collection of this data is called a user command.
+</p>
+
+<p>
+    The output of the client are UDP packets containing user commands that are the input to the server, the server is running
+    a game simulation, and outputs game states back to the client.
+</p>
+
+<p>
+    Recapping, the client's input are real world input devices, and the output are packets. The server's input is
+    packets and output is also packets.
+</p>
+
+<h2>Tickrates</h2>
+
+<p>
+    There are a few main tickrates to be aware of, the are easily remembered just by recalling the main
+    systems in a client server conversation. There is the client's inputs, the sending of packets from client to the server
+    the server's simulation, and the server sending packets back to the client.
+</p>
+
+<p>
+    With these in mind, we will call the rate at which the client samples inputs as the client sample rate, the rate
+    at which the client sends information to the server will be the client send rate, the server simulation rate and
+    the server send rate.
+</p>
+
+<p>
+    Note that source has individual server send rates for each connected player which makes sense because depending
+    on your internet quality you might not be able to handle a higher rate or vise versa.
+</p>
+
+<p>
+    Also there is a pretty big connection between the client sample rate and the client send rate. Let's say your
+    sample rate is 100Hz, and your send rate is 50Hz. When this is the case you're going to miss half of the inputs
+    you're sampling, so you should always make your sample rate the same as your send rate.
+</p>
+
+<p>
+    Let's say we've corrected our sample rate to be 50Hz to match the send rate of 50Hz, but now
+    the servers simulation rate is at 100Hz, then you're losing out on potential user commands which could be processed
+    but aren't because you're only sending new commands at half the speed of the tick rate of the server.
+</p>
+
+<p>
+    To remedy the above situation we could first correct our clients send rate to be 100Hz, and then correct the sample
+    rate to 100Hz as well, noting that now the client must do more work sampling and sending data which puts more load
+    on the client.
+</p>
+
+<p>
+    Finally we have to consider the servers send rate, and still assuming that our simulation rate is 100Hz, then we
+    would also want to make our send rate 100Hz, so not to miss out on any of our simulated world states.
+</p>
+
+<p>
+    At this point you might be wondering, why not just set all tick rates to be the same so we're guarenteed to not
+    have to lose out on any information at all, the reason is to optimize performance for cpu and networking.
+</p>
+
+<p>
+    A tick simply denotes one of these processes occuring once. Also since the server and client are not launched at
+    the same time, then the clients tick rates will probably be offset from the servers tick rate, in general we'll
+    assume that there is always some phase shift, so that ticks will not be occuring at the same time.
+</p>
+
+<p>
+    For the rest of the discussion we'll assume that servers simulation rate is 66.66 HZ, meaning that there is 15ms
+    between two server ticks, the server send rate is the same for everyone and is set at 20 Hz which gives 50ms delta
+    time between any two, the client sample rate is 30Hz giving a delta of 33.33ms, we'll assume that client send rate is the same.
+</p>
+
+<h2>Ping/Lag</h2>
+
+<p>
+    Now that you know about the round trip that happens as you play a game, you'll start to understand how lag can build up:
+    there's the cpu load that's between the client sampling and sending, the travelling of packets from the client to the server
+    the cpu load on the server to perform a simulation, and the sending of packets back to the client.
+</p>
+
+<p>
+    In most cases the time for computations is much less signficant than the impact of internet lag, so we will focus on this aspect.
+</p>
+
+<p>
+    This round trip time, the time for you to get the servers responce from one of your user commands to seeing
+    the reflected change in position, or world state (as received from the server) determines how responsive the game feels
+    and how in-control of the game you feel. Players with lower round trip time have an advantage over players that
+    have a higher one.
+</p>
+
+<h3>Issues that arise with ping</h3>
+
+<p>
+    To fully understand the implications of ping, we need to go through a series of basic to complex examples, as
+    there are many variables at play.
+</p>
+
+<h4>High Ping</h4>
+
+<p>
+    Let's assume that this round trip time was 1 minute. More specifically, the time for a user command to get to the server takes
+    30 seconds, the time to get back is 30 seconds and the computation time is negligable.
+</p>
+
+<p>
+    In this case you would try to walk forward by pressing w, and then 1 minute later you would receive your updated position and then actually move.
+    Now lets say you see any enemy at a certain position in the game, so you rotate your mouse so that your crosshair
+    aligns with the enemy (in 0.5 seconds) and click. Now we'll consider 2 different situations, let's say that the enemy
+    saw you at the same time that you saw them, and as they have low health decide they should dodge you.
+</p>
+
+<ol>
+    <li>
+        If the player reacts before you, that is that they send a user command which would move them to a postion where your
+        shot would no longer hit, before you send your user command which makes the crosshair align with them and fire.
+        Then as both those user commands go towards the server, we realize that the enemies dodge will get there first
+        under the assumption that all packets travel at the same rate, and so therefore our shot will not connect.
+    </li>
+    <li>
+        On the flip side, if our user command gets there before theirs, then our shot will hit and their dodge would
+        have happened after it connected. And recall that we wouldn't even see the result of this until 1 minute later.
+    </li>
+</ol>
+
+<p>
+    This situation is quite synthetic since there's no way two players would actually be playing a "realtime" game that
+    has 1 minute of ping. Although note that there are no "real" issues here, the player who had the faster reaction time
+    still wins.
+</p>
+
+<p>
+    This situation also assumes two players just suddenly exist and see eachother and then they send their first user
+    command. In reality they would have been moving and sending user commands before this moment.
+</p>
+
+<h4>Good enough ping</h4>
+
+<p>
+    Since there' no way to accurately play a game with 1 minute of ping since every user command you sent would be
+    experienced 1 minute after it happened.  In order to play in this environment you would have to guess what is
+    going to happen in 30 seconds, and make send user commands now, that reflect that.
+</p>
+
+<p>
+    Obviously there's no way to play a real time game in the above manner, so let's consider a ping of 1 second.
+    In this situation we can view the game and react to it, and our user commands would only be processed .5 seconds
+    after what we see. The thing is that the game wouldn't "line up" with what buttons you are pressing and so it
+    would feel also disorienting.
+</p>
+
+<p>
+    Ping which is good enough is a ping amount which makes it so that the time between pressing keys on the keyboard
+    and seeing those reflected changes is short enough so that they "line up" and there doesn't seem to be a disconnect
+    between pressing the buttons and what you see in game.
+</p>
+
+<p>
+    Then let's consider ping which is good enough, say within the range 20ms to 70ms. Now when we play the game, we
+    can consider the reflected changes as being what we're currently doing at this moment in time.
+</p>
+
+
+<h5>Two stationary players</h5>
+
+<p>
+    The setup for this situation is that there are two blinded players (A and B) both of which can see eachother
+    in their view if they were unblinded, standing on a plane.
+</p>
+
+<p>
+    Now suddenly both their views are unblinded, player A decides that they will shoot player B, and player B with low health
+    decides to try and dodge. Since player A's crosshair is not on player B, they'll issue a user command which moves
+    the mouse to the correct position and fires the weapon, player B will issue a player command so that anyone aiming at their
+    current position will miss their shot, by strafing out of the way.
+</p>
+
+<p>
+    Assuming that the travel time from client to server is the same for both players, we can see that whoever simply
+    reacts first in this situation will come out on top. This situation demonstrates the fairness of both having the same
+    internet speeds.
+</p>
+
+<h5>One camper, one mover</h5>
+
+<p>
+    The setup for this situation the same as the last except player B is now moving from one side of A's view to the other.
+    This is good for A since they are a camper, and leave their mouse stationary until a player decides accidentally
+    walks into their crosshair at which point they fires his sniper.
+</p>
+
+<p>
+    Recall that we have 500ms of ping, we will now present two situations.
+</p>
+
+<ol>
+    <li>B can move fast enough so that in 250ms, it's original hitbox position doesn't overlap with it's new hitbox position.</li>
     <p>
-        This acticle assumes that you've read, or at least at tried to get through <a href="https://developer.valvesoftware.com/wiki/Source_Multiplayer_Networking">source's multiplayer article</a>.
-        The purpose of this article is to explain the parts that I personally thought were hard to understand, and can be read in tadem with it as an aid.
+        If this is true, then when B's hitbox overlaps with A's crosshair they fire, and then 250ms later the server
+        recognizes this user command, since B is continually holding w (since at least 250ms before the enemy fired, so that
+        they're moving the entire time that A's fire command is travelling across the internet). Since we have the
+        assumption that B is able to move fast enough, so that it's original hitbox no longer overlaps with it's new
+        hitbox, in this case we can see that the shot will not connect.
     </p>
+    <li>If B cannot move fast enough, then if player A fires at exact moment they overlap with the crosshair (and
+    the crosshair is a point, infinitely precise), then player A's shot is guarenteed to hit.</li>
+</ol>
 
-    <p>
-        The first step in understanding source multiplayer networking is to know the parties involved,
-        there are clients which represent people who play the game, and there is a server which they
-        are connected to.
-    </p>
+<p>
+    The main thing we can learn from this situation is that if we send a packet to the server with an intent based on
+    the game state as we see it then that intent will not propagate as we expected due to the fact that while that packet
+    is travelling to the server, other packets are being processed which make the game state differ more and more from the state
+    it was at when we sent our user command.
+</p>
 
-    <p>
-        Looking at the client specifically, it has input and output, the input being keypresses, mousepresses and
-        mouse movements. A collection of this data is called a user command.
-    </p>
+<h2>lag compensation</h2>
 
-    <p>
-        The output of the client are UDP packets containing user commands that are the input to the server, the server is running
-        a game simulation, and outputs game states back to the client.
-    </p>
+<p>
+    One way we can combat this issue is by time travelling, or rather
+    lag compensation. To do this let's consider a single client connected
+    to the server. For this client we can build a rapport of their connection
+    to the server by measuring how long it takes for a packet to reach the server,
+    and if we're unable we can figure out an estimate of it by taking the round
+    trip time, subtracting any computation time and dividing by 2 under the assumption
+    that it takes roughly the same amount of time for a packet to travel to the server
+    as it does to come back.
+</p>
 
-    <p>
-        Recapping, the client's input are real world input devices, and the output are packets. The server's input is
-        packets and output is also packets.
-    </p>
+<p>
+    With this estimate the server can figure out when a given packet was sent by taking
+    the time it was received at and subtracting our estimated travel time.
+</p>
 
-    <h2>Tickrates</h2>
+<p>
+    Note if there is a significant difference between the to and from times we can add
+    logic where the client also sends an expected received time and the server can compare
+    This to an actual received time and correct for this error.
+</p>
 
-    <p>
-        There are a few main tickrates to be aware of, the are easily remembered just by recalling the main
-        systems in a client server conversation. There is the client's inputs, the sending of packets from client to the server
-        the server's simulation, and the server sending packets back to the client.
-    </p>
+<p>
+    Once we are aware of when the user command was actually issued we can use this information
+    to go back in time on the server, moving each player back to their locations at that
+    time and then check if shots fired actually connect with anyone.
+</p>
 
-    <p>
-        With these in mind, we will call the rate at which the client samples inputs as the client sample rate, the rate
-        at which the client sends information to the server will be the client send rate, the server simulation rate and
-        the server send rate.
-    </p>
-
-    <p>
-        Note that source has individual server send rates for each connected player which makes sense because depending
-        on your internet quality you might not be able to handle a higher rate or vise versa.
-    </p>
-
-    <p>
-        Also there is a pretty big connection between the client sample rate and the client send rate. Let's say your
-        sample rate is 100Hz, and your send rate is 50Hz. When this is the case you're going to miss half of the inputs
-        you're sampling, so you should always make your sample rate the same as your send rate.
-    </p>
-
-    <p>
-        Let's say we've corrected our sample rate to be 50Hz to match the send rate of 50Hz, but now
-        the servers simulation rate is at 100Hz, then you're losing out on potential user commands which could be processed
-        but aren't because you're only sending new commands at half the speed of the tick rate of the server.
-    </p>
-
-    <p>
-        To remedy the above situation we could first correct our clients send rate to be 100Hz, and then correct the sample
-        rate to 100Hz as well, noting that now the client must do more work sampling and sending data which puts more load
-        on the client.
-    </p>
-
-    <p>
-        Finally we have to consider the servers send rate, and still assuming that our simulation rate is 100Hz, then we
-        would also want to make our send rate 100Hz, so not to miss out on any of our simulated world states.
-    </p>
-
-    <p>
-        At this point you might be wondering, why not just set all tick rates to be the same so we're guarenteed to not
-        have to lose out on any information at all, the reason is to optimize performance for cpu and networking.
-    </p>
-
-    <p>
-        A tick simply denotes one of these processes occuring once. Also since the server and client are not launched at
-        the same time, then the clients tick rates will probably be offset from the servers tick rate, in general we'll
-        assume that there is always some phase shift, so that ticks will not be occuring at the same time.
-    </p>
-
-    <p>
-        For the rest of the discussion we'll assume that servers simulation rate is 66.66 HZ, meaning that there is 15ms
-        between two server ticks, the server send rate is the same for everyone and is set at 20 Hz which gives 50ms delta
-        time between any two, the client sample rate is 30Hz giving a delta of 33.33ms, we'll assume that client send rate is the same.
-    </p>
-
-    <h2>Ping/Lag</h2>
-
-    <p>
-        Now that you know about the round trip that happens as you play a game, you'll start to understand how lag can build up:
-        there's the cpu load that's between the client sampling and sending, the travelling of packets from the client to the server
-        the cpu load on the server to perform a simulation, and the sending of packets back to the client.
-    </p>
-
-    <p>
-        In most cases the time for computations is much less signficant than the impact of internet lag, so we will focus on this aspect.
-    </p>
-
-    <p>
-        This round trip time, the time for you to get the servers responce from one of your user commands to seeing
-        the reflected change in position, or world state (as received from the server) determines how responsive the game feels
-        and how in-control of the game you feel. Players with lower round trip time have an advantage over players that
-        have a higher one.
-    </p>
-
-    <h3>Issues that arise with ping</h3>
-
-    <p>
-        To fully understand the implications of ping, we need to go through a series of basic to complex examples, as
-        there are many variables at play.
-    </p>
-
-    <h4>High Ping</h4>
-
-    <p>
-        Let's assume that this round trip time was 1 minute. More specifically, the time for a user command to get to the server takes
-        30 seconds, the time to get back is 30 seconds and the computation time is negligable.
-    </p>
-
-    <p>
-        In this case you would try to walk forward by pressing w, and then 1 minute later you would receive your updated position and then actually move.
-        Now lets say you see any enemy at a certain position in the game, so you rotate your mouse so that your crosshair
-        aligns with the enemy (in 0.5 seconds) and click. Now we'll consider 2 different situations, let's say that the enemy
-        saw you at the same time that you saw them, and as they have low health decide they should dodge you.
-    </p>
-
-    <ol>
-        <li>
-            If the player reacts before you, that is that they send a user command which would move them to a postion where your
-            shot would no longer hit, before you send your user command which makes the crosshair align with them and fire.
-            Then as both those user commands go towards the server, we realize that the enemies dodge will get there first
-            under the assumption that all packets travel at the same rate, and so therefore our shot will not connect.
-        </li>
-        <li>
-            On the flip side, if our user command gets there before theirs, then our shot will hit and their dodge would
-            have happened after it connected. And recall that we wouldn't even see the result of this until 1 minute later.
-        </li>
-    </ol>
-
-    <p>
-        This situation is quite synthetic since there's no way two players would actually be playing a "realtime" game that
-        has 1 minute of ping. Although note that there are no "real" issues here, the player who had the faster reaction time
-        still wins.
-    </p>
-
-    <p>
-        This situation also assumes two players just suddenly exist and see eachother and then they send their first user
-        command. In reality they would have been moving and sending user commands before this moment.
-    </p>
-
-    <h4>Good enough ping</h4>
-
-    <p>
-        Since there' no way to accurately play a game with 1 minute of ping since every user command you sent would be
-        experienced 1 minute after it happened.  In order to play in this environment you would have to guess what is
-        going to happen in 30 seconds, and make send user commands now, that reflect that.
-    </p>
-
-    <p>
-        Obviously there's no way to play a real time game in the above manner, so let's consider a ping of 1 second.
-        In this situation we can view the game and react to it, and our user commands would only be processed .5 seconds
-        after what we see. The thing is that the game wouldn't "line up" with what buttons you are pressing and so it
-        would feel also disorienting.
-    </p>
-
-    <p>
-        Ping which is good enough is a ping amount which makes it so that the time between pressing keys on the keyboard
-        and seeing those reflected changes is short enough so that they "line up" and there doesn't seem to be a disconnect
-        between pressing the buttons and what you see in game.
-    </p>
-
-    <p>
-        Then let's consider ping which is good enough, say within the range 20ms to 70ms. Now when we play the game, we
-        can consider the reflected changes as being what we're currently doing at this moment in time.
-    </p>
-
-
-    <h5>Two stationary players</h5>
-
-    <p>
-        The setup for this situation is that there are two blinded players (A and B) both of which can see eachother
-        in their view if they were unblinded, standing on a plane.
-    </p>
-
-    <p>
-        Now suddenly both their views are unblinded, player A decides that they will shoot player B, and player B with low health
-        decides to try and dodge. Since player A's crosshair is not on player B, they'll issue a user command which moves
-        the mouse to the correct position and fires the weapon, player B will issue a player command so that anyone aiming at their
-        current position will miss their shot, by strafing out of the way.
-    </p>
-
-    <p>
-        Assuming that the travel time from client to server is the same for both players, we can see that whoever simply
-        reacts first in this situation will come out on top. This situation demonstrates the fairness of both having the same
-        internet speeds.
-    </p>
-
-    <h5>One camper, one mover</h5>
-
-    <p>
-        The setup for this situation the same as the last except player B is now moving from one side of A's view to the other.
-        This is good for A since they are a camper, and leave their mouse stationary until a player decides accidentally
-        walks into their crosshair at which point they fires his sniper.
-    </p>
-
-    <p>
-        Recall that we have 500ms of ping, we will now present two situations.
-    </p>
-
-    <ol>
-        <li>B can move fast enough so that in 250ms, it's original hitbox position doesn't overlap with it's new hitbox position.</li>
-        <p>
-            If this is true, then when B's hitbox overlaps with A's crosshair they fire, and then 250ms later the server
-            recognizes this user command, since B is continually holding w (since at least 250ms before the enemy fired, so that
-            they're moving the entire time that A's fire command is travelling across the internet). Since we have the
-            assumption that B is able to move fast enough, so that it's original hitbox no longer overlaps with it's new
-            hitbox, in this case we can see that the shot will not connect.
-        </p>
-        <li>If B cannot move fast enough, then if player A fires at exact moment they overlap with the crosshair (and
-        the crosshair is a point, infinitely precise), then player A's shot is guarenteed to hit.</li>
-    </ol>
-
-    <p>
-        The main thing we can learn from this situation is that if we send a packet to the server with an intent based on
-        the game state as we see it then that intent will not propagate as we expected due to the fact that while that packet
-        is travelling to the server, other packets are being processed which make the game state differ more and more from the state
-        it was at when we sent our user command.
-    </p>
-
-    <h2>lag compensation</h2>
-
-    <p>
-        One way we can combat this issue is by time travelling, or rather
-        lag compensation. To do this let's consider a single client connected
-        to the server. For this client we can build a rapport of their connection
-        to the server by measuring how long it takes for a packet to reach the server,
-        and if we're unable we can figure out an estimate of it by taking the round
-        trip time, subtracting any computation time and dividing by 2 under the assumption
-        that it takes roughly the same amount of time for a packet to travel to the server
-        as it does to come back.
-    </p>
-
-    <p>
-        With this estimate the server can figure out when a given packet was sent by taking
-        the time it was received at and subtracting our estimated travel time.
-    </p>
-
-    <p>
-        Note if there is a significant difference between the to and from times we can add
-        logic where the client also sends an expected received time and the server can compare
-        This to an actual received time and correct for this error.
-    </p>
-
-    <p>
-        Once we are aware of when the user command was actually issued we can use this information
-        to go back in time on the server, moving each player back to their locations at that
-        time and then check if shots fired actually connect with anyone.
-    </p>
-
-    <p>
-        This means that your game should have infrastructure which stores about 1 second of game
-        states on the server with a given time stamp of when it was created. And this will allow us
-        to find the closest state.
-    </p>
-
-
-
-
-
-
-
-
-
-
-</div>
+<p>
+    This means that your game should have infrastructure which stores about 1 second of game
+    states on the server with a given time stamp of when it was created. And this will allow us
+    to find the closest state.
+</p>
 
 <script src="https://utteranc.es/client.js"
         repo="cuppajoeman/utterances-comments"
@@ -292,6 +274,3 @@
         crossorigin="anonymous"
         async>
 </script>
-
-</body>
-</html>

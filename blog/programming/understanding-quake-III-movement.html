@@ -1,85 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>understanding quake III movement</title>
-    <link rel="stylesheet" href="../../css/styles.css">
-</head>
-<body>
+---
+title: understanding quake III movement
+---
+<h1>understanding quake III movement</h1>
 
-<div class="thin_wrapper">
-    <h1>understanding quake III movement</h1>
+<p>Since quake III released their source code we can take a look at how movement is handled, which is in the file
+<code>bg_move.c</code>
+</p>
 
-    <p>Since quake III released their source code we can take a look at how movement is handled, which is in the file
-    <code>bg_move.c</code>
-    </p>
+<p>
+    After perusing around, you'll see that the method of interest is called <code>PM_Accelerate</code>
+    which takes in wishdir, wishspeed and accel. At this point these are just parameters of the function, but
+    wishdir actually reprents the players intended new direction based on their keyboard and mouse inputs.
+</p>
+<p>
+    It then computes the dot product of the players current horizontal
+    velocity with wishdir and calls that currentspeed, note that this is not your current speed, but rather the length
+    of the projection of your current horizontal velocity onto wishdir (assuming wishdir is a unit vector)
+</p>
 
-    <p>
-        After perusing around, you'll see that the method of interest is called <code>PM_Accelerate</code>
-        which takes in wishdir, wishspeed and accel. At this point these are just parameters of the function, but
-        wishdir actually reprents the players intended new direction based on their keyboard and mouse inputs.
-    </p>
-    <p>
-        It then computes the dot product of the players current horizontal
-        velocity with wishdir and calls that currentspeed, note that this is not your current speed, but rather the length
-        of the projection of your current horizontal velocity onto wishdir (assuming wishdir is a unit vector)
-    </p>
+<p>Next a new variable by the name of addspeed is created which is wishspeed - currentspeed, what this tells us
+is that whatever speed we wished to travel at is being reduced by current speed, therefore a better name for currentspeed
+    is really speedpenalty
+</p>
 
-    <p>Next a new variable by the name of addspeed is created which is wishspeed - currentspeed, what this tells us
-    is that whatever speed we wished to travel at is being reduced by current speed, therefore a better name for currentspeed
-        is really speedpenalty
-    </p>
+<p>
+    accelspeed is defined as accel * frametime * wishspeed, although the units don't really make sense here,
+    accel * frametime is equal to a speed, and then wishspeed scales this speed up by an amount, in this sense we
+    should think of wishspeed as the speed gained multiplier. After it is defined, we clamp it so that it is upperbounded
+    by addspeed, which is speed we want the player to move at minus the penalty
+</p>
 
-    <p>
-        accelspeed is defined as accel * frametime * wishspeed, although the units don't really make sense here,
-        accel * frametime is equal to a speed, and then wishspeed scales this speed up by an amount, in this sense we
-        should think of wishspeed as the speed gained multiplier. After it is defined, we clamp it so that it is upperbounded
-        by addspeed, which is speed we want the player to move at minus the penalty
-    </p>
+<p>
+    finally we take wishdir, which we assume is a unit vector and scale it up by accelspeed and add it to the
+    players current velocity, note that this means that accelspeed really represents a velocity gain.
+</p>
 
-    <p>
-        finally we take wishdir, which we assume is a unit vector and scale it up by accelspeed and add it to the
-        players current velocity, note that this means that accelspeed really represents a velocity gain.
-    </p>
+<h2>how <code>PM_Accelerate</code> is called</h2>
 
-    <h2>how <code>PM_Accelerate</code> is called</h2>
+<p>
+    <code>PM_Accelerate</code> is used in <code>PM_[MovementType]Move</code>, the two main ones we will cover are
+    <code>PM_WalkMove</code> and <code>PM_AirMove</code>
+</p>
 
-    <p>
-        <code>PM_Accelerate</code> is used in <code>PM_[MovementType]Move</code>, the two main ones we will cover are
-        <code>PM_WalkMove</code> and <code>PM_AirMove</code>
-    </p>
+<p>
+    Looking inside of <code>PM_WalkMove</code>, we'll ignore anything that has to do with water or flying. The first
+    area of interest is when there is a check if the player is jumping, or rather just not touching the ground, if that's
+    the case we simply use <code>PM_AirMove</code> which we will cover next.
+</p>
 
-    <p>
-        Looking inside of <code>PM_WalkMove</code>, we'll ignore anything that has to do with water or flying. The first
-        area of interest is when there is a check if the player is jumping, or rather just not touching the ground, if that's
-        the case we simply use <code>PM_AirMove</code> which we will cover next.
-    </p>
+<p>
+    Assuming that we're not jumping we can see that there is a call to <code>PM_Friction</code>, looking inside that
+    method we can see that the vertical component of the players velocity is zeroed out (not sure why), and if your
+    speed is under a certain length it gets zeroed out.
+</p>
 
-    <p>
-        Assuming that we're not jumping we can see that there is a call to <code>PM_Friction</code>, looking inside that
-        method we can see that the vertical component of the players velocity is zeroed out (not sure why), and if your
-        speed is under a certain length it gets zeroed out.
-    </p>
+<p>
+    Next a variable by the name of drop is created which is intended to be the drop in your velocity based on the
+    friction. If you are just normally walking in up to 1 unit of water and not being knocked back, then a variable
+    called control which is equal to max(speed, pm_stopspeed) is used when we add control * pm_friction * frametime.
+</p>
 
-    <p>
-        Next a variable by the name of drop is created which is intended to be the drop in your velocity based on the
-        friction. If you are just normally walking in up to 1 unit of water and not being knocked back, then a variable
-        called control which is equal to max(speed, pm_stopspeed) is used when we add control * pm_friction * frametime.
-    </p>
+<p>
+    To understand this equation, we can think of pm_friction * frametime scaling the control by a certain amount
+    which is independent of frame rate. Finally the newspeed is the current speed minus the drop in speed, and note
+    newspeed is forced to stay non-negative.
+</p>
 
-    <p>
-        To understand this equation, we can think of pm_friction * frametime scaling the control by a certain amount
-        which is independent of frame rate. Finally the newspeed is the current speed minus the drop in speed, and note
-        newspeed is forced to stay non-negative.
-    </p>
+<p>
+        Then we can get the ratio of the newspeed to the oldspeed, so newspeed / speed, so for example if we were travelling
+    at 6 units per second, and then after subtracting the drop we are now at 3 units per second then, the speed ratio is
+    3/6 = 1/2, this ratio is then used to scale the players current velocity.
+</p>
 
-    <p>
-         Then we can get the ratio of the newspeed to the oldspeed, so newspeed / speed, so for example if we were travelling
-        at 6 units per second, and then after subtracting the drop we are now at 3 units per second then, the speed ratio is
-        3/6 = 1/2, this ratio is then used to scale the players current velocity.
-    </p>
-
-</div>
 
 <script src="https://utteranc.es/client.js"
         repo="cuppajoeman/utterances-comments"
@@ -88,6 +80,3 @@
         crossorigin="anonymous"
         async>
 </script>
-
-</body>
-</html>
