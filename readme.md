@@ -1,0 +1,1 @@
+This site now uses eleventy to make the blog section easier to maintain, see: https://www.11ty.dev/
