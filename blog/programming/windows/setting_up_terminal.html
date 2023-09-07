@@ -1,0 +1,72 @@
+---
+title: setting up terminal on windows
+---
+
+<p>
+	This article discusses my preferred way to set up a terminal on windows without resorting to linux subsystem for windows
+</p>
+
+<h1>terminal emulator</h1>
+
+<p>
+	My personal choice is the windows terminal that comes with windows, as it doesn't require any extra software. There are also some cool themes <a href="https://learn.microsoft.com/en-us/windows/terminal/custom-terminal-gallery/custom-schemes">you can set up</a>
+</p>
+
+<h1>shell</h1>
+
+<p>
+	I enjoy git bash as it comes with various linux commands and operates similarly to a linux terminal. Next I go into windows terminal settings and set the default terminal to be git bash, so that I'm not greeted with command propmpt or powershell
+</p>
+
+<h1>vim</h1>
+
+<p>
+     from vim's official github repository I get a nightly version of vim (so that it works with the newest version of python)
+</p>
+
+<p>
+    With that done, we still have an issue because running vim from git bash doesn't run the newly installed version of vim (but rather the one packaged with it), therefore an easy way to do this is to grab the directory that vim was installed into (on my system this is C:/Program Files/Vim/vim90/vim.exe) and set an alias in git bash like so: <code>alias vim="C:/Program Files/Vim/vim90/vim.exe"</code>.
+</p>
+
+<p>
+    Aliases only last for the current session (until you close the window), so next time you launch git bash you would no longer have the alias, therefore to add it permanently we will edit <code>C:\Program Files\Git\etc\profile.d\aliases.sh</code>, when done it should look something like this:
+</p>
+
+<pre>
+# Some good standards, which are not used if the user
+# creates his/her own .bashrc/.bash_profile
+
+# --show-control-chars: help showing Korean or accented characters
+alias ls='ls -F --color=auto --show-control-chars'
+alias ll='ls -l'
+alias vim='"C:/Program Files/Vim/vim90/vim.exe"'
+
+case "$TERM" in
+xterm*)
+	# The following programs are known to require a Win32 Console
+	# for interactive usage, therefore let's launch them through winpty
+	# when run inside `mintty`.
+	for name in node ipython php php5 psql python2.7 winget
+	do
+		case "$(type -p "$name".exe 2>/dev/null)" in
+		''|/usr/bin/*) continue;;
+		esac
+		alias $name="winpty $name.exe"
+	done
+	;;
+esac
+</pre>
+
+<p>
+    Note that I have <code>alias vim='"C:/Program Files/Vim/vim90/vim.exe"'</code> with two layers of quotations, so to escape the space characters.
+</p>
+
+<p>
+	Also note that on windows, we use the <code>vimfiles</code> directory instead of <code>.vim</code> in the root directory
+</p>
+
+<p>
+	I use UltiSnips which has a python dependency, thus I also keep a new version of python installed, paired with the nightly release of vim.
+</p>
+
+
