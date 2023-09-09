@@ -38,7 +38,9 @@
   margin: calc( -100px / 2 );
   background: white;
   border-radius: 50%;
+  text-align: center;
 }
+
 
 .center{
   display: flex;
