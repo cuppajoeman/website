@@ -33,7 +33,7 @@ jobs:
         run: npx @11ty/eleventy      
 
       - name: upload static site content
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v1
         with:
           name: eleventy_output
           path: ./_site
