@@ -1,0 +1,168 @@
+---
+title: setting up eleventy with github pages
+---
+
+<p>
+    Before starting this journey I knew nothing about github actions, now I know a little bit more about github actions. By the end of this tutorial you should be able to have a working github pages site that uses eleventy
+</p>
+
+<p>
+    Let's start by taking a look a one of the official starter workflows for something like <a href="https://github.com/actions/starter-workflows/blob/main/pages/mdbook.yml">mdbook</a>
+</p>
+
+<pre>
+    <code>
+# Sample workflow for building and deploying a mdBook site to GitHub Pages
+#
+# To get started with mdBook see: https://rust-lang.github.io/mdBook/index.html
+#
+name: Deploy mdBook site to Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: [$default-branch]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Build job
+  build:
+    runs-on: ubuntu-latest
+    env:
+      MDBOOK_VERSION: 0.4.21
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install mdBook
+        run: |
+          curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf -y | sh
+          rustup update
+          cargo install --version ${MDBOOK_VERSION} mdbook
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v3
+      - name: Build with mdBook
+        run: mdbook build
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: ./book
+
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
+    </code>
+</pre>
+
+<p>
+  From here, I tried to make my best guess at modifying it to something that might work for eleventy, which is a nodejs(>=14.x) package
+</p>
+
+<pre>
+  <code>
+name: Build Eleventy
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js >= 14.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+
+      - name: run eleventy
+        run: npx @11ty/eleventy
+
+      - name: upload static site content
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: ./_site
+
+ # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
+  </code>
+</pre>
+
+<p>
+  Which when copied into <code>.github/workflows/build.yml</code> in your repository should give you a working eleventy site.
+</p>
+
+<p>
+  For your own understanding, the above github action can be roughly abstracted to this:
+</p>
+
+<ul>
+  <li>create a github action called "Build Eleventy"</li>
+  <li>make sure this action runs whenever we push on the main branch</li>
+  <li>flip some switches so that deployment to gh-pages works</li>
+  <li>grab a ubuntu computer, then:</li>
+  <ul>
+    <li>pull the code from the current repository this file exists on</li>
+    <li>download nodejs</li>
+    <li>run the eleventy build command</li>
+    <li>grab the output from the default eleventy output dir <code>./_site</code> and then store that folder for the deploy process</li>
+  </ul>
+  <li>start the deployment process:</li>
+  <ul>
+    <li>grab the folder we created in the build step and then deploy that to github pages</li>
+  </ul>
+</ul>
+
+<p>
+  After making this, I was hoping I'd be able to make a pull request on the official <a href="https://github.com/actions/starter-workflows">github start-workflows repository</a>, the pre-requistes to make a pull request was incredibly long and said that "Please note that at this time we are only accepting new starter workflows for Code Scanning. Updates to existing starter workflows are fine." at the top, so I didn't make it
+</p>
+
+<script src="https://utteranc.es/client.js"
+        repo="cuppajoeman/utterances-comments"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+</script>
