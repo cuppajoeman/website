@@ -1,0 +1,111 @@
+---
+title: blender
+---
+
+<p>
+    My journal of learning blender, as a reference sheet for endeavors into blender
+</p>
+
+<p>
+    This article is from the point of view of a map maker who designs maps for fast paced fps games that have fast movement, teleporters, jump pads and explosive jumping
+</p>
+
+<h1>setting up</h1>
+<p>
+    Download blender, if you'll be working with blender in various locations which may not have an internet connection, download the manual to your computer, extract the zip and open index.html. Now pick up a <a href="https://nideffer.net/classes/aim_f17/blender-shortcut-charts.pdf">shortcut pdf</a>
+</p>
+
+<p>
+    When creating maps with blender, this is mainly referred to as modelling so start with that <a href="https://docs.blender.org/manual/en/latest/modeling/index.html">section</a> first at least understand object and edit mode. Next read through the mesh section and tool section. At this point you should have the bare minimum to get started
+</p>
+
+<fieldset>
+    <legend><h1>must know shortcuts</h1></legend>
+    <ul>
+        <li>ctrl+tab a quickswitcher for the different modes</li>
+    </ul>
+
+</fieldset>
+
+<fieldset>
+    <legend><h1>focusing the camera origin</h1></legend>
+    <p>
+        If you've created an object and you want the camera to rotate about the cneter point of the object, then in object mode click view and then frame selected.
+    </p>
+</fieldset>
+
+<fieldset>
+    <legend><h1>rectangular prisms</h1></legend>
+
+    <p>
+        These are quite useful for basic floors and walls, and are a building block to various other shapes.
+    </p>
+
+    <h2>good ways to create one</h2>
+    <ul>
+        <li>dimension setting</li>
+        <ul>
+            <li>create a cube</li>
+            <li>select it in object mode</li>
+            <li>press n to open the transform tab</li>
+            <li>in the transform tab set dimensions near the bottom</li>
+            <li>this may change the scale of your objects transform, in that case we can apply the objects transform using ctrl+a and then selecting scale</li>
+        </ul>
+    </ul>
+    <ul>
+        <li>face moving</li>
+        <ul>
+            <li>enable snapping</li>
+            <li>create a cube</li>
+            <li>enter edit mode and face select</li>
+            <li>choose the face or faces you wish to extend</li>
+            <li>select the move tool and drag</li>
+        </ul>
+    </ul>
+
+    <h2>bad ways</h2>
+    <ul>
+        <li>scaling a cube</li>
+    </ul>
+</fieldset>
+
+<fieldset>
+    <legend><h1>applying a transform</h1></legend>
+    <p>
+        Suppose that you've moved an object to a new location, rotated it or scaled the object, in any case if you'd like to consider the new position as (0, 0, 0) or the rotation as no-rotation or make this version of the object's scaling (1, 1, 1), then we can use ctrl+a to do this.
+    </p>
+</fieldset>
+
+<fieldset>
+    <legend><h1>duplicate and mirror object</h1></legend>
+    <p>
+        select your object and use a mirror modifer on it
+    </p>
+</fieldset>
+
+<fieldset>
+    <legend><h1>3d cursor</h1></legend>
+    <p>
+        The 3d cursor is a point in space which is denoted by the white and red dashed circle, it is used as a reference point when you use various tools, use ctrl+c to recenter it at the origin of the space
+    </p>
+</fieldset>
+
+<fieldset>
+    <legend><h1>iteration</h1></legend>
+    In blender you can soak up a lot of time just by creating the same thing multiple times, if you want to create a row of the same thing or even a grid of the same thing, for this situation let's create an m by n array of spaced out cubes.
+
+    <h2>how to do it</h2>
+    <ul>
+        <li>create a cube</li>
+        <li>go to the cubes properties panel and the modifiers tab add an array modifier with a count of m and apply it</li>
+        <li>do the same thing again with n</li>
+        <li>these objects are all grouped together so that we can't modify any singular one, let's fix that:</li>
+        <li>with the array selected go into edit mode and then press p > separate by loose parts</li>
+        <li>each object is separated but their origin is set to the original objects center, let's fix this:</li>
+        <li>in object mode select all created elements and run Shift+Ctrl+Alt+C > Origin to Geometry</li>
+    </ul>
+</fieldset>
+
+
+
+
