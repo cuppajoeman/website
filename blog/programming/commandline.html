@@ -1,0 +1,90 @@
+---
+title: commandline
+---
+<p>
+    The commandline provides you opportunities which would otherwise be unavailable if you restricted yourself to gui. This makes sense because when designing a command line program then developer is not tied down to creating an extensive user interface for the user and thus can make more features in their program.
+</p>
+
+<p>
+    As you become better at the command line, you'll start constructing more complex commands to do specific things. Personally my recollection of complex commands usually fades quickly, and so having a method to save these commands becomes important.
+</p>
+
+<h2>The Process</h2>
+<p>
+    To kick things off, lets consider the way most people come up with commands. Usually it goes like this <b>(come up with an idea) -> (figure out a command which can do that)</b>. The first part of this process is the easy one, and the latter being harder.
+</p>
+
+<p>
+    For example lets say we wanted to list the files in the current directory, to someone who already knows about the command <code>ls</code> this is a breeze, but to a fresh user, they might not know how and get stuck, thus the most important part of using the command line is actually knowing what commands you have available.
+</p>
+
+<h2>Man</h2>
+<p>
+    If there's one command you have to know, it would <code>man</code>, to get started run <code>man man</code>.
+</p>
+
+<p>
+    Now that you know that man describes what a program does through it's manual page, I need to bestow the most important skill when using man: <b>Attention Span</b>.
+</p>
+
+<p>
+    Being able to stay focused on a man page is what will free you from having to use the internet. The reason why this might be difficult is simply that man pages shove a bunch of information in front of your face which can be quite overwhelming.
+</p>
+
+<p>
+    Near the bottom of most man pages there is an overview section or at least a section that describes some of the details of the program which is nice to read after reading the intro.
+</p>
+
+
+<h2>What Do You Have?</h2>
+
+<p>
+    Going back to our process of <b>(come up with an idea) -> (figure out a command which can do that)</b>, then one easy way that many use is the internet. For example for the fresh user not knowing <code>ls</code> in the example, they might open up the browser and type in "how to list files in the current directory", and then learn about the <code>ls</code> command.
+</p>
+
+<p>
+    The command line is great because on any unix system you'll have access to it without having to install any dependencies or other software. With that in mind, it would be a little sad if we had to resort to using a whole other gui program with the requirement of an internet connection to actually get anything done at the command line.
+</p>
+
+<p>
+    The best command to combat internet use in this regard is the <b><code>apropos</code></b> command, use <code>man apropos</code> to figure out what it does.
+</p>
+
+<h4>aside</h4>
+<p>
+    When reading the man page for apropos you might see the mention of a regex, which is short for a regular expression, note that if an aspect or topic is second to the main task of the program, it is usually not explained and assumes you understand what it is. This allows command descriptions to stay short and to the point.
+</p>
+
+<h2>Wrangling a Man Page</h2>
+<p>
+    A very useful skill to have is the ability to search in a man page, and to do that we need to know more about whats even displaying the man page. So let's go back to <code>man man</code> and use the arrow keys to go to the bottom of the page, eventually once we get to the DEFAULTS section, we can see that: "The formatted manual page is displayed using a <u>pager</u>"
+</p>
+
+<p>
+    A pager is a program which can display pages of a file the main one used on linux is less
+</p>
+
+<h2>Apropos</h2>
+
+<p>
+    If there is one c
+</p>
+
+<h2>File System</h2>
+
+<h3>Listing Files</h3>
+<p>
+    When thrown into a bare shell, you'll want to remember the
+</p>
+
+<h2>Video</h2>
+
+<p>
+    You can perform many basic tasks with ffmpeg, make sure you have that installed.
+</p>
+
+<ul>
+    <li>
+        <a href="https://stackoverflow.com/questions/24961127/how-to-create-a-video-from-images-with-ffmpeg">turn images into a video</a> (also works to turn one image in to a video as well)
+    </li>
+</ul>
