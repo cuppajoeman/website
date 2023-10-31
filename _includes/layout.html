@@ -10,11 +10,24 @@
         <header>
             <h1 class="text_center">{{ title }}</h1>
         </header>
+
+        <div class="thin_wrapper">
+
         <main>
-            <div class="thin_wrapper">
                 {{ content }}
-                <p>written at {{ page.date }}</p>
-            </div>
         </main>
+
+        <footer>
+            <script src="https://utteranc.es/client.js"
+                    repo="cuppajoeman/utterances-comments"
+                    issue-term="pathname"
+                    theme="github-dark"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+
+            <p>last updated at {{ page.date }}</p>
+        </footer>
+        </div>
     </body>
 </html>

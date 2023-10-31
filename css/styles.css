@@ -53,7 +53,7 @@ li {
 }
 
 .thin_wrapper {
-  width: 50%;     /* specify a width! */
+  width: 70%;     /* specify a width! */
   margin: 0 auto; /* center */
 }
 
@@ -71,12 +71,12 @@ li {
 }
 
 /* code blocks */
-pre code {
-  background-color: dimgrey;
-  border: 1px solid green;
-  display: block;
-  padding: 10px;
-}
+/*pre code {*/
+/*  background-color: dimgrey;*/
+/*  border: 1px solid green;*/
+/*  display: block;*/
+/*  padding: 10px;*/
+/*}*/
 
 /*center align items in table cells */
 td {

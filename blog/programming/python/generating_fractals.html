@@ -1,57 +1,122 @@
 ---
-title: creating a directory structure
+title: generating fractals
 ---
 
-<p>
-    Suppose we have a directory that contains the following folders
-</p>
-
-<pre>
-    a
-        b
-            c
-                d
-                e
-                f
-                    g
-                    h
-                    i
-</pre>
 
 <p>
-    And we'd like to represent this as the dictionary: <code>{'': {'a': {'b': {'c': {'e': {}, 'd': {}, 'f': {'i': {}, 'h': {}, 'g': {}}}}}}}</code>
+    Today we'll discuss a general method to produce 2d images of fractals, and a python implementation
+</p>
+
+<h2>terminology</h2>
+
+<ul>
+    <li>pixel: a square with physical size that can be colored a certain way</li>
+    <li>screen: a screen is a 2d array of pixels (all of the same size)</li>
+    <li>screen_width: the number of pixels wide our screen is</li>
+    <li>screen_height: the number of pixels high our screen is</li>
+    <li>aspect ratio: given a screen, the aspect ratio is given by the ratio screen_width:screen_height in simplest form when written as x:y it means that for every x pixels along the horizontal part of the screen, there are y pixels along the vertical part of the screen </li>
+    <details>
+        <summary>example</summary>
+        <p>
+            If your screen is 1920px by 1080px, then the aspect ratio is 1920:1080, 1920 = 16 * 120, and 1080 = 9 * 120 therefore the aspect ratio in simplest terms can be written as 16:9, so that for every 16 horizontal pixels there will be 9 vertical pixels, so that any screen with this aspect ratio will be a rectangle who's width is greater than it's height.
+        </p>
+    </details>
+    <li>point: a point is a position in space that has no physical size</li>
+</ul>
+
+<h2>basics</h2>
+
+<p>
+    Before we draw fractals, let's make sure we can draw a circle, a fundamental mathematical object, for if we can't do that, then we will have a hard time trying our hand at something more complicated.
 </p>
 
 <p>
-    Then the following code snippet can be modified to your use case. It's use case is to create a directory structure like above while walking the filesystem in the <code>html</code> directory located outside of the directory that the script is in.
+    A circle, is a collection of points, all equidistant from a center point, each point on the circle has no physical size, there are infinitely many points on the circle, and when thought of together it defines a curved line in space.
 </p>
-
-<pre>
-
-import os
-import sys
-from os import walk
-
-script_directory = os.path.dirname(os.path.realpath(__file__))
-os.chdir("../html")
-html_directory = os.getcwd()
-
-directory_structure = {}
-
-for dir_path, dirs, file_names in walk(html_directory):
-    for name in file_names:
-        full_path = os.path.join(dir_path, name)
-        is_html_file = name[-4:] == "html"
-        if is_html_file:
-            relative_path = os.path.relpath(full_path)
-
-            sub_directory = directory_structure
-
-            for sub_path in relative_path.split("\\"):
-                sub_directory = sub_directory.setdefault(sub_path, {})
-
-</pre>
 
 <p>
-    Note that we're taking full advantage of setdefault to create subdirectories, and refreshing the value of <code>sub_directory</code> to the latest dictionary. See <a href="https://www.w3schools.com/python/ref_dictionary_setdefault.asp">setdefault</a> for more information
+    Our goal is to use a screen to represent a circle, we'll represent it by coloring the background of the screen black, and drawing the circle with white pixels.
 </p>
+
+<h2>from pixel to point</h2>
+
+<p>
+    Given a pixel (a, b)px on the screen, we'd like to associate this with a point on the plane, with that we can determine if the point resides on the circle and if it does, we may color that pixel white.
+</p>
+
+<h3>screen annoyances</h3>
+
+<details>
+    <summary>show details</summary>
+    <p>
+        When we talk about a cartesian plane, we usually think of 0 residing in our center of vision, and then having four quadrants around this, using this system the circle we spoke of earlier would be in the center of our view.
+    </p>
+
+    <p>
+        Contrary to this, most screens say that the pixel (0, 0)px is at top left of the screen, and the bottom right as of the screen has the pixel (screen_width, screen_height)px therefore moving donwards actually represents an increase in the y value, which is contrary to the cartesian plane.
+    </p>
+
+    <p>
+        With the above said, if our mapping from a pixel to a point was (a, b)px to (a, b), then the central point (0, 0) on the cartesian plane would be moved up to the top left corner, which wouldn't make sense as if we were able to draw our circle with pixels on the bottom left of the circle would be visible.
+    </p>
+</details>
+
+<h3>center it</h3>
+<details>
+    <summary>show details</summary>
+    <p>
+        A way to fix this would be to make sure the central pixel (screen_width/2, screen_height/2)px is mapped to the point (0, 0), as with this we would be able to make sure that the central pixel refers to the central point of the cartesian coordinate system.
+    </p>
+
+    <p>
+        And so a new mapping could be (a, b)px to (a - screen_width/2, b - screen_height/2), which guarentees when a = screen_width/2 and b = screen_height/2 that we get back (0, 0). Additionally, with this in place, the top left pixel of the screen maps to (-sw/2, -sh/2), the top right maps to (sw/2, -sh/2), the bottom right maps to (sw/2, sh/2) and the bottom left maps to (-sw/2, sh/2), thus the entire width of the cartesian plane this maps into is sw, and the height is sh. For ease of use, we will denote this map by center( (a, b)px ), so that center( (sw/2, sh/2)px ) = (0, 0)
+    </p>
+</details>
+
+<h3>scale it</h3>
+<details>
+    <summary>show details</summary>
+    <p>
+        Now with this system we can see that depending on the resolution of your screen, the section of the cartesian plane that your screen refers to is either larger or smaller. Since we don't want to discriminate between our newer and older computers we can divide the x coordinates by sw and the y coordinates by sh, so given a pixel (a, b)px, we can center it to get (c_a, c_b) and then divide (c_a / sw, c_b / sh). So that now this point is constrained within the section of the cartesian plane with 4 corner points (-1/2, -1/2), (1/2, -1/2), (1/2, 1/2), (-1/2, 1/2) (which outlines a box of side-length 1)
+    </p>
+</details>
+
+<h3>invert y axis</h3>
+<details>
+    <summary>show details</summary>
+    <p>
+        Now all screens we use will be referring to the same section of the cartesian plane, make sure that their central pixel refers to (0, 0), but there is one issue, based on our last paragraph, if we move from the center of the screen to the top of the screen, our y value will go from 0, to -1/2. This is an issue because in the cartesian plane, as we move up, the y value is positive and is increasing. Therefore we can first center our pixels, then scale them, and finally flip the y axis.
+    </p>
+</details>
+
+<h3>aspect ratio</h3>
+<details>
+    <summary>show details</summary>
+    <p>
+        If you've noticed the area of the plane that our screen refers to is a square, but our screen in real life is probably not a square, usually they are rectangles (I haven't yet seen a circular monitor, but I think that would be fun too). What this means is that if we consider a rectanglular screen, as it gets mapped into a square, the resulting pixels pixels we light up will now illuminate an ellipse rather than a circle. So let's account for this in our pixel to point mapping.
+    </p>
+    <p>
+        Since we know the aspect ratio of our screen is sw:sh in simplest form, we can make it into a ratio where we allow fractions like 1:sh/sw, meaning that for 1 pixel horizontally we'd get sh/sw pixels vertically, since we can't split pixels this isn't possible, but it means that we can multiply the y component by sh/sw after inverting the y axis, which would make sure that the region on the caresian plane that our screen is mapping into has the same shape as our monitor
+    </p>
+</details>
+
+<h3>zoom</h3>
+<details>
+    <summary>show details</summary>
+    <p>
+        Finally if you want to zoom in, then we multiply the aspect corrected point by a constant. This zooms in around the (0,0) point because
+    </p>
+</details>
+
+<h3>our fixed up screen</h3>
+
+<p>
+    Note that the above procedure works because of the fact that we put (0, 0) at the center, these transformations don't work as expected when the central point is not (0,0) for example the conjugate wouldn't work correctly as we're trying to flip y axis around the central point
+</p>
+
+<p>
+    Whenever we have a screen that works in the standard way, we need to remember to  <b>C</b>enter, <b>S</b>cale, <b>I</b>nvert and tweak the <b>A</b>spect <b>R</b>atio. In otherwords, if you want to fix your screen you're going to need <b>C-SIAR</b>'s, like scissors?
+</p>
+
+
+
