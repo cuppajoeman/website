@@ -27,7 +27,7 @@ title: creating a directory structure
 </p>
 
 <pre>
-
+    <code class="language-python">
 import os
 import sys
 from os import walk
@@ -49,6 +49,8 @@ for dir_path, dirs, file_names in walk(html_directory):
 
             for sub_path in relative_path.split("\\"):
                 sub_directory = sub_directory.setdefault(sub_path, {})
+
+    </code>
 
 </pre>
 

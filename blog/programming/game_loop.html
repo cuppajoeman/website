@@ -1,0 +1,98 @@
+---
+title: game loop
+---
+
+<p>
+  There are many articles on game loops, many require extra text to explain how it works. In this article I would like to produce self descriptive code with good naming conventions that stand on their own without extra documentation. Let's see if I can communicate through my code...
+</p>
+
+<p>
+  Before we get started, make sure you can at least understand the basics of c++ code, also read <a href="https://gafferongames.com/post/fix_your_timestep/">Glen's article</a> on this topic first.
+</p>
+
+<pre>
+  <code class="language-c++">
+#include <stdio.h>
+#include <cstdlib>
+#include <GLFW/glfw3.h>
+
+// All time is measured in seconds
+
+double time_elapsed_since_start_of_program = 0;
+
+// N iterations per second
+double update_rate_hz = 60.0d;
+// 1/N seconds per iteration
+double time_between_state_update = 1.0d / update_rate_hz;
+
+double time_elapsed_since_last_state_update = 0;
+
+bool quit_requested = false;
+
+void update(double time_since_last_update) {
+	printf("doing update\n");
+}
+
+void render() {
+	printf("doing rendering\n");
+}
+
+int main() {
+
+	if (!glfwInit()) {
+        exit(EXIT_FAILURE);
+	}
+
+	bool first_iteration = true;
+	double current_time_last_iteration = -1.0d;
+	double time_elapsed_since_last_iteration = -1.0d;
+
+	while (!quit_requested) {
+
+		// (A) We will naively assume that the current time is fixed for the entire iteration (which is false)
+		// if we wanted the correct current time through this function we would have to update it right before every line we use it
+		double current_time = glfwGetTime(); // (T)
+
+		if (first_iteration) {
+			// The last few lines of this iteration are next loops last iteration.
+			first_iteration = false;
+			current_time_last_iteration = current_time;
+			continue;
+		}
+
+		if (current_time >= 10) {
+			quit_requested = true;
+		}
+
+		// Note that this measures how long it takes for the code to start at (T) and arrive back at (T)
+		time_elapsed_since_last_iteration = current_time - current_time_last_iteration;
+
+		bool enough_time_for_updates = time_elapsed_since_last_state_update >= time_between_state_update;
+
+		if (enough_time_for_updates) {
+
+			double time_remaining_to_fit_updates = time_elapsed_since_last_state_update;
+			bool enough_time_to_fit_update = true;
+
+			while (enough_time_to_fit_update) {
+				update(time_between_state_update);
+				time_remaining_to_fit_updates -= time_between_state_update;
+				enough_time_to_fit_update = time_remaining_to_fit_updates >= time_between_state_update ;
+			}
+			time_elapsed_since_last_state_update = time_remaining_to_fit_updates; // This is valid due to (A)
+		}
+
+		render();
+
+		// With respect to the start of the next iteration, the code down here is previous iteration.
+		current_time_last_iteration = current_time;
+
+	}
+
+    glfwTerminate();
+    exit(EXIT_SUCCESS);
+}
+
+
+  </code>
+</pre>
