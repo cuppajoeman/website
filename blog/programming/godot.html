@@ -1,30 +1,14 @@
 ---
-title: pygame skeleton
+title: godot
 ---
-<p>Here is some minimal code to start a pygame project:</p>
+<p>A collection of information that I find useful for working with godot</p>
 
-<pre>
-    <code>
-import pygame
-pygame.init()
+<h2>development on older computer</h2>
 
-screen = pygame.display.set_mode((640, 480))
+<p>
+    On older computers we can still develop with godot. On an older computer I usually like to run a lightweight linux distribution, like manjaro with xfce. To keep godot up to date I install steam and install godot through that, when you launch godot it may complain about your graphics card being really old, in that case add <code>--rendering-driver opengl3</code> to the launch options for godot.
+</p>
 
-
-running = True
-while running:
-current_time = pygame.time.get_ticks()
-
-for event in pygame.event.get():
-if event.type == pygame.QUIT:
-running = False
-pygame.quit()
-
-screen.fill(pygame.Color("black"))
-
-pygame.display.flip()
-    </code>
-</pre>
 
 <script src="https://utteranc.es/client.js"
         repo="cuppajoeman/utterances-comments"

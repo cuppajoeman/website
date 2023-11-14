@@ -1,16 +1,45 @@
 body {
   background-color:black;
   color:white;
-  /* break words that get too long */
 }
+
+/* misc. start */
+
 img, video, source {
   display:block;
   margin-left: auto; 
   margin-right: auto;
 }
+
+.boxed {
+  border: 2px solid white;
+}
+
 pre {
   display:inline;
 }
+
+
+.goal::before  {
+  content: "GOAL: "
+}
+.goal {
+  background-color: seagreen;
+  color: black;
+}
+
+.todo::before  {
+  content: "TODO: "
+}
+.todo {
+  background-color: yellow;
+  color: black;
+}
+
+/* misc. end */
+
+/* custom link behavior start */
+
 a {
   color: #006400;
 }
@@ -20,6 +49,12 @@ a:visited {
 li {
   margin: 10px 0;
 }
+
+/* custom link behavior end */
+
+
+/* custom alignment classes start */
+
 .center {
   margin-left: auto;
   margin-right: auto;
@@ -37,14 +72,15 @@ li {
   text-align: center;
 }
 
-.boxed {
-  border: 2px solid white;
-}
-
 .hn_center {
-  text-align:center;  
+  text-align:center;
 }
 
+/* custom alignment classes end */
+
+
+
+/* custom wrapper classes start */
 
 /* Used to give a page some centering and not take up full screen */
 .wrapper {
@@ -61,6 +97,10 @@ li {
   width: 100%;
 }
 
+/* custom wrapper classes end */
+
+/* image color classes start */
+
 .inverted {
   background-color:white;
   color:black;
@@ -70,13 +110,9 @@ li {
   filter: invert(100%);
 }
 
-/* code blocks */
-/*pre code {*/
-/*  background-color: dimgrey;*/
-/*  border: 1px solid green;*/
-/*  display: block;*/
-/*  padding: 10px;*/
-/*}*/
+/* image color classes end */
+
+/* custom table styles start */
 
 /*center align items in table cells */
 td {
@@ -89,8 +125,9 @@ table {
   border: 1px solid white;
 }
 
+/* custom table styles end */
 
-/* when we are printing */
+/* custom printing styles start */
 
 @media print {
   table {
@@ -100,7 +137,12 @@ table {
     border: solid black !important;
   }
 }
-/* line behind the header */
+/* custom printing styles end */
+
+/* line behind header start */
+
+/* usage */
+/*<div class="line-behind"><span class="line"></span> <h3>Begin My Giving Journey</h3> </div>*/
 
 .line_behind {
   width: auto;
@@ -125,8 +167,11 @@ table {
   padding-right: 5px;
 }
 
-/* and then do */
-/*<div class="line-behind"><span class="line"></span> <h3>Begin My Giving Journey</h3> </div>*/
+
+/* line behind header end */
+
+
+/* custom scrollbar start */
 
 /* width */
 ::-webkit-scrollbar {
@@ -149,3 +194,5 @@ table {
 ::-webkit-scrollbar-thumb:hover {
   background: #b30000;
 }
+
+/* custom scrollbar end */

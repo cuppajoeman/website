@@ -26,8 +26,23 @@
   </li>
   {% endfor %}
 
+  <h1>software</h1>
+  {% for post in collections.software  %}
+  <li>
+    <a href="{{ post.url }}">{{ post.data.title }}</a>
+  </li>
+  {% endfor %}
+
   <h1>hardware</h1>
   {% for post in collections.hardware  %}
+  <li>
+    <a href="{{ post.url }}">{{ post.data.title }}</a>
+  </li>
+  {% endfor %}
+
+
+  <h1>lifestyle</h1>
+  {% for post in collections.lifestyle  %}
   <li>
     <a href="{{ post.url }}">{{ post.data.title }}</a>
   </li>
@@ -40,7 +55,7 @@
   </li>
   {% endfor %}
   <!-- <li>
-    <h1><a href="programming/programming.html">programming</a></h1>
+    <h1><a href="general/general.html">general</a></h1>
   </li>
   <li>
     <h1><a href="math/math.html">math</a></h1>
@@ -48,6 +63,16 @@
   <li>
     <h1><a href="hardware/hardware.html">hardware</a></h1>
   </li> -->
+  <h3>other blogs</h3>
+  <li>
+    <a href="https://benknoble.github.io/reading/">ben knoble's site</a>
+    <a href="http://kociemba.org/index.html">rubick's cube and geometry</a>
+    <a href="https://www.statox.fr/#">statox site - has many nice projects to play around with</a>
+    <a href="https://www.falstad.com/">cool physics simulations</a>
+    <a href="https://tck.mn/">tckmn's site - programming, math, dancing</a>
+    <a href="https://n3l50n.github.io/">friends site</a>
+    <a href="https://setosa.io/ev/">math topics explained visually</a>
+  </li>
 </ul>
 </body>
 </html>

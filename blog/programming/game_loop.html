@@ -3,7 +3,7 @@ title: game loop
 ---
 
 <p>
-  There are many articles on game loops, many require extra text to explain how it works. In this article I would like to produce self descriptive code with good naming conventions that stand on their own without extra documentation. Let's see if I can communicate through my code...
+  There are many articles on game loops, many require extra text to explain how it works. In this article I would like to produce self descriptive code with good naming conventions and comments that stand on their own without extra documentation.
 </p>
 
 <p>
@@ -15,6 +15,24 @@ title: game loop
 #include <stdio.h>
 #include <cstdlib>
 #include <GLFW/glfw3.h>
+
+/* game loop
+ *
+ * description:
+ * 		a game loop that updates the game state at fixed time intervals while also rendering as fast as possible.
+ *
+ * remarks:
+ * 		all time units are seconds
+ *
+ * design:
+ * 		the fundamental idea is that during the previous iteration (PI) time has passed. Now during the current iteration (CI),
+ * 		based on the PI's duration, we retroactively apply updates until we have "caught up" our state.
+ *
+ * 		right before a new iteration commences PI becomes CI, and we are now in the new CI.
+ *
+ *  author:
+ *  	cuppajoeman (2023)
+ */
 
 // All time is measured in seconds
 
@@ -44,33 +62,42 @@ int main() {
 	}
 
 	bool first_iteration = true;
-	double current_time_last_iteration = -1.0d;
-	double time_elapsed_since_last_iteration = -1.0d;
+	bool first_update = true;
+
+	double time_at_start_of_iteration_last_iteration = -1.0d;
+	double duration_of_last_iteration = -1.0d;
 
 	while (!quit_requested) {
 
-		// (A) We will naively assume that the current time is fixed for the entire iteration (which is false)
-		// if we wanted the correct current time through this function we would have to update it right before every line we use it
-		double current_time = glfwGetTime(); // (T)
+		double time_at_start_of_iteration = glfwGetTime(); // (T)
 
 		if (first_iteration) {
 			// The last few lines of this iteration are next loops last iteration.
 			first_iteration = false;
-			current_time_last_iteration = current_time;
+			time_at_start_of_iteration_last_iteration = time_at_start_of_iteration; // (C)
+			time_elapsed_since_last_state_update = time_at_start_of_iteration; // (F): Pretend an update has occurred at time 0 for bootstrapping purposes
 			continue;
 		}
 
-		if (current_time >= 10) {
+		if (time_at_start_of_iteration >= 10) {
 			quit_requested = true;
 		}
 
 		// Note that this measures how long it takes for the code to start at (T) and arrive back at (T)
-		time_elapsed_since_last_iteration = current_time - current_time_last_iteration;
+		// (G): Due to (C) tesli == 0 on the second iteration
+		duration_of_last_iteration = time_at_start_of_iteration - time_at_start_of_iteration_last_iteration;
 
+		// None of the updates that could have happened during the last iteration have been applied
+		// This is because last iteration, we retroactively applied last last iterations updates
+		time_elapsed_since_last_state_update += duration_of_last_iteration;
+
+		// since the value of teslsu is only updated by (E), this would always be false, but (F) bootstraps the process
 		bool enough_time_for_updates = time_elapsed_since_last_state_update >= time_between_state_update;
 
+		// Due to the (G), an update could only happen starting from the 3rd iteration
 		if (enough_time_for_updates) {
 
+			// retroactively apply updates that should have occurred during previous iterations
 			double time_remaining_to_fit_updates = time_elapsed_since_last_state_update;
 			bool enough_time_to_fit_update = true;
 
@@ -79,20 +106,18 @@ int main() {
 				time_remaining_to_fit_updates -= time_between_state_update;
 				enough_time_to_fit_update = time_remaining_to_fit_updates >= time_between_state_update ;
 			}
-			time_elapsed_since_last_state_update = time_remaining_to_fit_updates; // This is valid due to (A)
+			time_elapsed_since_last_state_update = time_remaining_to_fit_updates;
 		}
 
 		render();
 
 		// With respect to the start of the next iteration, the code down here is previous iteration.
-		current_time_last_iteration = current_time;
+		time_at_start_of_iteration_last_iteration = time_at_start_of_iteration;
 
 	}
 
     glfwTerminate();
     exit(EXIT_SUCCESS);
 }
-
-
   </code>
 </pre>

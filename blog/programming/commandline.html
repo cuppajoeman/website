@@ -64,6 +64,30 @@ title: commandline
     A pager is a program which can display pages of a file the main one used on linux is less
 </p>
 
+<h2>saving time</h2>
+<p>
+    If you find yourself using a command often, it can be useful to create a wrapper around it. For example say we are using ffmpeg to record our screen, you've spent 5 minutes reading the man page to set the perfect options for your framerate and other settings. Now if you want to do this process again, unless you have a great memory you'll have to do this exact process again, which wastes your time.
+</p>
+
+<p>
+    Additionally command names sometimes are not conducive to memorization, since there is no structured naming format we end up with things like rm to remove files and then rmdir to remove a directory, by wrapping common commands with wrappers we can come up with our own personal naming conventions and hide the implementation. Don't over do it either, things like cd and ls are good because they're short.
+</p>
+
+<h2>organization</h2>
+<p>
+    Over the years, you may start building up various scripts that do specific tasks that are common to you, keep them organized through named directories and use CDPATH to quickly access them.
+</p>
+<p>
+    Personally I create ~/common_dirs, and then symlink directories in there making sure that common_dirs is part of the cdpath, if you want tab completion I suggest downloading
+    <a href="https://github.com/scop/bash-completion">bash-completion</a>
+</p>
+
+<h2>moving around</h2>
+<p>
+    The main command you'll want to use is cd, note that cd directory_name is not it's only usage, at the current moment the only other supported operand is - (so you write cd -) which moves you to the last directory you were in, which is quite useful.
+</p>
+
+
 <h2>Apropos</h2>
 
 <p>

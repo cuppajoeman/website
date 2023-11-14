@@ -68,3 +68,19 @@ title: C
 <p>
     I'll assume you've read that and you're on board with cmake, now visit cmake's official website and use it as a reference to get started.
 </p>
+
+<h2>Debugging</h2>
+
+<p>
+    To debug your programs in the command line I recommend gdb, in order to use gdb you must compile your program in a debug mode. Use <code>man g++</code> and find the -g option, this embeds debug symbols into the executable making it easy to debug. With cmake you can pass the option <code>-D CMAKE_BUILD_TYPE=Debug</code>
+</p>
+
+<p>
+    For more detailed debugging focused on memory, we'll quote <a href="https://stackoverflow.com/users/89218/paleozogt">paleozogt</a> from stack exchange:
+</p>
+
+<blockquote>
+    <i>
+        Sometimes the crash itself isn't the real cause of the problem-- perhaps the memory got smashed at an earlier point but it took a while for the corruption to show itself. Check out <a href="https://valgrind.org/">valgrind</a>, which has lots of checks for pointer problems (including array bounds checking). It'll tell you where the problem starts, not just the line where the crash occurs.
+    </i>
+</blockquote>

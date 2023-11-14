@@ -1,111 +1,60 @@
 ---
-title: blender
+title: storage
 ---
 
 <p>
-    My journal of learning blender, as a reference sheet for endeavors into blender
+    Storing your files in this day and age has become more and more complicated, let's bring it back to the basics.
 </p>
 
 <p>
-    This article is from the point of view of a map maker who designs maps for fast paced fps games that have fast movement, teleporters, jump pads and explosive jumping
-</p>
-
-<h1>setting up</h1>
-<p>
-    Download blender, if you'll be working with blender in various locations which may not have an internet connection, download the manual to your computer, extract the zip and open index.html. Now pick up a <a href="https://nideffer.net/classes/aim_f17/blender-shortcut-charts.pdf">shortcut pdf</a>
+    At the core of file storage is hardware, the physical device that stores your data, no matter what you use to store your data, say google drive, dropbox, etc... somewhere your files are stored on a physical device.
 </p>
 
 <p>
-    When creating maps with blender, this is mainly referred to as modelling so start with that <a href="https://docs.blender.org/manual/en/latest/modeling/index.html">section</a> first at least understand object and edit mode. Next read through the mesh section and tool section. At this point you should have the bare minimum to get started
+    Moving one layer above the hardware, we conceptual can store data in files and folders, folders allow for a hierarchy to be created which can allow us the ability to organize our files and specify files we need, for example, suppose we have the following structure:
 </p>
 
-<fieldset>
-    <legend><h1>must know shortcuts</h1></legend>
-    <ul>
-        <li>ctrl+tab a quickswitcher for the different modes</li>
-    </ul>
+<pre>
+    A
+        B
+            C
+                hi.txt
+</pre>
 
-</fieldset>
+<p>
+    With this structure we can specify the file <code>hi.txt</code> with the path <code>/A/B/C/hi.txt</code>
+</p>
 
-<fieldset>
-    <legend><h1>focusing the camera origin</h1></legend>
-    <p>
-        If you've created an object and you want the camera to rotate about the cneter point of the object, then in object mode click view and then frame selected.
-    </p>
-</fieldset>
+<h1>Public and Private Data</h1>
 
-<fieldset>
-    <legend><h1>rectangular prisms</h1></legend>
+<p>
+    With most hosting services by default all your data is private and so there is no way for a user to simply just type in <code>/A/B/C/hi.txt</code> to find your file if this were the case, then it would be possible for someone to guess random paths and then steal your data.
+</p>
 
-    <p>
-        These are quite useful for basic floors and walls, and are a building block to various other shapes.
-    </p>
+<p>
+    Additionally since hosting services don't allow for paths to be used, when you share a file a unique id is created that you can share with others that links to the specific file. Now suppose that you want to embed this file on a website, then by using these links the hosting provider makes you even more dependent on their service as if you have embedded these files in many places across the internet emails and other locations, then if you ever decide to delete your account all this information is lost and these links are broken.
+</p>
 
-    <h2>good ways to create one</h2>
-    <ul>
-        <li>dimension setting</li>
-        <ul>
-            <li>create a cube</li>
-            <li>select it in object mode</li>
-            <li>press n to open the transform tab</li>
-            <li>in the transform tab set dimensions near the bottom</li>
-            <li>this may change the scale of your objects transform, in that case we can apply the objects transform using ctrl+a and then selecting scale</li>
-        </ul>
-    </ul>
-    <ul>
-        <li>face moving</li>
-        <ul>
-            <li>enable snapping</li>
-            <li>create a cube</li>
-            <li>enter edit mode and face select</li>
-            <li>choose the face or faces you wish to extend</li>
-            <li>select the move tool and drag</li>
-        </ul>
-    </ul>
+<p>
+    Personally I want to be able to look back at messages I've sent to people in the past and still be able to view the content whether or not I have a google drive account.
+</p>
 
-    <h2>bad ways</h2>
-    <ul>
-        <li>scaling a cube</li>
-    </ul>
-</fieldset>
+<h1>Let's Not Mix</h1>
 
-<fieldset>
-    <legend><h1>applying a transform</h1></legend>
-    <p>
-        Suppose that you've moved an object to a new location, rotated it or scaled the object, in any case if you'd like to consider the new position as (0, 0, 0) or the rotation as no-rotation or make this version of the object's scaling (1, 1, 1), then we can use ctrl+a to do this.
-    </p>
-</fieldset>
+<p>
+    One simple solution that cna be thought of is simply not mixing public and private data together, under this assumption, there is no need to hide paths, and sharing files could be as easy as using the path <code>/A/B/C/hi.txt</code>, this simple change allows us to not care about ID's anymore and has many good implications.
+</p>
 
-<fieldset>
-    <legend><h1>duplicate and mirror object</h1></legend>
-    <p>
-        select your object and use a mirror modifer on it
-    </p>
-</fieldset>
+<p>
+    One implementation of this is a webserver which contains these files, then given the ip address of this computer we can access the file by going on any browser and typing <code>IPADDRESS/A/B/C/D/hi.txt</code> to access the file.
+</p>
 
-<fieldset>
-    <legend><h1>3d cursor</h1></legend>
-    <p>
-        The 3d cursor is a point in space which is denoted by the white and red dashed circle, it is used as a reference point when you use various tools, use ctrl+c to recenter it at the origin of the space
-    </p>
-</fieldset>
+<p>
+    Now for our private files we can continue using any other service of our choosing.
+</p>
 
-<fieldset>
-    <legend><h1>iteration</h1></legend>
-    In blender you can soak up a lot of time just by creating the same thing multiple times, if you want to create a row of the same thing or even a grid of the same thing, for this situation let's create an m by n array of spaced out cubes.
+<h1>A Persistent File Structure</h1>
 
-    <h2>how to do it</h2>
-    <ul>
-        <li>create a cube</li>
-        <li>go to the cubes properties panel and the modifiers tab add an array modifier with a count of m and apply it</li>
-        <li>do the same thing again with n</li>
-        <li>these objects are all grouped together so that we can't modify any singular one, let's fix that:</li>
-        <li>with the array selected go into edit mode and then press p > separate by loose parts</li>
-        <li>each object is separated but their origin is set to the original objects center, let's fix this:</li>
-        <li>in object mode select all created elements and run Shift+Ctrl+Alt+C > Origin to Geometry</li>
-    </ul>
-</fieldset>
-
-
-
-
+<p>
+    Throughout the years, as the number of files you've shared increases, you'll want to organize your files, but if we change the file strucutre it might break links to other files we've had in the past
+</p>

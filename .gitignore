@@ -25,4 +25,4 @@ package-lock.json
 test/stubs-layout-cache/_includes/*.js
 
 # IDE files
-.idea
+.idea/
