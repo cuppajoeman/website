@@ -1,0 +1,8 @@
+/* the custom cursor is 32x32 pixels, so 16,16 is the center*/
+body {
+    cursor: url('../assets/custom_cursor.png') 16 16, auto;
+}
+
+a {
+    cursor: url('../assets/custom_cursor_inward.png') 16 16, auto;
+}
