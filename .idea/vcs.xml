@@ -4,5 +4,6 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/toolbox" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/toolbox/personal-homepage" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/toolbox/personal-homepage/notebook/cjm-css" vcs="Git" />
   </component>
 </project>
