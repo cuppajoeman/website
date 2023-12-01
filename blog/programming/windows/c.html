@@ -1,0 +1,111 @@
+---
+title: c programming on windows
+---
+
+<p>
+    When writing c++ code on windows, you might simply just want to use some huge tool like vscode, for me I came from the linux world, and I was used to being able to grab only the tools I need for a job and to get things done quickly and without many dependencies.
+</p>
+
+<h2>compiling</h2>
+
+<p>
+    The first thing you'll need is a compiler, if you don't know what that is you might want to check out my blog post about c. To this end there always seems to be one recommended piece of software called Ming-w64.
+</p>
+
+<p>
+    The really confusing thing you'll first encounter is that there is another piece of software called MingW which is different and not Ming-w64, so make sure you're not looking at the wrong project first of all. As of right now you can access the mingw-w64 project <a href="https://www.mingw-w64.org/">here</a>. (For more on the difference between mingw and mingw-64w, take a look on their <a href="https://en.m.wikipedia.org/wiki/Mingw-w64">wikipedia page</a>)
+</p>
+
+<p>
+    When you learn about mingw-w64, you'll notice something like this on their forum:
+</p>
+
+<blockquote>
+    The heart of the Mingw-w64 project is headers and support libraries to run the output of GCC on Windows. Since Mingw-w64 is neither the home of GCC nor of binutils, several sets of installation packages which combine them are available.
+</blockquote>
+
+<p>
+    The main thing to glean from this is that mingw-w64 is just part of the puzzle, it adds headers and support libraries that let you run the output of gcc on windows. It also clearly states that it is not the home of GCC, what this means to us is that mingw-w64 is not the tool we are looking for to compile a c++ program, but instead it is part of what we need to compile a c++ program.
+</p>
+
+<p>
+    On mingw-64w's downloads page it also lists a bunch links to projects that include all the extra pieces along with mingw-64w all included in a nice package. It however doesn't tell you which project you should choose or which project is the most stable, actively maintained, or most used, which might be important to you if you want to get things working quickly and be able to talk to someone if something goes wrong.
+</p>
+
+<p>
+    I chatted with some people on the mingw-64w IRC channel and found out about mysys2 and started reading about what that was, on their site I found this:
+</p>
+
+<blockquote>
+    MSYS2 is a collection of tools and libraries providing you with an easy-to-use environment for building, installing and running native Windows software.
+</blockquote>
+
+<p>
+    I also found out about cygwin, which states that it is:
+</p>
+
+<blockquote>
+    a large collection of GNU and Open Source tools which provide functionality similar to a Linux distribution on Windows.
+    a DLL (cygwin1.dll) which provides substantial POSIX API functionality.
+</blockquote>
+
+<p>
+    I also found out that mysys2 is a fork of cygwin, and the difference between them was described by Ray Donnelly on stack overflow
+    <a href="https://stackoverflow.com/questions/25751536/differences-between-msys2-and-cygwin/25755481#25755481">here</a>, which read:
+</p>
+
+<blockquote>
+    Traditionally MSYS bash has been inferior, but mostly because Cygwin remained under active development whereas MSYS didn't. MSYS forked from Cygwin version 1.3.3 and never re-synced, whereas MSYS2 resyncs with the Cygwin project regularly.
+
+    We don't have a "sweet pacman like package manager", we have as direct a re-compilation of Arch Linux's pacman package manager as we could achieve.
+
+    MSYS2 doesn't have cygwin.dll but it does have msys-2.0.dll which does the same thing (and some more besides). Specifically, arguments that look like paths and the PATH env. var are converted to Windows form when running Windows-native software.
+
+    As for whether it's slower, I expect there'd be very little difference but MSYS2 would be a tiny amount slower due to the extra conversion work. Then again, chances are you'll run more Windows-native software from within MSYS2 (such as MinGW-w64 compilers) than you would from Cygwin so that'll shift things back in MSYS2's favour.
+</blockquote>
+
+<p>
+    After reading this I didn't really know how these softwares differed functionally yet, just that there were differences between how long things take to run, instead I found this
+    <a href="https://stackoverflow.com/questions/771756/what-is-the-difference-between-cygwin-and-mingw">question </a> more helpful, summed up:
+</p>
+
+<blockquote>
+    Compile something in Cygwin and you are compiling it for Cygwin.
+    Compile something in MinGW and you are compiling it for Windows.
+
+    ...
+
+    What is Cygwin?
+
+    Cygwin is a compatibility layer that makes it easy to port simple Unix-based applications to Windows, by emulating many of the basic interfaces that Unix-based operating systems provide, such as pipes, Unix-style file and directory access, and so on as documented by the POSIX standards. Cygwin is also bundled with a port of the GNU Compiler Collection and some other tools to the Cygwin environment.
+
+    ...
+
+    Disadvantages of Cygwin
+
+    Compiling with Cygwin involves linking your program with the Cygwin run-time environment, which will typically be distributed with your program as the dynamically linked library cygwin1.dll. This library is open source and requires software using it to share a compatible open source license, even if you distribute the dll separately, because the header files and interface are included. This therefore imposes some restrictions on how you can license your code.
+
+    ...
+
+    What is MinGW?
+
+    MinGW is a distribution of the GNU compiler tools for native Windows, including the GNU Compiler Collection, GNU Binutils and GNU Debugger. Also included are header files and libraries allowing development of native Windows applications. This therefore will act as an open source alternative to the Microsoft Visual C++ suite.
+
+    ...
+
+    Disadvantages of MinGW
+
+    Software compiled for Windows using MinGW has to use Windows' own API for file and IO access. If you are porting a Unix/Linux application to Windows this may mean significant alteration to the code because the POSIX type API can no longer be used.
+</blockquote>
+
+<p>
+    After reading this, at the moment <b>I was simply interested in compiling code on windows, and through this question it seems like mingw-64w is the right option</b> (which seems to be conflated with mingw here). I came to this conclusion because cygwin has to goal of providing you a linux like system on windows as well, which seemed like more than what I was looking for.
+</p>
+
+<p>
+   Since mingw-64w is just part of the solution, and I've decided that I didn't want to use cygwin, I decided to give msys2 a try. Also they have a nice
+    <a href="https://www.msys2.org/wiki/How-does-MSYS2-differ-from-Cygwin/">comparison</a> on their website.
+</p>
+
+
+
