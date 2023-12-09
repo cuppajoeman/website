@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Section Name</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        body {
+            margin: 10%;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <h1>math</h1>
+    {% for post in collections.math  %}
+    <li>
+        <a href="{{ post.url }}">{{ post.data.title }}</a>
+    </li>
+    {% endfor %}
+
+    <h1>programming</h1>
+    {% for post in collections.programming  %}
+    <li>
+        <a href="{{ post.url }}">{{ post.data.title }}</a>
+    </li>
+    {% endfor %}
+
+    <h1>software</h1>
+    {% for post in collections.software  %}
+    <li>
+        <a href="{{ post.url }}">{{ post.data.title }}</a>
+    </li>
+    {% endfor %}
+
+    <h1>hardware</h1>
+    {% for post in collections.hardware  %}
+    <li>
+        <a href="{{ post.url }}">{{ post.data.title }}</a>
+    </li>
+    {% endfor %}
+
+
+    <!--  <h1>lifestyle</h1>-->
+    <!--  {% for post in collections.lifestyle  %}-->
+    <!--  <li>-->
+    <!--    <a href="{{ post.url }}">{{ post.data.title }}</a>-->
+    <!--  </li>-->
+    <!--  {% endfor %}-->
+
+    <h1>skateboard</h1>
+    {% for post in collections.skateboard  %}
+    <li>
+        <a href="{{ post.url }}">{{ post.data.title }}</a>
+    </li>
+    {% endfor %}
+    <!-- <li>
+      <h1><a href="general/general.html">general</a></h1>
+    </li>
+    <li>
+      <h1><a href="math/math.html">math</a></h1>
+    </li>
+    <li>
+      <h1><a href="hardware/hardware.html">hardware</a></h1>
+    </li> -->
+    <h3>other blogs</h3>
+    <ul>
+        <li href="https://benknoble.github.io/reading/">ben knoble's site</li>
+        <li href="http://kociemba.org/index.html">rubick's cube and geometry</li>
+        <li href="https://www.statox.fr/#">statox site - has many nice projects to play around with</li>
+        <li href="https://www.falstad.com/">cool physics simulations</li>
+        <li href="https://tck.mn/">tckmn's site - programming, math, dancing</li>
+        <li href="https://n3l50n.github.io/">friends site</li>
+        <li href="https://setosa.io/ev/">math topics explained visually</li>
+        <li href="https://sfconservancy.org/blog/2022/jun/30/give-up-github-launch/">give up github</li>
+        <li href="https://sfconservancy.org/">software freedom conservatory</li>
+        <li href="https://www.fsf.org/">software freedom foundation</li>
+        <li href="https://incompetech.com/graphpaper/">graph paper</li>
+        <li href="https://www.oftc.net/">open and free technology community</li>
+    </ul>
+</ul>
+</body>
+</html>
