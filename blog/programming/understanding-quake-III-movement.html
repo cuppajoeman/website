@@ -8,19 +8,14 @@ title: understanding quake III movement
 </p>
 
 <p>
-    After perusing around, you'll see that the method of interest is called <code>PM_Accelerate</code>
-    which takes in wishdir, wishspeed and accel. At this point these are just parameters of the function, but
-    wishdir actually reprents the players intended new direction based on their keyboard and mouse inputs.
+    After perusing around, you'll see that the method of interest is called <code>PM_Accelerate</code> which takes in wishdir, wishspeed and accel. At this point these are just parameters of the function, but wishdir actually reprents the players intended new direction based on their keyboard and mouse inputs.
 </p>
 <p>
-    It then computes the dot product of the players current horizontal
-    velocity with wishdir and calls that currentspeed, note that this is not your current speed, but rather the length
-    of the projection of your current horizontal velocity onto wishdir (assuming wishdir is a unit vector)
+    It then computes the dot product of the players current horizontal velocity with wishdir and calls that currentspeed, note that this is not your current speed, but rather the length of the projection of your current horizontal velocity onto wishdir (assuming wishdir is a unit vector)
 </p>
 
-<p>Next a new variable by the name of addspeed is created which is wishspeed - currentspeed, what this tells us
-is that whatever speed we wished to travel at is being reduced by current speed, therefore a better name for currentspeed
-    is really speedpenalty
+<p>
+    Next a new variable by the name of addspeed is created which is wishspeed - currentspeed, what this tells us is that whatever speed we wished to travel at is being reduced by current speed, therefore a better name for currentspeed is really speedpenalty
 </p>
 
 <p>
