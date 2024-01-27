@@ -14,18 +14,23 @@
 <h1>blog</h1>
 <ul>
   <h1>math</h1>
+
   {% for post in collections.math  %}
   <li>
     <a href="{{ post.url }}">{{ post.data.title }}</a>
   </li>
   {% endfor %}
+  <li>more articles</li>
 
   <h1>programming</h1>
-  {% for post in collections.programming  %}
+  {% assign top_posts = collections.programming | reverse %}
+  {%- for post in top_posts limit:5 -%}
   <li>
     <a href="{{ post.url }}">{{ post.data.title }}</a>
   </li>
   {% endfor %}
+  <li>more articles</li>
+
 
   <h1>software</h1>
   {% for post in collections.software  %}
@@ -33,6 +38,7 @@
     <a href="{{ post.url }}">{{ post.data.title }}</a>
   </li>
   {% endfor %}
+  <li>more articles</li>
 
   <h1>hardware</h1>
   {% for post in collections.hardware  %}
@@ -87,6 +93,10 @@
     <li href="https://www.oftc.net/">open and free technology community</li>
     <li>individualKex youtube channel</li>
     <li><a href="https://cirosantilli.com/ourbigbook-com">ciro santilli</a></li>
+    <li><a href="https://www.youtube.com/@NickMaltbie/videos">game dev videos character controllers focus</a></li>
+    <li><a href="https://projecteuler.net/">project euler</a></li>
+    <li><a href="https://web.archive.org/web/20231222150106/https://kulkarniamit.github.io/whatwhyhow/howto/use-vim-ctags.html">how to use ctags</a></li>
+    <li><a href="https://garsia.math.yorku.ca/MPWP/">macdonald polynomials</a></li>
   </ul>
 </ul>
 </body>
