@@ -2,8 +2,9 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/cjm-css" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/toolbox" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/toolbox/personal-homepage" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/toolbox/personal-homepage/notebook/cjm-css" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/toolbox/personal-homepage/cjm-css" vcs="Git" />
   </component>
 </project>
