@@ -1,0 +1,161 @@
+<body>
+
+<script src="../cjm-css/dropdown.js"></script>
+<script src="../cjm-css/limited_list.js"></script>
+<script src="../cjm-css/styles.js"></script>
+
+<div>
+    <h1>Callum Cassidy-Nolan</h1>
+    <h2>Toronto, ON</h2>
+    <h3>ccn[at]cuppajoeman[dot]com</h3>
+
+
+    
+
+    <br>
+
+    <fieldset>
+        <legend><h1>Education</h1></legend>
+        <ul>
+            <li>University of Toronto <span style="float: right;">GPA: 3.73</span></li>
+            <ul>
+                <li>Double Major in Computer Science and Mathematics <span style="float: right;">2018 - present</span>
+                </li>
+                
+                <li>Teaching Assistant</li>
+                <ul>
+                    <div class="dropdown">
+                        <li style="cursor: pointer; list-style: none;">-  CSC110 (Introduction to Computer Science)</li>
+                        <ul style="display: block;">
+                            <li>
+                                Held tutorials with up to 30 students, while answering questions and managing students
+                            </li>
+                            <li>
+                                Authored mathematical proofs into the official course notes <a href="http://web.archive.org/web/20240802042118/https://www.teach.cs.toronto.edu/~csc110y/fall/notes/">see here</a>.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <li style="cursor: pointer; list-style: none;">-  MAT223 (Linear Algebra)</li>
+                        <ul style="display: block;">
+                            <li>
+                                Lecture TA - Assisted professor during live lecture answering student questions and
+                                clarifying concepts
+                            </li>
+                            <li>
+                                Personal Office Hours - Held office hours providing 1 on 1 help for students
+                            </li>
+                        </ul>
+                    </div>
+                </ul>
+            </ul>
+        </ul>
+    </fieldset>
+
+    <br><br>
+
+    <fieldset>
+        <legend><h1>Programming &amp; Tech</h1></legend>
+        <ul>
+            <li><h2>software development</h2></li>
+                <ul>
+                    <li>Mathematics</li>
+                    <ul>
+                        <li><a href="https://www.openmath.net">openmath</a> (LaTeX, HTML, python, js) {Sept 2023 - current}</li>
+                        <ul>
+                           <li>an online math learning resource for pure mathematics, covers various undergraduate topics (algebra, topology, analysis, etc...)</li>
+                           <li>differentiates itself from other online resources by having links open in-line allowing you to recursively explore the knowledge base on one page</li>
+                           <li>over 1500+ knowledge objects covering definitions, theorems, corollaries, propositions and exercises</li>
+                        </ul>
+                        <li>LEAN Theorem Prover {Winter 2022}</li>
+                        <ul>
+                            <li>
+                                Worked with Stanislas Polu (OpenAI) formalizing math questions from Art of Problem Solving
+                                to
+                                build a dataset for an <a href="https://openai.com/blog/formal-math/">automated theorem
+                                    proving
+                                    model</a>
+                            </li>
+                            
+                        </ul>
+                    </ul>
+                    <li>Software Engineering</li>
+                    <ul>
+                        <li>Huawei {Oct 2022 - July 2023}</li>
+                        <ul>
+                            <li>Designed networking systems for communication between phones and sensors over the network</li>
+                            <li>Maintained and created android applications; followed kotlin best practices using jetpack compose</li>
+                            <li>Worked on a linear algebra library in java</li>
+                        </ul>
+                        <li>ScotiaBank Proof of Concept {Sept 2019 - Dec 2019}</li>
+                        <ul>
+                            <li>Industry classroom partnership with ScotiaBank</li>
+                            <li>Developed an android application as a <a href="https://c-vars.github.io/ScotiaTracker/">proof
+                                of
+                                concept for ScotiaBank</a></li>
+                        </ul>
+                    </ul>
+                    <li>Game Development</li>
+                    <ul>
+                        <li><a href="https://frag-z.com/">frag-z</a> (toolbox-engine, C++) {Jan 2024 - current}</li>
+                        <ul>
+                            <li>multiplayer fps game</li>
+                            <li>implemented client prediction and server reconciliation algorithm for movement</li>
+                            <li>created all assets from scratch in blender (weapons, animations, player models and maps)</li>
+                            
+                        </ul>
+                        <li><a href="https://cuppajoeman.itch.io/salmon">salmon run</a> (unity, C#) {Sept 2024 - Dec 2024}</li>
+                        <ul>
+                            <li>full 3D salmon racing game with local multiplayer</li>
+                            <li>implemented river mesh generation using spline sampling, with water shader</li>
+                            <li>implemented various enemies such as fisherman and eagle that track the player and try to catch them</li>
+                        </ul>
+                        <li><a href="https://github.com/cjmines/gui">cjmines</a> (toolbox-engine, C++) {Apr 2024 - current}</li>
+                        <ul>
+                            <li>a competitive minesweeper client focusing on the shortcomings of the current competitive clients</li>
+                            <li>implemented a no-guess board generation algorithm by reducing the problem to matrix row reduction with extra rules while row reducing</li>
+                        </ul>
+                        <li><a href="https://github.com/cpp-toolbox">toolbox-engine</a> (C++) {Sept 2023 - current}</li>
+                        <ul class="limited-list">
+                            <li>an open source modular engine with a focus on compatibility and performance</li>
+                            <li>managed up to 4 other developers teaching them how to use the engine and implement new features</li>
+                            <li>supports windows, mac and linux with good performance on low-end machines made in 2013+</li>
+                            <li style="display: none;">graphics: opengl3.3, audio: openal, physics: jolt physics, networking: enet</li>
+                            <li style="display: none;">implemented geometry batching to draw the scene in at most 3 draw calls, audio is also batched per tick for performance</li>
+                            <li style="display: none;">implemented super texture atlasing to implement "bindless" textures in opengl3.3 </li>
+                            <li style="display: none;">implemented full skeletal animation with support for loading in fbx files with animation</li>
+                            <li style="display: none;">implemented network wrapper around enet allowing for an easy development cycle when sending new data over the network</li>
+                            <li style="display: none;">implemented custom UI library with input boxes and buttons using SDF fonts</li>
+                            <li style="display: none;">implemented a glsl shader standard that is enforced when new shaders are created, simplifies configuration of VAO's and uniforms in-engine</li>
+                        </ul>
+                        
+                        
+                </ul>
+                    
+                    
+                </ul>
+        </ul>
+    </fieldset>
+
+    <br><br>
+
+<!--    <fieldset>-->
+<!--        <legend><h1>Creativity</h1></legend>-->
+<!--        <ul>-->
+<!--            <li>Music</li>-->
+<!--            <ul>-->
+<!--                <li>Self taught guitarist, developed <a href="https://theanchorsystem.net">new way of thinking about-->
+<!--                    music</a> to facilitate faster learning-->
+<!--                </li>-->
+<!--                <li>Can comp and solo along to jazz standards and play with others</li>-->
+<!--                <li>Creation of compositions</li>-->
+<!--            </ul>-->
+<!--        </ul>-->
+<!--    </fieldset>-->
+
+    <br><br>
+
+</div>
+
+
+</body>

@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>CV</title>
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="CV.css">
+<!--    <link rel="stylesheet" href="../css/styles.css">-->
+    <link rel="stylesheet" href="../cjm-css/styles.css">
 </head>
 <body>
 
-<script src="CV.js"></script>
+<script src="../cjm-css/dropdown.js"></script>
+<script src="../cjm-css/limited_list.js"></script>
+<script src="../cjm-css/styles.js"></script>
 
-<div class="thin_wrapper">
+<div class="wrapper">
     <h1>Callum Cassidy-Nolan</h1>
     <h2>Toronto, ON</h2>
     <h3>ccn[at]cuppajoeman[dot]com</h3>
@@ -19,9 +21,9 @@
     <fieldset>
         <legend><h1>Principles</h1></legend>
         <ul>
-            <li>• Minimize memorization, increase understanding</li>
-            <li>• Design things so that others can use or understand</li>
-            <li>• Have fun</li>
+            <li>Minimize memorization, increase understanding</li>
+            <li>Design things so that others can use or understand</li>
+            <li>Have fun</li>
         </ul>
     </fieldset>
 
@@ -30,55 +32,71 @@
     <fieldset>
         <legend><h1>Education</h1></legend>
         <ul>
-            <li>• University of Toronto <span style="float: right;">GPA: 3.71</span></li>
+            <li>University of Toronto <span style="float: right;">GPA: 3.73</span></li>
             <ul>
-                <li>• Double Major in Computer Science and Mathematics <span style="float: right;">2018-present</span>
+                <li>Double Major in Computer Science and Mathematics <span style="float: right;">2018-present</span>
                 </li>
                 <ul>
                     <div class="dropdown">
                         <li>🠣 Relevant Courses</li>
                         <ul>
-                            <li>• CSC108H1 Intro to Comp Prog <span style="float: right;">A+</span></li>
-                            <li>• CSC148H1 Intro to Comp Sci <span style="float: right;">A+</span></li>
-                            <li>• CSC165H1 Math Expr&Rsng for Cs <span style="float: right;">A</span></li>
-                            <li>• MAT137Y1 Calculus! <span style="float: right;">A+</span></li>
-                            <li>• MAT223H1 Linear Algebra I <span style="float: right;">A+</span></li>
-                            <li>• CSC207H1 Software Design <span style="float: right;">A+</span></li>
-                            <li>• CSC236H1 Intro to Theory Comp <span style="float: right;">A</span></li>
-                            <li>• MAT246H1 Abstract Mathematics <span style="float: right;">A</span></li>
-                            <li>• STA247H1 Prob Comp Appl <span style="float: right;">A-</span></li>
-                            <li>• CSC209H1 Soft Tools & Sys Prog <span style="float: right;">A+</span></li>
-                            <li>• CSC258H1 Computer Organizatn <span style="float: right;">A+</span></li>
-                            <li>• CSC263H1 Data Structures & Analysis <span style="float: right;">A-</span></li>
-                            <li>• MAT224H1 Linear Algebra II <span style="float: right;">A+</span></li>
-                            <li>• MAT237Y1 Advanced Calculus <span style="float: right;">A-</span></li>
-                            <li>• CSC369H1 Operating Systems <span style="float: right;">B+</span></li>
-                            <li>• MAT244H1 Ordinary Diff Equat <span style="float: right;">A+</span></li>
-                            <li>• MAT301H1 Groups & Symmetry <span style="float: right;">A+</span></li>
-                            <li>• MAT344H1 Intro Combinatorics <span style="float: right;">A+</span></li>
-                            <li>• CSC311H1 Intro Machine Learning <span style="float: right;">B</span></li>
-                            <li>• MAT309H1 Intro Math Logic <span style="float: right;">A</span></li>
+                            <li>CSC108H1 Intro to Comp Prog <span style="float: right;">A+</span></li>
+                            <li>CSC148H1 Intro to Comp Sci <span style="float: right;">A+</span></li>
+                            <li>CSC165H1 Math Expr&Rsng for Cs <span style="float: right;">A</span></li>
+                            <li>MAT137Y1 Calculus! <span style="float: right;">A+</span></li>
+                            <li>MAT223H1 Linear Algebra I <span style="float: right;">A+</span></li>
+                            <li>CSC207H1 Software Design <span style="float: right;">A+</span></li>
+                            <li>CSC236H1 Intro to Theory Comp <span style="float: right;">A</span></li>
+                            <li>MAT246H1 Abstract Mathematics <span style="float: right;">A</span></li>
+                            <li>STA247H1 Prob Comp Appl <span style="float: right;">A-</span></li>
+                            <li>CSC209H1 Soft Tools & Sys Prog <span style="float: right;">A+</span></li>
+                            <li>CSC258H1 Computer Organizatn <span style="float: right;">A+</span></li>
+                            <li>CSC263H1 Data Structures & Analysis <span style="float: right;">A-</span></li>
+                            <li>MAT224H1 Linear Algebra II <span style="float: right;">A+</span></li>
+                            <li>MAT237Y1 Advanced Calculus <span style="float: right;">A-</span></li>
+                            <li>CSC369H1 Operating Systems <span style="float: right;">B+</span></li>
+                            <li>MAT244H1 Ordinary Diff Equat <span style="float: right;">A+</span></li>
+                            <li>MAT301H1 Groups & Symmetry <span style="float: right;">A+</span></li>
+                            <li>MAT344H1 Intro Combinatorics <span style="float: right;">A+</span></li>
+                            <li>CSC311H1 Intro Machine Learning <span style="float: right;">B</span></li>
+                            <li>CSC410H1 Software Test & Verif <span style="float: right;">A</span></li>
+                            <li>MAT334H1 Complex Variables <span style="float: right;">A-</span></li>
+                            <li>MAT309H1 Intro Math Logic <span style="float: right;">A</span></li>
+                            <li>CSC324H1 Prog Languages <span style="float: right;">A</span></li>
+                            <li>CSC373H1 Algo Design & Analysis <span style="float: right;">A</span></li>
+                            <li>CSC384H1 Intro Artif Intell <span style="float: right;">A-</span></li>
+                            <li>MAT401H1 Polnon Equ & Fields <span style="float: right;">A</span></li>
+                            <li>MAT315H1 Intro Number Theory <span style="float: right;">B+</span></li>
+                            <li>MAT337H1 Intro Real Analysis <span style="float: right;">A+</span></li>
+                            <li>CSC317H1 Computer Graphics <span style="float: right;">IPR</span></li>
+                            <li>CSC320H1 Intro Visual Compt <span style="float: right;">IPR</span></li>
+                            <li>CSC404H1 Intro to Video Game Design <span style="float: right;">IPR</span></li>
+                            <li>MAT327H1 Intro to Topology <span style="float: right;">IPR</span></li>
+                            <li>MAT436H1 Intro Linear Operators <span style="float: right;">IPR</span></li>
                         </ul>
                     </div>
                 </ul>
-                <li>• Teaching Assistant</li>
+                <li>Teaching Assistant</li>
                 <ul>
                     <div class="dropdown">
                         <li>🠣 CSC110 (Introduction to Computer Science)</li>
                         <ul>
-                            <li>•
+                            <li>
                                 Held tutorials with up to 30 students, while answering questions and managing students
+                            </li>
+                            <li>
+                                Authored mathematical proofs into the official course notes <a href="http://web.archive.org/web/20240802042118/https://www.teach.cs.toronto.edu/~csc110y/fall/notes/">see here</a>.
                             </li>
                         </ul>
                     </div>
                     <div class="dropdown">
                         <li>🠣 MAT223 (Linear Algebra)</li>
                         <ul>
-                            <li>•
+                            <li>
                                 Lecture TA - Assisted professor during live lecture answering students questions and
                                 clarifying concepts
                             </li>
-                            <li>•
+                            <li>
                                 Personal Office Hours - Held Office hours for 1 on 1 help for students
                             </li>
                         </ul>
@@ -94,165 +112,157 @@
         <legend><h1>Programming & Tech</h1></legend>
         <ul>
             <li><h2>software development</h2></li>
-            <div class="dropdown">
-                <li>+ Details</li>
                 <ul>
-                    <li>• LEAN Theorem Prover</li>
+                    <li>Mathematics</li>
                     <ul>
-                        <li>•
-                            Worked with Stanislas Polu (OpenAI) formalizing math questions from Art of Problem Sovling,
-                            to
-                            build a dataset for an <a href="https://openai.com/blog/formal-math/">automated theorem
-                                proving
-                                model</a>. Until Mar 2022.
-                        </li>
-                        <div class="dropdown">
-                            <li>+ Details</li>
-                            <ul>
-                                <li>•
-                                    Gained the ability to quickly read a mathematical statement written in english and
-                                    convert
-                                    it to an equivalent statement in LEAN.
-                                </li>
-                                <li>•
-                                    Created shell scripts to help facilitate efficient creation of LEAN theorems and
-                                    minimize
-                                    time spent writing LEAN boilerplate code.
-                                </li>
-                                <li>•
-                                    Learned to navigate the mathlib API, (also designed the dark theme on mathlib, for
-                                    longer
-                                    reading sessions)
-                                </li>
-                            </ul>
-                        </div>
-                    </ul>
-                    <li>• Python</li>
-                    <ul>
-                        <li>•
-                            <a href="https://frag-x.com">Created multiplayer 2D fps shooter game</a> using built in
-                            python
-                            libraries and pygame.
-                        </li>
-                        <div class="dropdown">
-                            <li>🠣 Specifics</li>
-                            <ul>
-                                <li>•
-                                    Designed a multi-threaded server and physics engine by hand using software
-                                    engineering best
-                                    practices and ValVe multiplayer networking principles.
-                                </li>
-                                <li>•
-                                    Currently re-implementing the 3D version of the game in GODOT game engine
-                                </li>
-                            </ul>
-                        </div>
-                    </ul>
-                    <li>• Kotlin</li>
-                    <ul>
-                        <li>• Worked at Huawei maintaining and creating android applications for a year, followed kotlin best practices using jetpack compose</li>
-                    </ul>
-                    <li>• Java</li>
-                    <ul>
-                        <li>• Developed an android application as a <a href="https://c-vars.github.io/ScotiaTracker/">proof
-                            of
-                            concept for Scotia Bank</a></li>
-                    </ul>
-                    <li>• C</li>
-                    <ul>
-                        <li>• Familiarity with the cairo drawing library</li>
-                        <li>• Implemented chat application using sockets, threading and keyboard IO</li>
-                    </ul>
-                    <li>• Web</li>
-                    <ul>
-                        <div class="dropdown">
-                            <li>🠣 Hands On</li>
-                            <ul>
-                                <li>• Created my own cloud storage on multiple occasions using raspberry pi and
-                                    nextcloud
-                                </li>
-                                <li>• Worked on the ground in U of T IT department in network closets and setting up
-                                    servers/block storage for research students
-                                </li>
-                                <li>• Understanding of how the internet physically works (packets, ip addresses,
-                                    etc...)
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="dropdown">
-                            <li>🠣 Higher Level</li>
-                            <ul>
-                                <li>• Ability to set up webservers on machines using nginx</li>
-                                <li>• Currently managing of a handful of websites with custom domains</li>
-                                <li>• Experience setting up larger applications on servers like dokuwiki,
-                                    minecraft/terraria
-                                    servers (including plugins)
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="dropdown">
-                            <li>🠣 Communities</li>
-                            <ul>
-                                <li>• Active member on Stack Exchange, favorite communities are Mathematics, Music and
-                                    Stack
-                                    Overflow
-                                </li>
-                                <li>• Active on discord in similar communities</li>
-                                <li>• Can set up infrastructure to facilitate communities, webpages community chat
-                                    servers
-                                    etc...
-                                </li>
-                            </ul>
-                        </div>
-                    </ul>
-                </ul>
-            </div>
-
-            <li><h2>computers and tools</h2></li>
-            <div class="dropdown">
-                <li>+ Details</li>
-                <ul>
-                    <li>• Built two desktop computers and have maintained them since 2014</li>
-                    <li>• Manjaro Linux as main operating system</li>
-                    <div class="dropdown">
-                        <li>🠣 Resulting in</li>
+                        <li><a href="https://www.openmath.net">openmath</a> (LaTeX, HTML, python, js){sept 2023 - current}</li>
                         <ul>
-                            <li>• Ability to craft shell scripts for <a
-                                    href="https://github.com/cuppajoeman/my-system/blob/master/configuration/mouse-settings/logitech_m570_setup.sh">particular
-                                tasks quickly</a></li>
-                            <li>• Increased attention span, can read through technical articles and man pages</li>
-                            <li>• Familiarity with useful tools: cron, ffmpeg, imagemagick, nvim, fzf, diff ...</li>
-                            <li>• Utilization of simple programs (free software) which solve one problem well: rofi,
-                                ranger,
-                                zathura, shotcut, xournalpp, ...
-                            </li>
+                           <li>an online math learning resource for pure mathematics, covers various undergraduate topics (algebra, topology, analysis, etc...)</li>
+                           <li>differentiates itself from other online resources by having links open in-line allowing you to recursively explore the knowledge base on one page</li>
+                           <li>over 1500+ knowledge objects over definitions, theorems, corollaries, propositions and exercises</li>
                         </ul>
-                    </div>
-                    <li>• Formatting</li>
+                        <li>LEAN Theorem Prover {Winter 2022}</li>
+                        <ul>
+                            <li>
+                                Worked with Stanislas Polu (OpenAI) formalizing math questions from Art of Problem Sovling,
+                                to
+                                build a dataset for an <a href="https://openai.com/blog/formal-math/">automated theorem
+                                    proving
+                                    model</a>
+                            </li>
+                            <div class="dropdown">
+                                <li>+ Details</li>
+                                <ul>
+                                    <li>
+                                        Gained the ability to quickly read a mathematical statement written in english and
+                                        convert
+                                        it to an equivalent statement in LEAN.
+                                    </li>
+                                    <li>
+                                        Created shell scripts to help facilitate efficient creation of LEAN theorems and
+                                        minimize
+                                        time spent writing LEAN boilerplate code.
+                                    </li>
+                                    <li>
+                                        Learned to navigate the mathlib API, (also designed the dark theme on mathlib, for
+                                        longer
+                                        reading sessions)
+                                    </li>
+                                </ul>
+                            </div>
+                        </ul>
+                    </ul>
+                    <li>Software Engineering</li>
                     <ul>
-                        <li>• LaTeX - using as main formatting system for STEM documents since 2017</li>
-                        <li>• HTML - been designing clutter free and simple webpages since 2015</li>
+                        <li>Huawei {Oct 2022 - July 2023}</li>
+                        <ul>
+                            <li>Designed networking systems for communication between phones and sensors over the network</li>
+                            <li>Maintaining and creating android applications; followed kotlin best practices using jetpack compose</li>
+                            <li>Worked on a linear algebra library in java</li>
+                        </ul>
+                        <li>Scotia Bank Proof of Concept {Academic Year 2019}</li>
+                        <ul>
+                            <li>Industry Classroom partnership with Scotia Bank</li>
+                            <li>Developed an android application as a <a href="https://c-vars.github.io/ScotiaTracker/">proof
+                                of
+                                concept for Scotia Bank</a></li>
+                        </ul>
+                    </ul>
+                    <li>Game Development</li>
+                    <ul>
+                        <li><a href="https://frag-z.com/">frag-z</a> [in active development](toolbox-engine, C++){jan 2024 - current}</li>
+                        <ul>
+                            <li>multiplayer fps game</li>
+                            <li>implemented server prediction and server reconciliation algorithm for movement</li>
+                            <li>created all assets from scratch in blender (weapons, animations, player models and maps)</li>
+                            <li>created main menu sound track</li>
+                        </ul>
+                        <li><a href="https://cuppajoeman.itch.io/salmon">salmon run</a> (unity, C#) {sept 2024 - dec 2024}</li>
+                        <ul>
+                            <li>full 3D salmon racing game with local multiplayer</li>
+                            <li>implemented river mesh generation using spline sampling, with water shader</li>
+                            <li>implemented various enemies such as fisherman and eagle that track player and try to catch them</li>
+                        </ul>
+                        <li><a href="https://github.com/cjmines/gui">cjmines</a> (toolbox-engine, C++) {apr 2024 - current}</li>
+                        <ul>
+                            <li>a competitive minesweeper client focusing on the shortcomings of the current competitive clients</li>
+                            <li>implemented a no-guess board generation algorithm by reducing the problem to matrix row reduction with extra rules while row reducing</li>
+                        </ul>
+                        <li><a href="https://github.com/cpp-toolbox">toolbox-engine</a> (C++) {sept 2023 - current}</li>
+                        <ul class="limited-list">
+                            <li>an open source modular c++ engine with a focus on compatibility and performance</li>
+                            <li>managed up to 4 other developers teaching them how to use the engine and impelment new features</li>
+                            <li>supports windows, mac and linux, good performance on low-end machines made in 2013+</li>
+                            <li>graphics: opengl3.3, audio: openal, physics: jolt physics, networking: enet</li>
+                            <li>implemented geometry batching to draw the scene in at most 3 draw calls, audio is also batched per tick for performance</li>
+                            <li>implemented super texture atlasing to implement "bindless" textures in opengl3.3 </li>
+                            <li>implemented full skeletal animation with support for loading in fbx files with animation</li>
+                            <li>implemented network wrapper around enet allowing for an easy development cycle when sending new data over the network</li>
+                            <li>implemented custom UI library with input boxes and buttons using SDF fonts</li>
+                            <li>implemented a glsl shader standard that is enforced when new shaders are created, simplifies configuration of VAO's and uniforms in-engine</li>
+                        </ul>
+                        <li>frag-x (python) {sept 2019 - sept 2021}</li>
+                        <ul>
+                            <li>
+                                <a href="https://github.com/frag-x/frag-x">Created multiplayer 2D fps shooter game</a> using built in
+                                python
+                                libraries and pygame.
+                            </li>
+                            <li>
+                                Designed a multi-threaded server and physics engine by hand using software
+                                engineering best
+                                practices and ValVe multiplayer networking principles.
+                            </li>
                     </ul>
                 </ul>
-            </div>
+                    <li>Sys Admin/Hardware/Linux</li>
+                    <ul class="limited-list">
+                        <li>Worked on the ground in U of T IT department in network closets and setting up
+                            servers/block storage for research students as well as physical computer hardware repair {summer 2019}
+                        </li>
+                        <li>Familiarity with useful cli tools: cron, ffmpeg, imagemagick, nvim, fzf, diff ...</li>
+                        <li>Ability to set up webservers on machines using nginx</li>
+                        <li>C</li>
+                        <ul>
+                            <li>Familiarity with the cairo drawing library</li>
+                            <li>Implemented chat application using sockets, threading and keyboard IO</li>
+                        </ul>
+                        <li>Created my own cloud storage on multiple occasions using raspberry pi and
+                            nextcloud
+                        </li>
+                        <li>Currently managing of a handful of websites with custom domains</li>
+                        <li>Experience setting up larger applications on servers like dokuwiki,
+                            minecraft/terraria
+                            servers (including plugins)
+                        </li>
+                        <li>Familiar with arduino programming</li>
+                        <li>Ability to solder basic circuitry</li>
+                        <li>Built two desktop computers and have maintained them since 2014 with the ability to debug and solve hardware problems</li>
+                        <li>Manjaro Linux as main operating system</li>
+                        <li>Utilization of simple programs (free software) which solve one problem well: rofi,
+                            ranger,
+                            zathura, shotcut, xournalpp, ...
+                        </li>
+                    </ul>
+                </ul>
         </ul>
     </fieldset>
 
     <br><br>
 
-    <fieldset>
-        <legend><h1>Creativity</h1></legend>
-        <ul>
-            <li>• Music</li>
-            <ul>
-                <li>• Self taught guitarist, developed <a href="https://theanchorsystem.net">new way of thinking about
-                    music</a> to facilitate faster learning
-                </li>
-                <li>• Can comp and solo along to jazz standards and play with others</li>
-                <li>• Creation of compositions</li>
-            </ul>
-        </ul>
-    </fieldset>
+<!--    <fieldset>-->
+<!--        <legend><h1>Creativity</h1></legend>-->
+<!--        <ul>-->
+<!--            <li>Music</li>-->
+<!--            <ul>-->
+<!--                <li>Self taught guitarist, developed <a href="https://theanchorsystem.net">new way of thinking about-->
+<!--                    music</a> to facilitate faster learning-->
+<!--                </li>-->
+<!--                <li>Can comp and solo along to jazz standards and play with others</li>-->
+<!--                <li>Creation of compositions</li>-->
+<!--            </ul>-->
+<!--        </ul>-->
+<!--    </fieldset>-->
 
     <br><br>
 
